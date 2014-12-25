@@ -5,6 +5,7 @@ Neverwinter gateway - Professions Robot
 
 + fills professions slots
 + level professions
++ refines AD
 + Transfers AD to one chracter (account)
 + Open rewardchest(99) per session
 
@@ -13,25 +14,31 @@ Contains helper script what add´s,
 + "sell all" 
 + "open all(99)"
 
-, buttons when managing account via Gateway, script can be "Paused". 
+, buttons when managing account via Gateway.
 
 Website, https://greasyfork.org/scripts/7061-neverwinter-gateway-professions-robot/
 
-Script is tested with Portable Chrome + Tampermonkey (updated versions)
+Script is tested with,
+----------------------
++ Portable Chrome + Tampermonkey (updated versions)
++ Opera + Tampermonkey (updated versions)
+
 if you find that script works with some other browser + xxxMonkey feel free to tell it.
 
 Reported and known non-working combinations,
-
-Firefox + GreasMonkey (failure after GreasMonkey 2.xx update and reported failures after Firefox update)
-Opera + VioletMonkey 
+--------------------------------------------
++ Firefox + GreasMonkey (failure after GreasMonkey 2.xx update and reported failures after Firefox update)
++ Opera + VioletMonkey 
 
 * * *
-license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
+License http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 
 This script is originally created by Mustex´s,
+
 http://userscripts.org/scripts/show/170920
 
 It is then Modified by Bunta,
+
 https://greasyfork.org/en/scripts/771-neverwinter-gateway-professions-robot 
 
 Now script get lotsa changes and are modified by community Devs and Contributors, 
