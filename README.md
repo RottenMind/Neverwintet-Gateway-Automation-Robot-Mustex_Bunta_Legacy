@@ -27,6 +27,7 @@ Opera + VioletMonkey
 
 * * *
 license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
+
 This script is originally created by Mustex´s,
 http://userscripts.org/scripts/show/170920
 
