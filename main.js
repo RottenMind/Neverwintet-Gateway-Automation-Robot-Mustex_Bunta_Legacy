@@ -23,7 +23,7 @@ NW Gateway Professions Bot Contributors
 -----------------------------------
 Kakoura, Nametaken, rotten_mind, Frankescript, Brent
 */
-// @version 1.05.0.1f
+// @version 1.05.0.1G
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -32,6 +32,8 @@ Kakoura, Nametaken, rotten_mind, Frankescript, Brent
 // ==/UserScript==
 
 /* RELEASE NOTES
+1.05.0.1G
+- Github release
 1.05.0.1f
 - minor tasklist updates
 - added button "open all(99)", opens rewardchest
