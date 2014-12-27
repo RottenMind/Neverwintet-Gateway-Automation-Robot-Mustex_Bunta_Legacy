@@ -5,11 +5,11 @@
 // @include https://gateway.playneverwinter.com
 // @include https://gateway.playneverwinter.com/*
 // @include https://gatewaysitedown.playneverwinter.com
-// @include https://gatewaysitedown.playneverwinter.com/* 
+// @include https://gatewaysitedown.playneverwinter.com/*
 // @include http://gateway.playneverwinter.com
 // @include http://gateway.playneverwinter.com/*
 // @include http://gatewaysitedown.playneverwinter.com
-// @include http://gatewaysitedown.playneverwinter.com/* 
+// @include http://gatewaysitedown.playneverwinter.com/*
 // @originalAuthor Mustex/Bunta
 // @modifiedBy NW Gateway Professions Bot Developers & Contributors
 
@@ -23,7 +23,7 @@ NW Gateway Professions Bot Contributors
 -----------------------------------
 Kakoura, Nametaken, rotten_mind, Frankescript, Brent
 */
-// @version 1.05.0.1f
+// @version 1.05.0.1G
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -32,6 +32,8 @@ Kakoura, Nametaken, rotten_mind, Frankescript, Brent
 // ==/UserScript==
 
 /* RELEASE NOTES
+1.05.0.1G
+- Github release
 1.05.0.1f
 - minor tasklist updates
 - added button "open all(99)", opens rewardchest
@@ -39,176 +41,176 @@ Kakoura, Nametaken, rotten_mind, Frankescript, Brent
 - fixed unnecessary ZEX visit´s
 - 
 1.05.0.1e
-	- Info page updates for non-compatible browser/XXXmonkey
-	
+- Info page updates for non-compatible browser/XXXmonkey
+
 1.05.0.1d
-	- WinterEvent tasks added
-	- Added AD transfer automation
-	- Settings Panel UI: Increased size and implemented two columns for options to minimize vertical length. Also implemented new radio and button styles.
+- WinterEvent tasks added
+- Added AD transfer automation
+- Settings Panel UI: Increased size and implemented two columns for options to minimize vertical length. Also implemented new radio and button styles.
 1.05.0.1c
-	- UI feature: Limit the gateway popup notification messages that appear at the top of the screen to a max of 2 notifications. The oldest (first) notification will always be removed when reaching the limit.
+- UI feature: Limit the gateway popup notification messages that appear at the top of the screen to a max of 2 notifications. The oldest (first) notification will always be removed when reaching the limit.
 1.05.0.1b
-	- Added Reward Chest Opening Option
-	- Added All button when selling from inventory
-	- Added condition check for profession slot input val > 0 when processing tasks
+- Added Reward Chest Opening Option
+- Added All button when selling from inventory
+- Added condition check for profession slot input val > 0 when processing tasks
 1.05.0.1 (v1, mod 5)
-	- Started with bluep's edits (https://greasyfork.org/en/forum/discussion/270/x)
-	- Edited back in leadership asset priority (https://greasyfork.org/en/forum/discussion/comment/7213/#Comment_7213)
-	- Edited in Jewelcrafting for Mod5 (https://greasyfork.org/en/forum/discussion/comment/6930/#Comment_6930)
-	- Modified the default leadership tasks to prioritize AD generation (feel free to rever)
+- Started with bluep's edits (https://greasyfork.org/en/forum/discussion/270/x)
+- Edited back in leadership asset priority (https://greasyfork.org/en/forum/discussion/comment/7213/#Comment_7213)
+- Edited in Jewelcrafting for Mod5 (https://greasyfork.org/en/forum/discussion/comment/6930/#Comment_6930)
+- Modified the default leadership tasks to prioritize AD generation (feel free to rever)
 /* End Bunta's Edits?
 1.0.0.3
-	- Fix some gem trading tasks not being filtered correctly
-	- Add check for gateway disconnected
+- Fix some gem trading tasks not being filtered correctly
+- Add check for gateway disconnected
 1.0.0.2
-	- Fix leadership tasks not creating assets correctly
-	- Add option to save task lists per character (experimental)
+- Fix leadership tasks not creating assets correctly
+- Add option to save task lists per character (experimental)
 1.0.0.1
-	- Rewrite script using client.dataModel methods to massively improve reliability and performance (thanks Msc)
-	- AD refining will now only attempt to refine if you are able to collect diamonds
-	- Change task lists to use exact task names so no ambiguity exists (no longer requires excluderare option)
-	- Asset resources are now trained as needed (only for required slots)
+- Rewrite script using client.dataModel methods to massively improve reliability and performance (thanks Msc)
+- AD refining will now only attempt to refine if you are able to collect diamonds
+- Change task lists to use exact task names so no ambiguity exists (no longer requires excluderare option)
+- Asset resources are now trained as needed (only for required slots)
 0.3.0.5
-	- Fix resources not buying correctly in all cases
-	- Fix pause button state saving correctly in firefox
+- Fix resources not buying correctly in all cases
+- Fix pause button state saving correctly in firefox
 0.3.0.4
-	- Add page timeout reloading functions outside of main function (thanks Kreese and Frabtik)
-	- Add check to ensure tasks are being started for the correct character
-	- Alter next run resolve function to use delay parameter to allow for unique delay timers to be used in certain cases
+- Add page timeout reloading functions outside of main function (thanks Kreese and Frabtik)
+- Add check to ensure tasks are being started for the correct character
+- Alter next run resolve function to use delay parameter to allow for unique delay timers to be used in certain cases
 0.3.0.3
-	- Fix ingredient task selection to correctly iterate through all ingredient tasks
-	- Alter character selection to pick only exact character name matches
-	- Update leadership tasks
+- Fix ingredient task selection to correctly iterate through all ingredient tasks
+- Alter character selection to pick only exact character name matches
+- Update leadership tasks
 0.3.0.2
-	- Exclude alchemy from rare task exclusions due to Aqua Regia (thanks Eversor)
-	- Reduce GM_setValue calls to avoid tampermonkey failing to save settings (thanks miah)
+- Exclude alchemy from rare task exclusions due to Aqua Regia (thanks Eversor)
+- Reduce GM_setValue calls to avoid tampermonkey failing to save settings (thanks miah)
 0.3.0.1
-	- Altered mutichar selector to be faster (thanks miah)
-	- Updated rare tasks selector (thanks Traktor)
-	- Add option to refine AD during character switching (thanks Eversor)
-	- Added some level 20 gather tasks
-	- Increased supply buying to 100 units
+- Altered mutichar selector to be faster (thanks miah)
+- Updated rare tasks selector (thanks Traktor)
+- Add option to refine AD during character switching (thanks Eversor)
+- Added some level 20 gather tasks
+- Increased supply buying to 100 units
 0.3.0.0
-	- Added Multi-Character support
-	- Added function to clear all saved settings for script
-	- Remove disable sound functionality (now configurable in gateway)
+- Added Multi-Character support
+- Added function to clear all saved settings for script
+- Remove disable sound functionality (now configurable in gateway)
 0.2.0.1.8
-	- Added pause button to allow easy on/off switching
+- Added pause button to allow easy on/off switching
 0.2.0.1.7
-	- Added option to enable/disable filling optional asset slots
-	- Added batch potions tasks to be skipped in ingredient selection
-	- Added timer to reload page if stuck loading for too long
-	- Added option to disable page sounds
-	- Updated license to by-nc-sa
+- Added option to enable/disable filling optional asset slots
+- Added batch potions tasks to be skipped in ingredient selection
+- Added timer to reload page if stuck loading for too long
+- Added option to disable page sounds
+- Updated license to by-nc-sa
 0.2.0.1.6
-	- Add configurable option for excluding rare tasks
+- Add configurable option for excluding rare tasks
 0.2.0.1.5
-	- Add ability to specify specific level for tasks and configure same named artificing resource tasks to request correct level of task
-	- Remove purchase notification that never times out
+- Add ability to specify specific level for tasks and configure same named artificing resource tasks to request correct level of task
+- Remove purchase notification that never times out
 0.2.0.1.4
-	- Added functionality to purchase required resources from gateway shop
+- Added functionality to purchase required resources from gateway shop
 0.2.0.1.3
-	- Add Artificing and Weaponsmithing to Robot
-	(Artificing will not work properly yet as all three tiers of gather and craft tasks have the same task name) 
+- Add Artificing and Weaponsmithing to Robot
+(Artificing will not work properly yet as all three tiers of gather and craft tasks have the same task name)
 0.2.0.1.2
-	- Update reload process
-	- Fix optional asset selector with gateway update
+- Update reload process
+- Fix optional asset selector with gateway update
 0.2.0.1.1
-	- Simplify asset selection after they fixed bug in previous gateway update
-	- Update level 20 leadership tasks
-	- Update with changes in Mustex's script (version 15)
-		* Added a secondary timer that will reload the gateway every few hours. This should help with disconnects from the server
-		* Implemented tooltips for settings panel
+- Simplify asset selection after they fixed bug in previous gateway update
+- Update level 20 leadership tasks
+- Update with changes in Mustex's script (version 15)
+* Added a secondary timer that will reload the gateway every few hours. This should help with disconnects from the server
+* Implemented tooltips for settings panel
 0.1.9.1.15
-	- Repeat task reordering for +2 armor
+- Repeat task reordering for +2 armor
 0.1.9.1.14
-	- Fix selection of assets after gateway update
-	- Skip intensive gather tasks added after gateway update
+- Fix selection of assets after gateway update
+- Skip intensive gather tasks added after gateway update
 0.1.9.1.13
-	- Change ordering of tasks and ingredient checks
-	The purpose of this is to allow crafting of +4 armors if you have +2 ingredients in your inv but to not create them if you don't.
-	Creating the ingredients for them is less efficient than crafting ingredients for pants but is more efficient if you already have the ingredients from earlier tasks.
+- Change ordering of tasks and ingredient checks
+The purpose of this is to allow crafting of +4 armors if you have +2 ingredients in your inv but to not create them if you don't.
+Creating the ingredients for them is less efficient than crafting ingredients for pants but is more efficient if you already have the ingredients from earlier tasks.
 0.1.9.1.12
-	- Optimise crafting tasks for highest exp/min gains due to ingredient requirements
+- Optimise crafting tasks for highest exp/min gains due to ingredient requirements
 0.1.9.1.11
-	- Add extra craft tasks for when residuum runs out
+- Add extra craft tasks for when residuum runs out
 0.1.9.1.10
-	- Only allow rare tasks to be selected for Leadership
-	This avoids craft loops where higher quality rare crafts require ingredients with the same name
+- Only allow rare tasks to be selected for Leadership
+This avoids craft loops where higher quality rare crafts require ingredients with the same name
 0.1.9.1.9
-	- Alter craft tasks to favour armor to optimise inventory space
+- Alter craft tasks to favour armor to optimise inventory space
 0.1.9.1.8
-	- Fix script restart bug when no tasks found
+- Fix script restart bug when no tasks found
 0.1.9.1.7
-	- Update search string for Potions (After the task names for elxiirs have been changed)
-	- Remove logon error skips to avoid logons sometimes failing on first load (ensure logon details are correct!)
+- Update search string for Potions (After the task names for elxiirs have been changed)
+- Remove logon error skips to avoid logons sometimes failing on first load (ensure logon details are correct!)
 0.1.9.1.6
-	- Update tasks for all professions
-	- Update ingredient search lists for all professions
+- Update tasks for all professions
+- Update ingredient search lists for all professions
 0.1.9.1.5
-	- Fix regular expression used in potion ingredient search
+- Fix regular expression used in potion ingredient search
 0.1.9.1.4
-	- Alter default timeouts (makes script a lot more stable and less prone to errors)
-	- Remove unused variable
-	- Add extra logging for task ingredient searches
+- Alter default timeouts (makes script a lot more stable and less prone to errors)
+- Remove unused variable
+- Add extra logging for task ingredient searches
 0.1.9.1.3
-	- Fix bug with required resource checks getting stuck on non craftable resources
+- Fix bug with required resource checks getting stuck on non craftable resources
 0.1.9.1.2
-	- Added method to check for required task ingredients and choose tasks to create them
-	Method is currently hard coded to specify certain search strings for ingredient types
-	Currently working for all Alchemy tasks
-	There is a current problem that if you have the required potion ingredient but it is in your belt slots
-	the task is uncraftable but the ingredients show as available and it will not craft a new one
+- Added method to check for required task ingredients and choose tasks to create them
+Method is currently hard coded to specify certain search strings for ingredient types
+Currently working for all Alchemy tasks
+There is a current problem that if you have the required potion ingredient but it is in your belt slots
+the task is uncraftable but the ingredients show as available and it will not craft a new one
 0.1.9.1
-	- Update with changes in Mustex's script (version 12)
-		* Added tasks for Platesmithing, Leatherworking, Tailoring
-		* Added detection for the gateway being down
+- Update with changes in Mustex's script (version 12)
+* Added tasks for Platesmithing, Leatherworking, Tailoring
+* Added detection for the gateway being down
 0.1.8.3.8
-	- Update asset selection to avoid using coloured assets in junk slots for leadership
+- Update asset selection to avoid using coloured assets in junk slots for leadership
 0.1.8.3.7
-	- Update leadership tasks table due to task reward/duration alterations
+- Update leadership tasks table due to task reward/duration alterations
 0.1.8.3.6
-	- Add option to enable/disable automation process
-	- Update alchemy tasks some more
+- Add option to enable/disable automation process
+- Update alchemy tasks some more
 0.1.8.3.5
-	- Add ability to select from multiple tasks with same name (eg Alchemical Research)
-	- Add craft options for alchemy potions (need to be manually switched since they use the same ingredients)
+- Add ability to select from multiple tasks with same name (eg Alchemical Research)
+- Add craft options for alchemy potions (need to be manually switched since they use the same ingredients)
 0.1.8.3.4
-	- Add alchemy tasks up to level 20
+- Add alchemy tasks up to level 20
 0.1.8.3.3
-	- Change task slot selection to be user configurable options in settings window
-	- Add level 1 alchemical research
+- Change task slot selection to be user configurable options in settings window
+- Add level 1 alchemical research
 0.1.8.3.2
-	- Added ability to specify how many tasks of each profession to train multiple professions at once
-	- Updated mailsmithing level 0 tasks
+- Added ability to specify how many tasks of each profession to train multiple professions at once
+- Updated mailsmithing level 0 tasks
 0.1.8.3.1
-	- Changed asset selection to only update Junk assets
-	- Leadership asset selection for bronze tier picks lowest asset first
-	- Modified Leadership tasks
+- Changed asset selection to only update Junk assets
+- Leadership asset selection for bronze tier picks lowest asset first
+- Modified Leadership tasks
 0.1.8.3
-	- Tweaked Leadership tasks grid
-	- Added task grid for Alchemy (Partial) 
+- Tweaked Leadership tasks grid
+- Added task grid for Alchemy (Partial)
 0.1.8.2
-	- onsave handlers for settings are now called before the settings values are saved
-	- Added onsave handler for console to enable/disable using the window console
+- onsave handlers for settings are now called before the settings values are saved
+- Added onsave handler for console to enable/disable using the window console
 0.1.8.1
-	- Added checking for errors (using the window title) and will navigate back to the main login page if autologin is enabled
+- Added checking for errors (using the window title) and will navigate back to the main login page if autologin is enabled
 0.1.8
-	- Added popup for altering settings
-	- Settings are saved to script cache
-	- Added mailsmithing tasks to task grid
+- Added popup for altering settings
+- Settings are saved to script cache
+- Added mailsmithing tasks to task grid
 0.1.7
-	- Added lower level leadership tasks to grid
-	- Added hiring tasks to leadership task
-	- Uses saved values to determine which profession type to level (Defaults to Leadership, currently no way to change it)
+- Added lower level leadership tasks to grid
+- Added hiring tasks to leadership task
+- Uses saved values to determine which profession type to level (Defaults to Leadership, currently no way to change it)
 
 0.1.5
-	- Is now able to recover from missing assets
-	- Uses a configurable grid to determine what the next task is to complete
+- Is now able to recover from missing assets
+- Uses a configurable grid to determine what the next task is to complete
 
 0.1.0
-	- Is now able to select some hard coded leadership tasks
-	- Can now collect from any completed slot
+- Is now able to select some hard coded leadership tasks
+- Can now collect from any completed slot
 */
 
 // Make sure it's running on the main page, no frames
@@ -219,30 +221,30 @@ if (window.self !== window.top) {
 // Set global console variables
 var fouxConsole = {log:function(){},info:function(){},error:function(){},warn:function(){}};
 var console = unsafeWindow.console || fouxConsole;
-var chardiamonds = {}; 
+var chardiamonds = {};
 // Page Reloading function
 // Every second the page is idle or loading is tracked
 var loading_reset = false; // Enables a periodic reload if this is toggled on by the Auto Reload check box on the settings panel
-var s_paused = false;      // extend the paused setting to the Page Reloading function
+var s_paused = false;	   // extend the paused setting to the Page Reloading function
 
 (function() {
-	var $                  = unsafeWindow.$;
+	var $				   = unsafeWindow.$;
 	
 	//MAC-NW
 	$.fn.waitUntilExists = function (handler, shouldRunHandlerOnce, isChild) {
 		var found = 'found';
 		var $this = $(this.selector);
 		var $elements = $this.not(function () {
-				return $(this).data(found);
-			}).each(handler).data(found, true);
+			return $(this).data(found);
+		}).each(handler).data(found, true);
 		if (!isChild) {
 			(window.waitUntilExists_Intervals = window.waitUntilExists_Intervals || {})[this.selector] = window.setInterval(function () {
-					$this.waitUntilExists(handler, shouldRunHandlerOnce, true);
-				}, 500);
+				$this.waitUntilExists(handler, shouldRunHandlerOnce, true);
+			}, 500);
 		} else if (shouldRunHandlerOnce && $elements.length) {
 			window.clearInterval(window.waitUntilExists_Intervals[this.selector]);
 		}
-		return $this;
+			return $this;
 	}
 	// MAC-NW - Wait for tooltip to come up so we can alter the list
 	$('.tooltip-menu button').waitUntilExists(function () {
@@ -262,7 +264,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 				console.log("ERROR: Did not succeed to add open all tooltip.");
 			}
 	});
-
+	
 	$('.vendor-quantity-block span.attention').waitUntilExists(function () {
 		if ($('.vendor-quantity-block span.attention span').length)
 			$('.vendor-quantity-block span.attention').replaceWith('<div class="input-field button"><div class="input-bg-left"></div><div class="input-bg-mid"></div><div class="input-bg-right"></div><button onclick="$(\'input[name=inventorySellQty]\').val(\'' + $(".vendor-quantity-block span.attention span").text() + '\');">All (' + $(".vendor-quantity-block span.attention span").text() + ')</button></div>');
@@ -275,19 +277,20 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 	
 	//MAC-NW
 	
-	var state_loading      = 0;   // If "Page Loading" takes longer than 30 seconds, reload page (maybe a javascript error)
+	var state_loading	   = 0;	  // If "Page Loading" takes longer than 30 seconds, reload page (maybe a javascript error)
 	var state_loading_time = 30;  // default of 30 seconds
-	var state_idle         = 0;   // If the page is idle for longer than 60 seconds, reload page (maybe a javascript error)
-	var state_idle_time    = 120; // default of 120 seconds
-	var reload_hours       = [2,5,8,11,14,17,20,23]; // logout and reload every three hours - 2:29 - 5:29 - 8:29 - 11:29 - 14:29 - 17:29 - 20:29 - 23:29
-	var last_location      = "";  // variable to track reference to page URL
-	var reload_timer       = setInterval(function() {
+	var chardiamonds = {};
+	var state_idle		   = 0;	  // If the page is idle for longer than 60 seconds, reload page (maybe a javascript error)
+	var state_idle_time	   = 120; // default of 120 seconds
+	var reload_hours	   = [2,5,8,11,14,17,20,23]; // logout and reload every three hours - 2:29 - 5:29 - 8:29 - 11:29 - 14:29 - 17:29 - 20:29 - 23:29
+	var last_location	   = "";  // variable to track reference to page URL
+	var reload_timer	   = setInterval(function() {
 		if (!s_paused) {
 			if (loading_reset) {
-				var loading_date       = new Date();
-				var loading_sec        = Number(loading_date.getSeconds());
-				var loading_min        = Number(loading_date.getMinutes());
-				var loading_hour       = Number(loading_date.getHours());
+				var loading_date	   = new Date();
+				var loading_sec		   = Number(loading_date.getSeconds());
+				var loading_min		   = Number(loading_date.getMinutes());
+				var loading_hour	   = Number(loading_date.getHours());
 				if (reload_hours.indexOf(loading_hour) >= 0 && loading_min == 29 && loading_sec < 2) {
 					console.log("Auto Reload");
 					unsafeWindow.location.href = "http://gateway.playneverwinter.com";
@@ -301,7 +304,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 				unsafeWindow.location.href = "http://gateway.playneverwinter.com";
 				return;
 			}
-
+			
 			if ($("div.loading-image:visible").length) {
 				last_location = location.href;
 				state_idle = 0;
@@ -318,38 +321,38 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			// TODO: Add check for Gateway disconnected
 			//<div class="modal-content" id="modal_content"><h3>Disconnected from Gateway</h3><p>You have been disconnected.</p><button type="button" class="modal-button" onclick="window.location.reload(true);">Close</button>
 			
-
+			
 			/* Can't use idle check with dataModel methods
-			else if (location.href == last_location) {
-				state_loading = 0;
-				if (state_idle >= state_idle_time) {
-					console.log("Page Idle too long");
-					state_idle = 0;
-					unsafeWindow.location.href = "http://gateway.playneverwinter.com";
-				}
-				else {
-					state_idle++;
-					// comment out to avoid console spam
-					//console.log("Page Idle ...", state_idle + "s");
-				}
-			}
-			*/
-			else {
-				last_location = location.href;
-				state_loading = 0;
-				state_idle = 0;
-			}
-		}
-	},1000);
+else if (location.href == last_location) {
+state_loading = 0;
+if (state_idle >= state_idle_time) {
+console.log("Page Idle too long");
+state_idle = 0;
+unsafeWindow.location.href = "http://gateway.playneverwinter.com";
+}
+else {
+state_idle++;
+// comment out to avoid console spam
+//console.log("Page Idle ...", state_idle + "s");
+}
+}
+*/
+	else {
+		last_location = location.href;
+		state_loading = 0;
+		state_idle = 0;
+	}
+}
+},1000);
 })();
 
 (function() {
-
+	
 	/**
-	* Add a string of CSS to the main page
-	*
-	* @param {String} cssString The CSS to add to the main page
-	*/
+* Add a string of CSS to the main page
+*
+* @param {String} cssString The CSS to add to the main page
+*/
 	function AddCss(cssString) {
 		var head = document.getElementsByTagName('head')[0];
 		if (!head)
@@ -362,7 +365,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 	function countLeadingSpaces(str) {
 		return str.match(/^(\s*)/)[1].length;
 	}
-
+	
 	var image_pause = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAY" +
 		"AAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2" +
 		"ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG" +
@@ -502,8 +505,8 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 		"pBQpI8GJDTR050zkNzK0bMMZLvUNZ8yCfy6Wvbc1NVyi4dloXjqWvds6uvp41pFmpVOKJWd" +
 		"6bgwxkmTMIotWKpwrfBkZl7uMonUHf5wSlV2+fUZrjnXdzrmyy7djD8GWTW9e51z557o1Tz" +
 		"85FH/WkOkaHQAAAABJRU5ErkJggg==";
-
-
+	
+	
 	// Setup global closure variables
 	var $ = unsafeWindow.jQuery;
 	var timerHandle = 0;
@@ -512,276 +515,25 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 	var chartimers = {};
 	var settingwipe = false; // Use to wipe stored settings
 	var delay = {
-		SHORT   : 1000,
-		MEDIUM  : 5000,
-		LONG    : 30000,
-		MINS    : 300000,
+		SHORT	: 1000,
+		MEDIUM	: 5000,
+		LONG	: 30000,
+		MINS	: 300000,
 		DEFAULT : 10000, // default delay
 		TIMEOUT : 60000, // delay for cycle processing timeout
 	};
-
+	
 	/*
-	* Tasklist can be modified to configure the training you want to perform.
-	* The configurable options window sets how many profession slots you want to use for each profession.
-	* The level array below for each professions specifies the tasks you want to learn at each crafting level.
-	* Each craft slot will pick the first task that meets requirements.
-	* See http://pastebin.com/VaGntEha for Task Name Map.
-	* Some names above do not match, use below code to check:
-	* var tasks = client.dataModel.model.craftinglist['craft_' + profname].entries.filter(function(entry) { return entry.def && entry.def.displayname == taskname; }); tasks[0].def.name;
-	*/
+* Tasklist can be modified to configure the training you want to perform.
+* The configurable options window sets how many profession slots you want to use for each profession.
+* The level array below for each professions specifies the tasks you want to learn at each crafting level.
+* Each craft slot will pick the first task that meets requirements.
+* See http://pastebin.com/VaGntEha for Task Name Map.
+* Some names above do not match, use below code to check:
+* var tasks = client.dataModel.model.craftinglist['craft_' + profname].entries.filter(function(entry) { return entry.def && entry.def.displayname == taskname; }); tasks[0].def.name;
+*/
 	var tasklist;
 	var defaultTasklist = [
-		{
-			//WinterEvent
-			taskName:"WinterEvent",
-			level: {
-				0:["Event_Winter_Tier0_Intro"], 
-				1:["Event_Winter_Tier1_Rankup",/*"Event_Winter_Tier1_Shiny_Lure",*/"Event_Winter_Tier1_Refine","Event_Winter_Tier1_Gather"],
-				2:["Event_Winter_Tier1_Rankup_2",/*"Event_Winter_Tier1_Fishingpole_Blue","Event_Winter_Tier1_Shiny_Lure_Mass",*/"Event_Winter_Tier1_Refine_2","Event_Winter_Tier1_Gather_2"],
-				3:[/*"Event_Winter_Tier1_Lightwine","Event_Winter_Tier1_Mesmerizing_Lure",*/"Event_Winter_Tier1_Gather_3"],
-			},
-		},
-		
-		{
-			// Black Ice Shaping
-			taskName:"BlackIce",
-			level: {
-				1:["Blackice_Tier1_Process_Blackice"],
-				2:["Blackice_Tier1_Process_Blackice"],
-				3:["Blackice_Tier1_Process_Blackice"],
-				/*
-				1:["Forge Hammerstone Pick","Gather Raw Black Ice","Truesilver Pick Grip","Process Raw Black Ice","Upgrade Chillwright","Hire an additional Chillwright"],
-				2:["Forge Hammerstone Pick","Gather Raw Black Ice","Truesilver Pick Grip","Process Raw Black Ice","Upgrade Chillwright","Hire an additional Chillwright"],
-				3:["Forge Hammerstone Pick","Gather Raw Black Ice","Truesilver Pick Grip","Process Raw Black Ice","Upgrade Chillwright","Hire an additional Chillwright"],
-				*/
-			},
-		},
-		{
-			taskName:"Alchemy",
-			level: {
-				0:["Alchemy_Tier0_Intro_1"],
-				1:["Alchemy_Tier1_Experiment_Rank2","Alchemy_Tier1_Experimentation_Rank1"],
-				2:["Alchemy_Tier1_Experiment_Rank3","Alchemy_Tier1_Experimentation_Rank2"],
-				3:["Alchemy_Tier1_Experiment_Rank4","Alchemy_Tier1_Experimentation_Rank3"],
-				4:["Alchemy_Tier1_Experiment_Rank5","Alchemy_Tier1_Experimentation_Rank4"],
-				5:["Alchemy_Tier1_Experiment_Rank6","Alchemy_Tier1_Experimentation_Rank5"],
-				6:["Alchemy_Tier1_Experiment_Rank7","Alchemy_Tier1_Experimentation_Rank6"],
-				7:["Alchemy_Tier2_Experiment_Rank08","Alchemy_Tier2_Experimentation_Rank07"],
-				8:["Alchemy_Tier2_Experiment_Rank09","Alchemy_Tier2_Experimentation_Rank08"],
-				9:["Alchemy_Tier2_Experiment_Rank10","Alchemy_Tier2_Experimentation_Rank09"],
-				10:["Alchemy_Tier2_Experiment_Rank11","Alchemy_Tier2_Experimentation_Rank10"],
-				11:["Alchemy_Tier2_Experiment_Rank12","Alchemy_Tier2_Experimentation_Rank11"],
-				12:["Alchemy_Tier2_Experiment_Rank13","Alchemy_Tier2_Experimentation_Rank12"],
-				13:["Alchemy_Tier2_Experiment_Rank14","Alchemy_Tier2_Experimentation_Rank13"],
-				14:["Alchemy_Tier3_Experiment_Rank15","Alchemy_Tier3_Experimentation_Rank14"],
-				15:["Alchemy_Tier3_Experiment_Rank16","Alchemy_Tier3_Experimentation_Rank15"],
-				16:["Alchemy_Tier3_Experiment_Rank17","Alchemy_Tier3_Experimentation_Rank16"],
-				17:["Alchemy_Tier3_Experiment_Rank18","Alchemy_Tier3_Experimentation_Rank17"],
-				18:["Alchemy_Tier3_Experiment_Rank19","Alchemy_Tier3_Experimentation_Rank18"],
-				19:["Alchemy_Tier3_Experiment_Rank20","Alchemy_Tier3_Experimentation_Rank19"],
-				//20:["Alchemy_Tier3_Experimentation_Rank20"],
-				//19:["Alchemical Research","Rank 20 Experimentation","Upgrade Mixologist","Upgrade Apothecary","Hire an additional Apothecary"],
-				//20:["Alchemy_Tier2_Aquavitae_2"],
-				20:["Alchemy_Tier3_Protection_Potion_Major","Alchemy_Tier3_Potency_Potion_Major","Alchemy_Tier2_Aquaregia","Alchemy_Tier3_Refine_Basic","Alchemy_Tier3_Gather_Components"],
-			},
-		},
-		{
-			taskName:"Artificing",
-			level: {
-				0:["Artificing_Tier0_Intro_1"],
-				1:["Artificing_Tier1_Symbol_Virtuous_1","Artificing_Tier1_Refine_Basic"],
-				2:["Artificing_Tier1_Icon_Virtuous_1","Artificing_Tier1_Refine_Basic"],
-				3:["Artificing_Tier1_Icon_Virtuous_1","Artificing_Tier1_Refine_Basic"],
-				4:["Artificing_Tier1_Icon_Virtuous_2","Artificing_Tier1_Refine_Basic"],
-				5:["Artificing_Tier1_Icon_Virtuous_2","Artificing_Tier1_Refine_Basic"],
-				6:["Artificing_Tier1_Icon_Virtuous_2","Artificing_Tier1_Refine_Basic"],
-				7:["Artificing_Tier1_Icon_Virtuous_2","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				8:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				9:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				10:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				11:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				12:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				13:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				14:["Artificing_Tier3_Icon_Virtuous_4","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				15:["Artificing_Tier3_Icon_Virtuous_4","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				16:["Artificing_Tier3_Icon_Virtuous_4","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				17:["Artificing_Tier3_Icon_Virtuous_5","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				18:["Artificing_Tier3_Icon_Virtuous_5","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				19:["Artificing_Tier3_Icon_Virtuous_5","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
-				20:["Artificing_Tier2_Refine_Basic"],
-				//19:["Virtuous Icon +5","Upgrade Engraver","Upgrade Carver","Hire an additional Carver"],
-				//20:["7:Craft Ornamental metal and Carved Wood"],
-			},
-		},
-		{
-			taskName:"Weaponsmithing",
-			level: {
-				0:["Weaponsmithing_Tier0_Intro"],
-				1:["Weaponsmithing_Tier1_Dagger_1"],
-				2:["Weaponsmithing_Tier1_Dagger_1"],
-				3:["Weaponsmithing_Tier1_Dagger_1"],
-				4:["Weaponsmithing_Tier1_Dagger_2"],
-				5:["Weaponsmithing_Tier1_Dagger_2"],
-				6:["Weaponsmithing_Tier1_Dagger_2"],
-				7:["Weaponsmithing_Tier2_Dagger_3"],
-				8:["Weaponsmithing_Tier2_Dagger_3"],
-				9:["Weaponsmithing_Tier2_Dagger_3"],
-				10:["Weaponsmithing_Tier2_Dagger_3"],
-				11:["Weaponsmithing_Tier2_Dagger_3"],
-				12:["Weaponsmithing_Tier2_Dagger_3"],
-				13:["Weaponsmithing_Tier2_Dagger_3"],
-				14:["Weaponsmithing_Tier3_Dagger_4"],
-				15:["Weaponsmithing_Tier3_Dagger_4"],
-				16:["Weaponsmithing_Tier3_Dagger_4"],
-				17:["Weaponsmithing_Tier3_Dagger_4"],
-				18:["Weaponsmithing_Tier3_Dagger_4"],
-				19:["Weaponsmithing_Tier3_Dagger_4"],
-				20:["Weaponsmithing_Tier2_Refine_Basic"],
-				//19:["Dagger+4","Upgrade Grinder","Upgrade Smelter","Hire an additional Smelter"],
-				//20:["Craft Steel Blades and Barausk Hafts"],
-			},
-		},
-		{
-			// Jewelcrafting
-			taskName:"Jewelcrafting",
-			level: {
-				0:["Jewelcrafting_Tier0_Intro"],
-				1:[ "Jewelcrafting_Tier1_Waist_Offense_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				2:[ "Jewelcrafting_Tier1_Waist_Offense_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				3:[ "Jewelcrafting_Tier1_Neck_Offense_1","Jewelcrafting_Tier1_Waist_Offense_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				4:[ "Jewelcrafting_Tier1_Neck_Offense_1","Jewelcrafting_Tier1_Waist_Misc_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				5:[ "Jewelcrafting_Tier1_Neck_Offense_1","Jewelcrafting_Tier1_Waist_Misc_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				6:["Jewelcrafting_Tier1_Neck_Misc_1","Jewelcrafting_Tier1_Waist_Misc_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				7:[ "Jewelcrafting_Tier2_Waist_Offense_2","Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				8:[ "Jewelcrafting_Tier2_Waist_Offense_2","Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				9:[ "Jewelcrafting_Tier2_Neck_Offense_2","Jewelcrafting_Tier2_Waist_Offense_2","Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				10:[ "Jewelcrafting_Tier2_Waist_Misc_2","Jewelcrafting_Tier2_Neck_Offense_2", "Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				11:[ "Jewelcrafting_Tier2_Waist_Misc_2","Jewelcrafting_Tier2_Neck_Offense_2", "Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				12:[ "Jewelcrafting_Tier2_Waist_Misc_2","Jewelcrafting_Tier2_Neck_Offense_2", "Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				13:["Jewelcrafting_Tier2_Neck_Misc_2","Jewelcrafting_Tier2_Waist_Misc_2", "Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				14:[ "Jewelcrafting_Tier3_Waist_Offense_3","Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				15:[ "Jewelcrafting_Tier3_Waist_Offense_3","Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				16:["Jewelcrafting_Tier3_Neck_Offense_3","Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				17:["Jewelcrafting_Tier3_Neck_Defense_3","Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				18:["Jewelcrafting_Tier3_Neck_Defense_3","Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				19:["Jewelcrafting_Tier3_Neck_Defense_3","Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
-				20:["Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier1_Refine_Basic"],
-			},
-		},
-		{
-			// Mailsmithing
-			taskName:"Armorsmithing_Med",
-			level: {
-				0:["Med_Armorsmithing_Tier0_Intro"],
-				1:["Med_Armorsmithing_Tier1_Chain_Boots_1","Med_Armorsmithing_Tier1_Chain_Shirt_1"],
-				2:["Med_Armorsmithing_Tier1_Chain_Armor_1","Med_Armorsmithing_Tier1_Chain_Pants_1"],
-				3:["Med_Armorsmithing_Tier1_Chain_Armor_1","Med_Armorsmithing_Tier1_Chain_Boots_Set_1"],
-				4:["Med_Armorsmithing_Tier1_Chain_Armor_1","Med_Armorsmithing_Tier1_Chain_Boots_Set_1"],
-				5:["Med_Armorsmithing_Tier1_Chain_Armor_Set_1","Med_Armorsmithing_Tier1_Chain_Boots_Set_1"],
-				6:["Med_Armorsmithing_Tier1_Chain_Armor_Set_1","Med_Armorsmithing_Tier1_Chain_Boots_Set_1"],
-				7:["Med_Armorsmithing_Tier1_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt"],
-				8:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_1","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt"],
-				9:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_1","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt"],
-				10:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_1","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt_2"],
-				11:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_2","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt_2","Med_Armorsmithing_Tier2_Chain_Pants_1"],
-				12:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_2","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt_2","Med_Armorsmithing_Tier2_Chain_Pants_1"],
-				13:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_2","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt_2","Med_Armorsmithing_Tier2_Chain_Pants_1"],
-				14:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_2","Med_Armorsmithing_Tier3_Chain_Shirt","Med_Armorsmithing_Tier3_Chain_Boots_Set_1"],
-				15:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Boots_Set_1"],
-				16:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants2","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Helm_Set_1","Med_Armorsmithing_Tier3_Chain_Pants"],
-				17:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants2","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Helm_Set_1","Med_Armorsmithing_Tier3_Chain_Pants"],
-				18:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants2","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Helm_Set_1","Med_Armorsmithing_Tier3_Chain_Pants"],
-				19:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants2","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Helm_Set_1","Med_Armorsmithing_Tier3_Chain_Pants"],
-				20:["Med_Armorsmithing_Tier2_Refine_Basic"],
-				//19:["Chain Armor +4","Fancy Chain Pants","Fancy Chain Shirt","Chain Helm +4","Ornate Chain Pants","Upgrade Blacksmith","Upgrade Prospector","Hire an additional Prospector"],
-				//20:["Forge Steel Rings and Scales"],
-			},
-		},
-		{
-			// Platesmithing
-			taskName:"Armorsmithing_Heavy",
-			level: {
-				0:["Hvy_Armorsmithing_Tier0_Intro"],
-				1:["Hvy_Armorsmithing_Tier1_Plate_Boots_1","Hvy_Armorsmithing_Tier1_Plate_Shirt_1","Hvy_Armorsmithing_Tier1_Shield_1"],
-				2:["Hvy_Armorsmithing_Tier1_Plate_Armor_1","Hvy_Armorsmithing_Tier1_Plate_Pants_1"],
-				3:["Hvy_Armorsmithing_Tier1_Plate_Armor_1","Hvy_Armorsmithing_Tier1_Plate_Boots_Set_1"],
-				4:["Hvy_Armorsmithing_Tier1_Plate_Armor_1","Hvy_Armorsmithing_Tier1_Plate_Boots_Set_1"],
-				5:["Hvy_Armorsmithing_Tier1_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier1_Plate_Boots_Set_1"],
-				6:["Hvy_Armorsmithing_Tier1_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier1_Plate_Boots_Set_1"],
-				7:["Hvy_Armorsmithing_Tier1_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt","Hvy_Armorsmithing_Tier2_Shield_Set_1"],
-				8:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_1","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt"],
-				9:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_1","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt"],
-				10:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_1","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt_2"],
-				11:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_2","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt_2","Hvy_Armorsmithing_Tier2_Plate_Pants_1"],
-				12:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_2","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt_2","Hvy_Armorsmithing_Tier2_Plate_Pants_1"],
-				13:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_2","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt_2","Hvy_Armorsmithing_Tier2_Plate_Pants_1"],
-				14:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_2","Hvy_Armorsmithing_Tier3_Plate_Shirt","Hvy_Armorsmithing_Tier3_Plate_Boots_Set_1"],
-				15:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Boots_Set_1"],
-				16:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants2","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Helm_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants"],
-				17:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants2","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Helm_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants"],
-				18:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants2","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Helm_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants"],
-				19:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants2","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Helm_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants"],
-				20:["Hvy_Armorsmithing_Tier2_Refine_Basic"],
-				//19:["Plate Armor +4","Fancy Plate Pants","Fancy Plate Shirt","Plate Helm +4","Ornate Plate Pants","Upgrade Armorer","Upgrade Miner","Hire an additional Miner"],
-				//20:["Forge Steel Plates"],
-			},
-		},
-		{
-			taskName:"Leatherworking",
-			level: {
-				0:["Leatherworking_Tier0_Intro_1"],
-				1:["Leatherworking_Tier1_Leather_Boots_1","Leatherworking_Tier1_Leather_Shirt_1"],
-				2:["Leatherworking_Tier1_Leather_Armor_1","Leatherworking_Tier1_Leather_Pants_1"],
-				3:["Leatherworking_Tier1_Leather_Armor_1","Leatherworking_Tier1_Leather_Boots_Set_1"],
-				4:["Leatherworking_Tier1_Leather_Armor_1","Leatherworking_Tier1_Leather_Boots_Set_1"],
-				5:["Leatherworking_Tier1_Leather_Armor_Set_1","Leatherworking_Tier1_Leather_Boots_Set_1"],
-				6:["Leatherworking_Tier1_Leather_Armor_Set_1","Leatherworking_Tier1_Leather_Boots_Set_1"],
-				7:["Leatherworking_Tier1_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt"],
-				8:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_1","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt"],
-				9:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_1","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt"],
-				10:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_1","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt_2"],
-				11:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_2","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt_2","Leatherworking_Tier2_Leather_Pants_1"],
-				12:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_2","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt_2","Leatherworking_Tier2_Leather_Pants_1"],
-				13:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_2","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt_2","Leatherworking_Tier2_Leather_Pants_1"],
-				14:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_2","Ornate Leatherworking_Tier1_Leather_Shirt_1","Leatherworking_Tier3_Leather_Boots_Set_1"],
-				15:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Boots_Set_1"],
-				16:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants2","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Helm_Set_1","Leatherworking_Tier3_Leather_Pants"],
-				17:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants2","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Helm_Set_1","Leatherworking_Tier3_Leather_Pants"],
-				18:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants2","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Helm_Set_1","Leatherworking_Tier3_Leather_Pants"],
-				19:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants2","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Helm_Set_1","Leatherworking_Tier3_Leather_Pants"],
-				20:["Leatherworking_Tier2_Refine_Basic"],
-				//19:["Leather Armor +4","Fancy Leather Pants","Fancy Leather Shirt","Leather Helm +4","Ornate Leather Pants","Upgrade Tanner","Upgrade Skinner","Hire an additional Skinner"],
-				//20:["Cure Tough Pelts"],
-			},
-		},
-		{
-			taskName:"Tailoring",
-			level: {
-				0:["Tailoring_Tier0_Intro"],
-				1:["Tailoring_Tier1_Cloth_Boots_1","Tailoring_Tier1_Cloth_Shirt_1"],
-				2:["Tailoring_Tier1_Cloth_Armor_1","Tailoring_Tier1_Cloth_Pants_1"],
-				3:["Tailoring_Tier1_Cloth_Armor_1","Tailoring_Tier1_Cloth_Boots_Set_1"],
-				4:["Tailoring_Tier1_Cloth_Armor_1","Tailoring_Tier1_Cloth_Boots_Set_1"],
-				5:["Tailoring_Tier1_Cloth_Armor_Set_1","Tailoring_Tier1_Cloth_Boots_Set_1"],
-				6:["Tailoring_Tier1_Cloth_Armor_Set_1","Tailoring_Tier1_Cloth_Boots_Set_1"],
-				7:["Tailoring_Tier1_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt"],
-				8:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_1","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt"],
-				9:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_1","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt"],
-				10:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_1","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt_2"],
-				11:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_2","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt_2","Tailoring_Tier2_Cloth_Pants_1"],
-				12:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_2","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt_2","Tailoring_Tier2_Cloth_Pants_1"],
-				13:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_2","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt_2","Tailoring_Tier2_Cloth_Pants_1"],
-				14:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_2", "Tailoring_Tier3_Cloth_Shirt","Tailoring_Tier3_Cloth_Boots_Set_1"],
-				15:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Boots_Set_1"],
-				16:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants2","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Helm_Set_1","Tailoring_Tier3_Cloth_Pants"],
-				17:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants2","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Helm_Set_1","Tailoring_Tier3_Cloth_Pants"],
-				18:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants2","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Helm_Set_1","Tailoring_Tier3_Cloth_Pants"],
-				19:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants2","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Helm_Set_1","Tailoring_Tier3_Cloth_Pants"],
-				20:["Tailoring_Tier2_Refine_Basic"],
-				//19:["Cloth Robes +4","Fancy Cloth Pants","Fancy Cloth Shirt","Cloth Cap +4","Ornate Cloth Pants","Upgrade Outfitter","Upgrade Weaver","Hire an additional Weaver"],
-				//20:["Weave Cotton Cloth"],
-			},
-		},
 		{
 			// modded to prioritize RAD production, added low level task for speeding up levelling up
 			taskName:"Leadership",
@@ -813,30 +565,282 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 				20:["Leadership_Tier3_20r_Master2","Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3","Leadership_Tier3_20_Destroy","Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier2_12_Taxes","Leadership_Tier3_16_Fight","Leadership_Tier2_10_Battle","Leadership_Tier3_13_Patrol","Leadership_Tier2_9_Chart","Leadership_Tier1_5_Explore"],
 			},
 		},
-	];
+		
+		{
+			//WinterEvent
+			taskName:"WinterEvent",
+			level: {
+				0:["Event_Winter_Tier0_Intro"],
+				1:["Event_Winter_Tier1_Rankup",/*"Event_Winter_Tier1_Shiny_Lure",*/"Event_Winter_Tier1_Refine","Event_Winter_Tier1_Gather"],
+				2:["Event_Winter_Tier1_Rankup_2",/*"Event_Winter_Tier1_Fishingpole_Blue","Event_Winter_Tier1_Shiny_Lure_Mass",*/"Event_Winter_Tier1_Refine_2","Event_Winter_Tier1_Gather_2"],
+				3:["Event_Winter_Tier1_Lightwine",/*"Event_Winter_Tier1_Mesmerizing_Lure",*/"Event_Winter_Tier1_Gather_3"],
+			},
+		},
+		
+		{
+			// Black Ice Shaping
+			taskName:"BlackIce",
+			level: {
+				1:["Blackice_Tier1_Process_Blackice"],
+				2:["Blackice_Tier1_Process_Blackice"],
+				3:["Blackice_Tier1_Process_Blackice"],
+				/*
+1:["Forge Hammerstone Pick","Gather Raw Black Ice","Truesilver Pick Grip","Process Raw Black Ice","Upgrade Chillwright","Hire an additional Chillwright"],
+2:["Forge Hammerstone Pick","Gather Raw Black Ice","Truesilver Pick Grip","Process Raw Black Ice","Upgrade Chillwright","Hire an additional Chillwright"],
+3:["Forge Hammerstone Pick","Gather Raw Black Ice","Truesilver Pick Grip","Process Raw Black Ice","Upgrade Chillwright","Hire an additional Chillwright"],
+*/
+},
+},
+	{
+		// Jewelcrafting
+		taskName:"Jewelcrafting",
+		level: {
+			0:["Jewelcrafting_Tier0_Intro"],
+			1:[ "Jewelcrafting_Tier1_Waist_Offense_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			2:[ "Jewelcrafting_Tier1_Waist_Offense_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			3:[ "Jewelcrafting_Tier1_Neck_Offense_1","Jewelcrafting_Tier1_Waist_Offense_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			4:[ "Jewelcrafting_Tier1_Neck_Offense_1","Jewelcrafting_Tier1_Waist_Misc_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			5:[ "Jewelcrafting_Tier1_Neck_Offense_1","Jewelcrafting_Tier1_Waist_Misc_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			6:["Jewelcrafting_Tier1_Neck_Misc_1","Jewelcrafting_Tier1_Waist_Misc_1","Jewelcrafting_Tier1_Refine_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			7:[ "Jewelcrafting_Tier2_Waist_Offense_2","Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			8:[ "Jewelcrafting_Tier2_Waist_Offense_2","Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			9:[ "Jewelcrafting_Tier2_Neck_Offense_2","Jewelcrafting_Tier2_Waist_Offense_2","Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			10:[ "Jewelcrafting_Tier2_Waist_Misc_2","Jewelcrafting_Tier2_Neck_Offense_2", "Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			11:[ "Jewelcrafting_Tier2_Waist_Misc_2","Jewelcrafting_Tier2_Neck_Offense_2", "Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			12:[ "Jewelcrafting_Tier2_Waist_Misc_2","Jewelcrafting_Tier2_Neck_Offense_2", "Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			13:["Jewelcrafting_Tier2_Neck_Misc_2","Jewelcrafting_Tier2_Waist_Misc_2", "Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			14:[ "Jewelcrafting_Tier3_Waist_Offense_3","Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			15:[ "Jewelcrafting_Tier3_Waist_Offense_3","Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			16:["Jewelcrafting_Tier3_Neck_Offense_3","Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			17:["Jewelcrafting_Tier3_Neck_Defense_3","Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			18:["Jewelcrafting_Tier3_Neck_Defense_3","Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			19:["Jewelcrafting_Tier3_Neck_Defense_3","Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic","Jewelcrafting_Tier3_Gather_Basic","Jewelcrafting_Tier2_Gather_Basic","Jewelcrafting_Tier1_Gather_Basic"],
+			20:["Jewelcrafting_Tier2_Refine_Basic","Jewelcrafting_Tier1_Refine_Basic"],
+		},
+	},
+	{
+		// Mailsmithing
+		taskName:"Armorsmithing_Med",
+		level: {
+			0:["Med_Armorsmithing_Tier0_Intro"],
+			1:["Med_Armorsmithing_Tier1_Chain_Boots_1","Med_Armorsmithing_Tier1_Chain_Shirt_1"],
+			2:["Med_Armorsmithing_Tier1_Chain_Armor_1","Med_Armorsmithing_Tier1_Chain_Pants_1"],
+			3:["Med_Armorsmithing_Tier1_Chain_Armor_1","Med_Armorsmithing_Tier1_Chain_Boots_Set_1"],
+			4:["Med_Armorsmithing_Tier1_Chain_Armor_1","Med_Armorsmithing_Tier1_Chain_Boots_Set_1"],
+			5:["Med_Armorsmithing_Tier1_Chain_Armor_Set_1","Med_Armorsmithing_Tier1_Chain_Boots_Set_1"],
+			6:["Med_Armorsmithing_Tier1_Chain_Armor_Set_1","Med_Armorsmithing_Tier1_Chain_Boots_Set_1"],
+			7:["Med_Armorsmithing_Tier1_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt"],
+			8:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_1","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt"],
+			9:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_1","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt"],
+			10:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_1","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt_2"],
+			11:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_2","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt_2","Med_Armorsmithing_Tier2_Chain_Pants_1"],
+			12:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_2","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt_2","Med_Armorsmithing_Tier2_Chain_Pants_1"],
+			13:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_2","Med_Armorsmithing_Tier2_Chain_Boots_Set_1","Med_Armorsmithing_Tier2_Chain_Shirt_2","Med_Armorsmithing_Tier2_Chain_Pants_1"],
+			14:["Med_Armorsmithing_Tier2_Chain_Armor_Set_1","Med_Armorsmithing_Tier2_Chain_Pants_2","Med_Armorsmithing_Tier3_Chain_Shirt","Med_Armorsmithing_Tier3_Chain_Boots_Set_1"],
+			15:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Boots_Set_1"],
+			16:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants2","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Helm_Set_1","Med_Armorsmithing_Tier3_Chain_Pants"],
+			17:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants2","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Helm_Set_1","Med_Armorsmithing_Tier3_Chain_Pants"],
+			18:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants2","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Helm_Set_1","Med_Armorsmithing_Tier3_Chain_Pants"],
+			19:["Med_Armorsmithing_Tier3_Chain_Armor_Set_1","Med_Armorsmithing_Tier3_Chain_Pants2","Med_Armorsmithing_Tier3_Chain_Shirt2","Med_Armorsmithing_Tier3_Chain_Helm_Set_1","Med_Armorsmithing_Tier3_Chain_Pants"],
+			20:["Med_Armorsmithing_Tier2_Refine_Basic"],
+			//19:["Chain Armor +4","Fancy Chain Pants","Fancy Chain Shirt","Chain Helm +4","Ornate Chain Pants","Upgrade Blacksmith","Upgrade Prospector","Hire an additional Prospector"],
+			//20:["Forge Steel Rings and Scales"],
+		},
+	},
+	{
+		// Platesmithing
+		taskName:"Armorsmithing_Heavy",
+		level: {
+			0:["Hvy_Armorsmithing_Tier0_Intro"],
+			1:["Hvy_Armorsmithing_Tier1_Plate_Boots_1","Hvy_Armorsmithing_Tier1_Plate_Shirt_1","Hvy_Armorsmithing_Tier1_Shield_1"],
+			2:["Hvy_Armorsmithing_Tier1_Plate_Armor_1","Hvy_Armorsmithing_Tier1_Plate_Pants_1"],
+			3:["Hvy_Armorsmithing_Tier1_Plate_Armor_1","Hvy_Armorsmithing_Tier1_Plate_Boots_Set_1"],
+			4:["Hvy_Armorsmithing_Tier1_Plate_Armor_1","Hvy_Armorsmithing_Tier1_Plate_Boots_Set_1"],
+			5:["Hvy_Armorsmithing_Tier1_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier1_Plate_Boots_Set_1"],
+			6:["Hvy_Armorsmithing_Tier1_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier1_Plate_Boots_Set_1"],
+			7:["Hvy_Armorsmithing_Tier1_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt","Hvy_Armorsmithing_Tier2_Shield_Set_1"],
+			8:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_1","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt"],
+			9:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_1","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt"],
+			10:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_1","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt_2"],
+			11:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_2","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt_2","Hvy_Armorsmithing_Tier2_Plate_Pants_1"],
+			12:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_2","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt_2","Hvy_Armorsmithing_Tier2_Plate_Pants_1"],
+			13:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_2","Hvy_Armorsmithing_Tier2_Plate_Boots_Set_1","Hvy_Armorsmithing_Tier2_Plate_Shirt_2","Hvy_Armorsmithing_Tier2_Plate_Pants_1"],
+			14:["Hvy_Armorsmithing_Tier2_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier2_Plate_Pants_2","Hvy_Armorsmithing_Tier3_Plate_Shirt","Hvy_Armorsmithing_Tier3_Plate_Boots_Set_1"],
+			15:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Boots_Set_1"],
+			16:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants2","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Helm_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants"],
+			17:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants2","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Helm_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants"],
+			18:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants2","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Helm_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants"],
+			19:["Hvy_Armorsmithing_Tier3_Plate_Armor_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants2","Hvy_Armorsmithing_Tier3_Plate_Shirt2","Hvy_Armorsmithing_Tier3_Plate_Helm_Set_1","Hvy_Armorsmithing_Tier3_Plate_Pants"],
+			20:["Hvy_Armorsmithing_Tier2_Refine_Basic"],
+			//19:["Plate Armor +4","Fancy Plate Pants","Fancy Plate Shirt","Plate Helm +4","Ornate Plate Pants","Upgrade Armorer","Upgrade Miner","Hire an additional Miner"],
+			//20:["Forge Steel Plates"],
+		},
+	},
+	{
+		taskName:"Leatherworking",
+		level: {
+			0:["Leatherworking_Tier0_Intro_1"],
+			1:["Leatherworking_Tier1_Leather_Boots_1","Leatherworking_Tier1_Leather_Shirt_1"],
+			2:["Leatherworking_Tier1_Leather_Armor_1","Leatherworking_Tier1_Leather_Pants_1"],
+			3:["Leatherworking_Tier1_Leather_Armor_1","Leatherworking_Tier1_Leather_Boots_Set_1"],
+			4:["Leatherworking_Tier1_Leather_Armor_1","Leatherworking_Tier1_Leather_Boots_Set_1"],
+			5:["Leatherworking_Tier1_Leather_Armor_Set_1","Leatherworking_Tier1_Leather_Boots_Set_1"],
+			6:["Leatherworking_Tier1_Leather_Armor_Set_1","Leatherworking_Tier1_Leather_Boots_Set_1"],
+			7:["Leatherworking_Tier1_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt"],
+			8:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_1","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt"],
+			9:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_1","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt"],
+			10:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_1","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt_2"],
+			11:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_2","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt_2","Leatherworking_Tier2_Leather_Pants_1"],
+			12:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_2","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt_2","Leatherworking_Tier2_Leather_Pants_1"],
+			13:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_2","Leatherworking_Tier2_Leather_Boots_Set_1","Leatherworking_Tier2_Leather_Shirt_2","Leatherworking_Tier2_Leather_Pants_1"],
+			14:["Leatherworking_Tier2_Leather_Armor_Set_1","Leatherworking_Tier2_Leather_Pants_2","Ornate Leatherworking_Tier1_Leather_Shirt_1","Leatherworking_Tier3_Leather_Boots_Set_1"],
+			15:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Boots_Set_1"],
+			16:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants2","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Helm_Set_1","Leatherworking_Tier3_Leather_Pants"],
+			17:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants2","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Helm_Set_1","Leatherworking_Tier3_Leather_Pants"],
+			18:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants2","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Helm_Set_1","Leatherworking_Tier3_Leather_Pants"],
+			19:["Leatherworking_Tier3_Leather_Armor_Set_1","Leatherworking_Tier3_Leather_Pants2","Leatherworking_Tier3_Leather_Shirt2","Leatherworking_Tier3_Leather_Helm_Set_1","Leatherworking_Tier3_Leather_Pants"],
+			20:["Leatherworking_Tier2_Refine_Basic"],
+			//19:["Leather Armor +4","Fancy Leather Pants","Fancy Leather Shirt","Leather Helm +4","Ornate Leather Pants","Upgrade Tanner","Upgrade Skinner","Hire an additional Skinner"],
+			//20:["Cure Tough Pelts"],
+		},
+	},
+	{
+		taskName:"Tailoring",
+		level: {
+			0:["Tailoring_Tier0_Intro"],
+			1:["Tailoring_Tier1_Cloth_Boots_1","Tailoring_Tier1_Cloth_Shirt_1"],
+			2:["Tailoring_Tier1_Cloth_Armor_1","Tailoring_Tier1_Cloth_Pants_1"],
+			3:["Tailoring_Tier1_Cloth_Armor_1","Tailoring_Tier1_Cloth_Boots_Set_1"],
+			4:["Tailoring_Tier1_Cloth_Armor_1","Tailoring_Tier1_Cloth_Boots_Set_1"],
+			5:["Tailoring_Tier1_Cloth_Armor_Set_1","Tailoring_Tier1_Cloth_Boots_Set_1"],
+			6:["Tailoring_Tier1_Cloth_Armor_Set_1","Tailoring_Tier1_Cloth_Boots_Set_1"],
+			7:["Tailoring_Tier1_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt"],
+			8:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_1","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt"],
+			9:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_1","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt"],
+			10:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_1","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt_2"],
+			11:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_2","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt_2","Tailoring_Tier2_Cloth_Pants_1"],
+			12:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_2","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt_2","Tailoring_Tier2_Cloth_Pants_1"],
+			13:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_2","Tailoring_Tier2_Cloth_Boots_Set_1","Tailoring_Tier2_Cloth_Shirt_2","Tailoring_Tier2_Cloth_Pants_1"],
+			14:["Tailoring_Tier2_Cloth_Armor_Set_1","Tailoring_Tier2_Cloth_Pants_2", "Tailoring_Tier3_Cloth_Shirt","Tailoring_Tier3_Cloth_Boots_Set_1"],
+			15:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Boots_Set_1"],
+			16:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants2","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Helm_Set_1","Tailoring_Tier3_Cloth_Pants"],
+			17:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants2","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Helm_Set_1","Tailoring_Tier3_Cloth_Pants"],
+			18:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants2","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Helm_Set_1","Tailoring_Tier3_Cloth_Pants"],
+			19:["Tailoring_Tier3_Cloth_Armor_Set_1","Tailoring_Tier3_Cloth_Pants2","Tailoring_Tier3_Cloth_Shirt2","Tailoring_Tier3_Cloth_Helm_Set_1","Tailoring_Tier3_Cloth_Pants"],
+			20:["Tailoring_Tier2_Refine_Basic"],
+			//19:["Cloth Robes +4","Fancy Cloth Pants","Fancy Cloth Shirt","Cloth Cap +4","Ornate Cloth Pants","Upgrade Outfitter","Upgrade Weaver","Hire an additional Weaver"],
+			//20:["Weave Cotton Cloth"],
+		},
+	},
+	{
+		taskName:"Artificing",
+		level: {
+			0:["Artificing_Tier0_Intro_1"],
+			1:["Artificing_Tier1_Symbol_Virtuous_1","Artificing_Tier1_Refine_Basic"],
+			2:["Artificing_Tier1_Icon_Virtuous_1","Artificing_Tier1_Refine_Basic"],
+			3:["Artificing_Tier1_Icon_Virtuous_1","Artificing_Tier1_Refine_Basic"],
+			4:["Artificing_Tier1_Icon_Virtuous_2","Artificing_Tier1_Refine_Basic"],
+			5:["Artificing_Tier1_Icon_Virtuous_2","Artificing_Tier1_Refine_Basic"],
+			6:["Artificing_Tier1_Icon_Virtuous_2","Artificing_Tier1_Refine_Basic"],
+			7:["Artificing_Tier1_Icon_Virtuous_2","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			8:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			9:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			10:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			11:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			12:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			13:["Artificing_Tier2_Icon_Virtuous_3","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			14:["Artificing_Tier3_Icon_Virtuous_4","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			15:["Artificing_Tier3_Icon_Virtuous_4","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			16:["Artificing_Tier3_Icon_Virtuous_4","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			17:["Artificing_Tier3_Icon_Virtuous_5","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			18:["Artificing_Tier3_Icon_Virtuous_5","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			19:["Artificing_Tier3_Icon_Virtuous_5","Artificing_Tier3_Refine_Basic","Artificing_Tier2_Refine_Basic","Artificing_Tier1_Refine_Basic"],
+			20:["Artificing_Tier2_Refine_Basic"],
+			//19:["Virtuous Icon +5","Upgrade Engraver","Upgrade Carver","Hire an additional Carver"],
+			//20:["7:Craft Ornamental metal and Carved Wood"],
+		},
+	},
+	{
+		taskName:"Weaponsmithing",
+		level: {
+			0:["Weaponsmithing_Tier0_Intro"],
+			1:["Weaponsmithing_Tier1_Dagger_1"],
+			2:["Weaponsmithing_Tier1_Dagger_1"],
+			3:["Weaponsmithing_Tier1_Dagger_1"],
+			4:["Weaponsmithing_Tier1_Dagger_2"],
+			5:["Weaponsmithing_Tier1_Dagger_2"],
+			6:["Weaponsmithing_Tier1_Dagger_2"],
+			7:["Weaponsmithing_Tier2_Dagger_3"],
+			8:["Weaponsmithing_Tier2_Dagger_3"],
+			9:["Weaponsmithing_Tier2_Dagger_3"],
+			10:["Weaponsmithing_Tier2_Dagger_3"],
+			11:["Weaponsmithing_Tier2_Dagger_3"],
+			12:["Weaponsmithing_Tier2_Dagger_3"],
+			13:["Weaponsmithing_Tier2_Dagger_3"],
+			14:["Weaponsmithing_Tier3_Dagger_4"],
+			15:["Weaponsmithing_Tier3_Dagger_4"],
+			16:["Weaponsmithing_Tier3_Dagger_4"],
+			17:["Weaponsmithing_Tier3_Dagger_4"],
+			18:["Weaponsmithing_Tier3_Dagger_4"],
+			19:["Weaponsmithing_Tier3_Dagger_4"],
+			20:["Weaponsmithing_Tier2_Refine_Basic"],
+			//19:["Dagger+4","Upgrade Grinder","Upgrade Smelter","Hire an additional Smelter"],
+			//20:["Craft Steel Blades and Barausk Hafts"],
+		},
+	},
+	{
+		taskName:"Alchemy",
+		level: {
+			0:["Alchemy_Tier0_Intro_1"],
+			1:["Alchemy_Tier1_Experiment_Rank2","Alchemy_Tier1_Experimentation_Rank1"],
+			2:["Alchemy_Tier1_Experiment_Rank3","Alchemy_Tier1_Experimentation_Rank2"],
+			3:["Alchemy_Tier1_Experiment_Rank4","Alchemy_Tier1_Experimentation_Rank3"],
+			4:["Alchemy_Tier1_Experiment_Rank5","Alchemy_Tier1_Experimentation_Rank4"],
+			5:["Alchemy_Tier1_Experiment_Rank6","Alchemy_Tier1_Experimentation_Rank5"],
+			6:["Alchemy_Tier1_Experiment_Rank7","Alchemy_Tier1_Experimentation_Rank6"],
+			7:["Alchemy_Tier2_Experiment_Rank08","Alchemy_Tier2_Experimentation_Rank07"],
+			8:["Alchemy_Tier2_Experiment_Rank09","Alchemy_Tier2_Experimentation_Rank08"],
+			9:["Alchemy_Tier2_Experiment_Rank10","Alchemy_Tier2_Experimentation_Rank09"],
+			10:["Alchemy_Tier2_Experiment_Rank11","Alchemy_Tier2_Experimentation_Rank10"],
+			11:["Alchemy_Tier2_Experiment_Rank12","Alchemy_Tier2_Experimentation_Rank11"],
+			12:["Alchemy_Tier2_Experiment_Rank13","Alchemy_Tier2_Experimentation_Rank12"],
+			13:["Alchemy_Tier2_Experiment_Rank14","Alchemy_Tier2_Experimentation_Rank13"],
+			14:["Alchemy_Tier3_Experiment_Rank15","Alchemy_Tier3_Experimentation_Rank14"],
+			15:["Alchemy_Tier3_Experiment_Rank16","Alchemy_Tier3_Experimentation_Rank15"],
+			16:["Alchemy_Tier3_Experiment_Rank17","Alchemy_Tier3_Experimentation_Rank16"],
+			17:["Alchemy_Tier3_Experiment_Rank18","Alchemy_Tier3_Experimentation_Rank17"],
+			18:["Alchemy_Tier3_Experiment_Rank19","Alchemy_Tier3_Experimentation_Rank18"],
+			19:["Alchemy_Tier3_Experiment_Rank20","Alchemy_Tier3_Experimentation_Rank19"],
+			//20:["Alchemy_Tier3_Experimentation_Rank20"],
+			//19:["Alchemical Research","Rank 20 Experimentation","Upgrade Mixologist","Upgrade Apothecary","Hire an additional Apothecary"],
+			//20:["Alchemy_Tier2_Aquavitae_2"],
+			20:["Alchemy_Tier3_Protection_Potion_Major","Alchemy_Tier3_Potency_Potion_Major","Alchemy_Tier2_Aquaregia","Alchemy_Tier3_Refine_Basic","Alchemy_Tier3_Gather_Components"],
+		},
+	},
+];
 	
 	// Load Settings
 	var settingnames = [
-		{name: 'paused',            title: 'Pause Script',                      def: false,     type:'checkbox',    tooltip:'Disable All Automation'},
-		{name: 'debug',             title: 'Enable Debug',                      def: false,     type:'checkbox',    tooltip:'Enable all debug output to console', onsave: function(newValue, oldValue) {console=newValue?unsafeWindow.console||fouxConsole:fouxConsole;}},
-		{name: 'optionals',         title: 'Fill Optional Assets',              def: true,      type:'checkbox',    tooltip:'Enable to include selecting the optional assets of tasks'},
-		{name: 'autopurchase',      title: 'Auto Purchase Resources',           def: true,      type:'checkbox',    tooltip:'Automatically purchase required resources from gateway shop (100 at a time)'},
-		{name: 'trainassets',       title: 'Train Assets',                      def: true,      type:'checkbox',    tooltip:'Enable training/upgrading of asset worker resources'},
-		{name: 'refinead',          title: 'Refine AD',                         def: true,      type:'checkbox',    tooltip:'Enable refining of AD on character switch'},
-		{name: 'openrewards',       title: 'Open Reward Chests',                def: false,     type:'checkbox',    tooltip:'Enable opeing of leadership chests on character switch'}, //MAC-NW
-		{name: 'autoreload',        title: 'Auto Reload',                       def: false,     type:'checkbox',    tooltip:'Enabling this will reload the gateway periodically. (Ensure Auto Login is enabled)'},
-		{name: 'autologin',         title: 'Attempt to login automatically',    def: false,     type:'checkbox',    tooltip:'Automatically attempt to login to the neverwinter gateway site'},
-		{name: 'nw_username',       title: '  Neverwinter Username',            def: '',        type:'text',        tooltip:''},
-		{name: 'nw_password',       title: '  Neverwinter Password',            def: '',        type:'password',    tooltip:''},
-		{name: 'charcount',         title: '  Number of Characters',            def: '2',       type:'text',        tooltip:'Enter number of characters to use (reload page to update settings form)'},
-		// MAC-NW AD Consolidation
-		{name: 'autoexchange',      title: 'Consolidate AD via ZEX',            def: false,     type:'checkbox',    tooltip:'Automatically attempt to post, cancel and withdraw AD via ZEX and consolidate to designated character'},
-		{name: 'bankchar',          title: '  Character Name of Banker',        def: '',        type:'text',        tooltip:'Enter name of the character to hold account AD'},
-		{name: 'banktransmin',      title: '  Min AD for Transfer',             def: '22000',   type:'text',        tooltip:'Enter minimum AD limit for it to be cosidered for transfer off a character'},
-		{name: 'bankcharmin',       title: '  Min Character balance',           def: '8000',    type:'text',        tooltip:'Enter the amount of AD to always keep available on characters'},
-		{name: 'banktransrate',     title: '  AD per Zen Rate (in zen)',        def: '50',      type:'text',        tooltip:'Enter default rate to use for transfering through ZEX'},
-		// MAC-NW
-	];
+	{name: 'paused',			  title: 'Pause Script',						 def: false, type:'checkbox', tooltip:'Disable All Automation'},
+	{name: 'debug',				  title: 'Enable Debug',						 def: false, type:'checkbox', tooltip:'Enable all debug output to console', onsave: function(newValue, oldValue) {console=newValue?unsafeWindow.console||fouxConsole:fouxConsole;}},
+	{name: 'optionals',			  title: 'Fill Optional Assets',				 def: true,	 type:'checkbox', tooltip:'Enable to include selecting the optional assets of tasks'},
+	{name: 'autopurchase',		  title: 'Auto Purchase Resources',				 def: true,	 type:'checkbox', tooltip:'Automatically purchase required resources from gateway shop (100 at a time)'},
+	{name: 'trainassets',		  title: 'Train Assets',						 def: true,	 type:'checkbox', tooltip:'Enable training/upgrading of asset worker resources'},
+	{name: 'refinead',			  title: 'Refine AD',							 def: true,	 type:'checkbox', tooltip:'Enable refining of AD on character switch'},
+	{name: 'openrewards',		  title: 'Open Reward Chests',					 def: false,  type:'checkbox', tooltip:'Enable opeing of leadership chests on character switch'}, //MAC-NW
+	{name: 'autoreload',		  title: 'Auto Reload',							 def: false, type:'checkbox', tooltip:'Enabling this will reload the gateway periodically. (Ensure Auto Login is enabled)'},
+	{name: 'autologin',			  title: 'Attempt to login automatically',		 def: false, type:'checkbox', tooltip:'Automatically attempt to login to the neverwinter gateway site'},
+	{name: 'nw_username',		  title: '	Neverwinter Username',				 def: '',	 type:'text',	  tooltip:''},
+	{name: 'nw_password',		  title: '	Neverwinter Password',				 def: '',	 type:'password', tooltip:''},
+	{name: 'charcount',			  title: '	Number of Characters',				 def: '2',	 type:'text',	  tooltip:'Enter number of characters to use (reload page to update settings form)'},
+	// MAC-NW AD Consolidation
+	{name: 'autoexchange',		  title: 'Consolidate AD via ZEX',				 def: false, type:'checkbox', tooltip:'Automatically attempt to post, cancel and withdraw AD via ZEX and consolidate to designated character'},
+	{name: 'bankchar',			  title: '	Character Name of Banker',			 def: '',	type:'text',	  tooltip:'Enter name of the character to hold account AD'},
+	{name: 'banktransmin',		  title: '	Min AD for Transfer',				 def: '22000',	 type:'text', tooltip:'Enter minimum AD limit for it to be cosidered for transfer off a character'},
+	{name: 'bankcharmin',		  title: '	Min Character balance',				 def: '8000',	type:'text',  tooltip:'Enter the amount of AD to always keep available on characters'},
+	{name: 'banktransrate',		  title: '	AD per Zen Rate (in zen)',			 def: '300',   type:'text',	  tooltip:'Enter default rate to use for transfering through ZEX'},
+	// MAC-NW
+];
 	
 	// Load local settings cache (unsecured)
 	var settings = {};
@@ -844,7 +848,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 		// Ignore label types
 		if (settingnames[i].type === 'label') {
 			continue;
-		} 
+		}
 		settings[settingnames[i].name] = GM_getValue(settingnames[i].name, settingnames[i].def);
 		// call the onsave for the setting if it exists
 		if (typeof(settingnames[i].onsave) === "function") {
@@ -855,24 +859,24 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 	
 	if (settings["charcount"]<1) { settings["charcount"] = 1; }
 	if (settings["charcount"]>99) { settings["charcount"] = 99; }
-
+	
 	var charSettings = [];
 	for (var i = 0; i < settings["charcount"]; i++) {
-		charSettings.push({name: 'nw_charname'+i,           title: 'Character',         def: 'Character '+(i+1),    type:'text',    tooltip:'Characters Name'});
-		charSettings.push({name: 'WinterEvent'+i,           title: 'WinterEvent',       def: '0',                   type:'text',    tooltip:'Number of slots to assign to WinterEvent'});
-		charSettings.push({name: 'BlackIce'+i,              title: 'Black Ice Shaping', def: '0',                   type:'text',    tooltip:'Number of slots to assign to BIS'});
-		charSettings.push({name: 'Alchemy'+i,               title: 'Alchemy',           def: '0',                   type:'text',    tooltip:'Number of slots to assign to Alchemy'});
-		charSettings.push({name: 'Artificing'+i,            title: 'Artificing',        def: '0',                   type:'text',    tooltip:'Number of slots to assign to Artificing'});
-		charSettings.push({name: 'Weaponsmithing'+i,        title: 'Weaponsmithing',    def: '0',                   type:'text',    tooltip:'Number of slots to assign to Weaponsmithing'});
-		charSettings.push({name: 'Jewelcrafting'+i,         title: 'Jewelcrafting',     def: '0',                   type:'text',    tooltip:'Number of slots to assign to Jewelcrafting'});
-		charSettings.push({name: 'Armorsmithing_Med'+i,     title: 'Mailsmithing',      def: '0',                   type:'text',    tooltip:'Number of slots to assign to Mailsmithing'});
-		charSettings.push({name: 'Armorsmithing_Heavy'+i,   title: 'Platesmithing',     def: '0',                   type:'text',    tooltip:'Number of slots to assign to Platesmithing'});
-		charSettings.push({name: 'Leatherworking'+i,        title: 'Leatherworking',    def: '0',                   type:'text',    tooltip:'Number of slots to assign to Leatherworking'});
-		charSettings.push({name: 'Tailoring'+i,             title: 'Tailoring',         def: '0',                   type:'text',    tooltip:'Number of slots to assign to Tailoring'});
-		charSettings.push({name: 'Leadership'+i,            title: 'Leadership',        def: '9',                   type:'text',    tooltip:'Number of slots to assign to Leadership'});
-
+		charSettings.push({name: 'nw_charname'+i,		  title: 'Character',	   def: 'Character '+(i+1), type:'text',	 tooltip:'Characters Name'});
+		charSettings.push({name: 'WinterEvent'+i,		  title: 'WinterEvent',	   def: '0',				type:'text',	 tooltip:'Number of slots to assign to WinterEvent'});
+		charSettings.push({name: 'Leadership'+i,		  title: 'Leadership',	   def: '9',				type:'text',	 tooltip:'Number of slots to assign to Leadership'});
+		charSettings.push({name: 'BlackIce'+i,			  title: 'Black Ice Shaping',def: '0',				type:'text',	 tooltip:'Number of slots to assign to BIS'});
+		charSettings.push({name: 'Jewelcrafting'+i,		  title: 'Jewelcrafting',  def: '0',				type:'text',	 tooltip:'Number of slots to assign to Jewelcrafting'});
+		charSettings.push({name: 'Armorsmithing_Med'+i,	  title: 'Mailsmithing',   def: '0',				type:'text',	 tooltip:'Number of slots to assign to Mailsmithing'});
+		charSettings.push({name: 'Armorsmithing_Heavy'+i, title: 'Platesmithing',  def: '0',				type:'text',	 tooltip:'Number of slots to assign to Platesmithing'});
+		charSettings.push({name: 'Leatherworking'+i,	  title: 'Leatherworking', def: '0',				type:'text',	 tooltip:'Number of slots to assign to Leatherworking'});
+		charSettings.push({name: 'Tailoring'+i,			  title: 'Tailoring',	   def: '0',				type:'text',	 tooltip:'Number of slots to assign to Tailoring'});
+		charSettings.push({name: 'Artificing'+i,		  title: 'Artificing',	   def: '0',				type:'text',	 tooltip:'Number of slots to assign to Artificing'});
+		charSettings.push({name: 'Weaponsmithing'+i,	  title: 'Weaponsmithing', def: '0',				type:'text',	 tooltip:'Number of slots to assign to Weaponsmithing'});
+		charSettings.push({name: 'Alchemy'+i,			  title: 'Alchemy',		   def: '0',				type:'text',	 tooltip:'Number of slots to assign to Alchemy'});
+		
 		// task settings are slightly different
-		charSettings.push({name: 'tasklist'+i,				title: 'Task List',			def: '',					type:'void',	tooltip:''});
+		charSettings.push({name: 'tasklist'+i,			  title: 'Task List',	   def: '',					type:'void',	 tooltip:''});
 	}
 	
 	for (var i = 0; i < charSettings.length; i++) {
@@ -884,10 +888,10 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 		LOGIN : { name: "Login", path: "div#login"},
 		GUARD : { name: "Account Guard", path: "div#page-accountguard"},
 	});
-
+	
 	/**
-	* Uses the page settings to determine which page is currently displayed
-	*/
+* Uses the page settings to determine which page is currently displayed
+*/
 	function GetCurrentPage() {
 		for each(var page in PAGES) {
 			if ($(page["path"]).filter(":visible").length) {
@@ -897,35 +901,35 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 	}
 	
 	/**
-	* Logs in to gateway
-	* No client.dataModel exists at this stage
-	*/
+* Logs in to gateway
+* No client.dataModel exists at this stage
+*/
 	function page_LOGIN() {
 		//if (!$("form > p.error:visible").length && settings["autologin"]) {
-			// No previous log in error - attempt to log in
-			console.log("Setting username");
-			$("input#user").val(settings["nw_username"]);
-			console.log("Setting password");
-			$("input#pass").val(settings["nw_password"]);
-			console.log("Clicking Login Button");
-			$("div#login > input").click();
+		// No previous log in error - attempt to log in
+		console.log("Setting username");
+		$("input#user").val(settings["nw_username"]);
+		console.log("Setting password");
+		$("input#pass").val(settings["nw_password"]);
+		console.log("Clicking Login Button");
+		$("div#login > input").click();
 		//}
 		dfdNextRun.resolve(delay.LONG);
 	}
 	
 	/**
-	* Action to perform on account guard page
-	*/
+* Action to perform on account guard page
+*/
 	function page_GUARD() {
 		// Do nothing on the guard screen
 		dfdNextRun.resolve(delay.LONG);
 	}
-
+	
 	/**
-	* Collects rewards for tasks or starts new tasks
-	* Function is called once per new task and returns true if an action is created
-	* If no action is started function returns false to switch characters
-	*/
+* Collects rewards for tasks or starts new tasks
+* Function is called once per new task and returns true if an action is created
+* If no action is started function returns false to switch characters
+*/
 	function processCharacter() {
 		// Switch to professions page to show task progression
 		unsafeWindow.location.hash="#char("+encodeURI(unsafeWindow.client.getCurrentCharAtName())+")/professions";
@@ -962,18 +966,18 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 		
 		// TODO: Add code to get next task finish time
 		chartimers[charcurrent] = getNextFinishedTask();
- 
-		// Add diamond count	883			 // Add diamond count  
+		
+		// Add diamond count	883			 // Add diamond count
 		chardiamonds[charcurrent] = unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds;
-		console.log(settings["nw_charname"+charcurrent] + "'s", "Astral Diamonds:", chardiamonds[charcurrent]);
+		
 		return false;
 	}
 	
 	/**
-	* Finds the task finishing next & returns the date or NULL otherwise
-	* 
-	* @return {Date} / {null}
-	*/
+* Finds the task finishing next & returns the date or NULL otherwise
+*
+* @return {Date} / {null}
+*/
 	function getNextFinishedTask() {
 		var tmpNext, next = null;
 		unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.forEach(function(entry) {
@@ -989,13 +993,13 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 		}
 		return next;
 	}
-
+	
 	/**
-	* Iterative approach to finding the next task to assign to an open slot.
-	*
-	* @param {Array} prof The tasklist for the profession being used
-	* @param {int} i The current task number being attempted
-	*/
+* Iterative approach to finding the next task to assign to an open slot.
+*
+* @param {Array} prof The tasklist for the profession being used
+* @param {int} i The current task number being attempted
+*/
 	function createNextTask(prof, i) {
 		// TODO: Use callback function
 		if (!unsafeWindow.client.dataModel.model.craftinglist || unsafeWindow.client.dataModel.model.craftinglist === null || !unsafeWindow.client.dataModel.model.craftinglist['craft_' + prof.taskName] || unsafeWindow.client.dataModel.model.craftinglist['craft_' + prof.taskName] === null) {
@@ -1003,7 +1007,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			window.setTimeout(function() { createNextTask(prof, i); }, delay.SHORT);
 			return false;
 		}
-
+		
 		// Check level
 		var level = unsafeWindow.client.dataModel.model.ent.main.itemassignmentcategories.categories.filter(function(entry) { return entry.name == prof.taskName; })[0].currentrank;
 		var list = prof.level[level];
@@ -1014,89 +1018,89 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 		}
 		console.log(prof.taskName, "is level", level);
 		console.log("createNextTask", list.length, i);
-
+		
 		var taskName = list[i];
 		console.log("Searching for task:", taskName);
 		
 		// Search for task to start
 		var task = searchForTask(taskName, prof.taskName);
-
-		/** TODO: Use this  code once below can be replaced properly
-		if (task === null) {
-			console.log("Skipping task selection to purchase resources");
-			dfdNextRun.resolve();
-		}
-		else if (task) {
-			startTask(task);
-			dfdNextRun.resolve();
-		}
-		else {
-			console.log('Finding next task');
-			createNextTask(prof, i+1);
-		}
-		**/
-
-
-		// Finish createNextTask function
-		if (task === null) {
-			console.log("Skipping task selection to purchase resources");
-			dfdNextRun.resolve();
-			return true;
-		}
-		if (task) {
-			task = '/professions-tasks/' + prof.taskName + '/' + task.def.name;
-			console.log('Task Found');
-			unsafeWindow.location.hash = unsafeWindow.location.hash.replace(/\)\/.+/,')' + task);
-			WaitForState("div.page-professions-taskdetails").done(function() {
-				// Click all buttons and select an item to use in the slot
-				var def = $.Deferred();
-				var buttonList = $("h3:contains('Optional Assets:')").closest("div").find("button");
-				if (buttonList.length && settings["optionals"]) {
-					SelectItemFor(buttonList, 0, def, prof);
-				}
-				else {
-					def.resolve();
-				}
-				def.done(function() {
-					// All items are populated
-					console.log("Items Populated");
-					// Click the Start Task Button
-					//Get the start task button if it is enabled
-					var enabledButton = $("div.footer-body > div.input-field.button:not('.disabled') > button:contains('Start Task')");
-					if (enabledButton.length) {
-						console.log("Clicking Start Task Button");
-						enabledButton.click();
-						WaitForState("").done(function() {
-							// Done
-							dfdNextRun.resolve(delay.SHORT);
-						});
-						return true;
-					}
-					else { // Button not enabled, something required was probably missing
-						// Go back
-						$("div.footer-body > div.input-field.button > button:contains('Back')").click();
-						WaitForState("").done(function() {
-							// continue with the next one
-							console.log('Finding next task');
-							createNextTask(prof, i+1);
-						});
-					}
-				});
-			});
-		}
-		else {
-			console.log('Finding next task');
-			createNextTask(prof, i+1);
-		}
+		
+		/** TODO: Use this	code once below can be replaced properly
+if (task === null) {
+console.log("Skipping task selection to purchase resources");
+dfdNextRun.resolve();
+}
+else if (task) {
+startTask(task);
+dfdNextRun.resolve();
+}
+else {
+console.log('Finding next task');
+createNextTask(prof, i+1);
+}
+**/
+	
+	
+	// Finish createNextTask function
+	if (task === null) {
+		console.log("Skipping task selection to purchase resources");
+		dfdNextRun.resolve();
+		return true;
 	}
+	if (task) {
+		task = '/professions-tasks/' + prof.taskName + '/' + task.def.name;
+		console.log('Task Found');
+		unsafeWindow.location.hash = unsafeWindow.location.hash.replace(/\)\/.+/,')' + task);
+		WaitForState("div.page-professions-taskdetails").done(function() {
+			// Click all buttons and select an item to use in the slot
+			var def = $.Deferred();
+			var buttonList = $("h3:contains('Optional Assets:')").closest("div").find("button");
+			if (buttonList.length && settings["optionals"]) {
+				SelectItemFor(buttonList, 0, def, prof);
+			}
+			else {
+				def.resolve();
+			}
+			def.done(function() {
+				// All items are populated
+				console.log("Items Populated");
+				// Click the Start Task Button
+				//Get the start task button if it is enabled
+				var enabledButton = $("div.footer-body > div.input-field.button:not('.disabled') > button:contains('Start Task')");
+				if (enabledButton.length) {
+					console.log("Clicking Start Task Button");
+					enabledButton.click();
+					WaitForState("").done(function() {
+						// Done
+						dfdNextRun.resolve(delay.SHORT);
+					});
+					return true;
+				}
+				else { // Button not enabled, something required was probably missing
+					// Go back
+					$("div.footer-body > div.input-field.button > button:contains('Back')").click();
+					WaitForState("").done(function() {
+						// continue with the next one
+						console.log('Finding next task');
+						createNextTask(prof, i+1);
+					});
+				}
+			});
+		});
+	}
+	else {
+		console.log('Finding next task');
+		createNextTask(prof, i+1);
+	}
+}
 	
 	/**
-	* Checks task being started for requirements and initiates beginning task if found
-	*
-	* @param {string} taskname The name of the task being started
-	* @param {string} profname The name of the profession being used
-	* @param {Deferred} dfd Deferred object to process on return
-	*/
+* Checks task being started for requirements and initiates beginning task if found
+*
+* @param {string} taskname The name of the task being started
+* @param {string} profname The name of the profession being used
+* @param {Deferred} dfd Deferred object to process on return
+*/
 	function searchForTask(taskname, profname) {
 		// Return first object that matches exact craft name
 		var thisTask = unsafeWindow.client.dataModel.model.craftinglist['craft_' + profname].entries.filter(function(entry) {
@@ -1136,12 +1140,12 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 					searchAsset = true;
 				}
 				else {
-					// TODO: Automatically purchase item assets from shop
+				   // TODO: Automatically purchase item assets from shop
 					console.log("Not enough assets for task:", taskname);
 					return false;
 				}
 			}
-
+			
 			// Check for craftable or buyable ingredients
 			else {
 				var failedResources = thisTask.consumables.filter(function(entry) { return entry.required && !entry.fillsrequirements; });
@@ -1177,7 +1181,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			console.log("Failed to resolve item requirements for task:", taskname);
 			return false;
 		}
-
+		
 		// Generate list of available tasks to search ingredients/assets from
 		console.log("Searching ingredient tasks for:", profname);
 		var taskList = unsafeWindow.client.dataModel.model.craftinglist['craft_' + profname].entries.filter(function(entry) {
@@ -1227,26 +1231,26 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 	}
 	
 	/** --------- MAC-NW : Unused old function
-	* Fills resource slots and begins a profession task
-	*
-	* @param {string} taskDetail The craftindetail object for the task to be started
-	
-	function startTask(taskDetail) {
-		return;
-		
-		unsafeWindow.client.professionFetchTaskDetail(taskDetail.def.name);
-		//client.dataModel.addDefaultResources();
-		client.professionStartAssignment(taskDetail.def.name);
-	}*/
+* Fills resource slots and begins a profession task
+*
+* @param {string} taskDetail The craftindetail object for the task to be started
 
+function startTask(taskDetail) {
+return;
+
+unsafeWindow.client.professionFetchTaskDetail(taskDetail.def.name);
+//client.dataModel.addDefaultResources();
+client.professionStartAssignment(taskDetail.def.name);
+}*/
+	
 	/**
-	* Selects the highest level asset for the i'th button in the list. Uses an iterative approach
-	* in order to apply a sufficient delay after the asset is assigned
-	*
-	* @param {Array} The list of buttons to use to click and assign assets for
-	* @param {int} i The current iteration number. Will select assets for the i'th button
-	* @param {Deferred} jQuery Deferred object to resolve when all of the assets have been assigned
-	*/
+* Selects the highest level asset for the i'th button in the list. Uses an iterative approach
+* in order to apply a sufficient delay after the asset is assigned
+*
+* @param {Array} The list of buttons to use to click and assign assets for
+* @param {int} i The current iteration number. Will select assets for the i'th button
+* @param {Deferred} jQuery Deferred object to resolve when all of the assets have been assigned
+*/
 	function SelectItemFor(buttonListIn, i, def, prof) {
 		buttonListIn[i].click();
 		WaitForState("").done(function() {
@@ -1257,17 +1261,17 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			var ic, $it;
 			
 			var clicked = false;
-
+			
 			// Try to avoid using up higher rank assets needlessly
 			if (prof.taskName === "Leadership") {
 				var mercenarys = $("div.modal-item-list a.Bronze:contains('Mercenary')");
 				var guards = $("div.modal-item-list a.Bronze:contains('Guard')");
 				var footmen = $("div.modal-item-list a.Bronze:contains('Footman')");
-
-				if (mercenarys.length)   { clicked = true; mercenarys[0].click(); }
-				else if (guards.length)  { clicked = true; guards[0].click(); }
-				else if (footmen.length) { clicked = true; footmen[0].click(); }
-			}
+				
+				if (mercenarys.length)	 { clicked = true; mercenarys[0].click(); }
+				else if (guards.length)	 { clicked = true; guards[0].click(); }
+					else if (footmen.length) { clicked = true; footmen[0].click(); }
+					}
 			
 			// check resources & assets for best quality, in descending order
 			for (ic in quality) {
@@ -1278,7 +1282,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 					break;
 				}
 			}
-		
+			
 			// if no asset was selected, check for persons for best speed, in descending order
 			if (!clicked) {
 				for (ic in quality) {
@@ -1290,7 +1294,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 					}
 				}
 			}
-		
+			
 			// if nothing was found at all, return immediately (skip other optional slots)
 			if (!clicked) {
 				$("button.close-button").click();
@@ -1300,7 +1304,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 					def.resolve();
 				});
 			}
-
+			
 			console.log("Clicked item");
 			WaitForState("").done(function() {
 				// Get the new set of select buttons created since the other ones are removed when the asset loads
@@ -1317,71 +1321,71 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 	}
 	
 	/* ################# original
-	function SelectItemFor(buttonListIn, i, def, prof) {
-		buttonListIn[i].click();
-		WaitForState("").done(function() {
-			var specialItems = $("div.modal-item-list a.Special");
-			var goldItems = $("div.modal-item-list a.Gold");
-			var silverItems = $("div.modal-item-list a.Silver");
-			var bronzeItems = $("div.modal-item-list a.Bronze");
-			var clicked = false;
+function SelectItemFor(buttonListIn, i, def, prof) {
+buttonListIn[i].click();
+WaitForState("").done(function() {
+var specialItems = $("div.modal-item-list a.Special");
+var goldItems = $("div.modal-item-list a.Gold");
+var silverItems = $("div.modal-item-list a.Silver");
+var bronzeItems = $("div.modal-item-list a.Bronze");
+var clicked = false;
 
-			// Try to avoid using up higher rank assets needlessly
-			if (prof.taskName === "Leadership") {
-				var mercenarys = $("div.modal-item-list a.Bronze:contains('Mercenary')");
-				var guards = $("div.modal-item-list a.Bronze:contains('Guard')");
-				var footmen = $("div.modal-item-list a.Bronze:contains('Footman')");
+// Try to avoid using up higher rank assets needlessly
+if (prof.taskName === "Leadership") {
+var mercenarys = $("div.modal-item-list a.Bronze:contains('Mercenary')");
+var guards = $("div.modal-item-list a.Bronze:contains('Guard')");
+var footmen = $("div.modal-item-list a.Bronze:contains('Footman')");
 
-				if (mercenarys.length)   { clicked = true; mercenarys[0].click(); }
-				else if (guards.length)  { clicked = true; guards[0].click(); }
-				else if (footmen.length) { clicked = true; footmen[0].click(); }
-			}
-			// TODO: add remaining professions in the same way for bronze tier assets.
+if (mercenarys.length)	 { clicked = true; mercenarys[0].click(); }
+else if (guards.length)	 { clicked = true; guards[0].click(); }
+else if (footmen.length) { clicked = true; footmen[0].click(); }
+}
+// TODO: add remaining professions in the same way for bronze tier assets.
 
-			if (!clicked) {
-				// Click the highest slot
-				if (specialItems.length)	 { specialItems[0].click(); }
-				else if (goldItems.length)   { goldItems[0].click(); }
-				else if (silverItems.length) { silverItems[0].click(); }
-				else if (bronzeItems.length) { bronzeItems[0].click(); }
-				else { $("button.close-button").click(); }
-			}
+if (!clicked) {
+// Click the highest slot
+if (specialItems.length)	 { specialItems[0].click(); }
+else if (goldItems.length)	 { goldItems[0].click(); }
+else if (silverItems.length) { silverItems[0].click(); }
+else if (bronzeItems.length) { bronzeItems[0].click(); }
+else { $("button.close-button").click(); }
+}
 
-			console.log("Clicked item");
-			WaitForState("").done(function() {
-				// Get the new set of select buttons created since the other ones are removed when the asset loads
-				var buttonList = $("h3:contains('Optional Assets:')").closest("div").find("button");
-				if (i < buttonList.length - 1) {
-					SelectItemFor(buttonList, i+1, def, prof);
-				}
-				else {
-					// Let main loop continue
-					def.resolve();
-				}
-			});
-		});
-	}
-	*/
+console.log("Clicked item");
+WaitForState("").done(function() {
+// Get the new set of select buttons created since the other ones are removed when the asset loads
+var buttonList = $("h3:contains('Optional Assets:')").closest("div").find("button");
+if (i < buttonList.length - 1) {
+SelectItemFor(buttonList, i+1, def, prof);
+}
+else {
+// Let main loop continue
+def.resolve();
+}
+});
+});
+}
+*/
 	
 	/**
-	* Will buy a given purchasable resource
-	*
-	* @param {String} item The data-tt-item id of the Resource to purchase
-	*/
+* Will buy a given purchasable resource
+*
+* @param {String} item The data-tt-item id of the Resource to purchase
+*/
 	function buyResource(item) {
 		console.log("Purchasing resources:", item);
 		
 		var resourceID = {
-			Crafting_Resource_Charcoal          : 0,
-			Crafting_Resource_Rocksalt          : 1,
-			Crafting_Resource_Spool_Thread      : 2,
-			Crafting_Resource_Porridge          : 3,
-			Crafting_Resource_Solvent           : 4,
-			Crafting_Resource_Brimstone         : 5,
-			Crafting_Resource_Coal              : 6,
-			Crafting_Resource_Moonseasalt       : 7,
-			Crafting_Resource_Quicksilver       : 8,
-			Crafting_Resource_Spool_Threadsilk  : 9,
+			Crafting_Resource_Charcoal			: 0,
+			Crafting_Resource_Rocksalt			: 1,
+			Crafting_Resource_Spool_Thread		: 2,
+			Crafting_Resource_Porridge			: 3,
+			Crafting_Resource_Solvent			: 4,
+			Crafting_Resource_Brimstone			: 5,
+			Crafting_Resource_Coal				: 6,
+			Crafting_Resource_Moonseasalt		: 7,
+			Crafting_Resource_Quicksilver		: 8,
+			Crafting_Resource_Spool_Threadsilk	: 9,
 		};
 		
 		// Make purchase
@@ -1394,7 +1398,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 	// MAC-NW -- AD Transfer through exchange functions (Consolidation)
 	
 	// Function used to check exchange data model and post calculated AD/Zen for transfer if all requirements are met
-	function postZexOffer() { 
+	function postZexOffer() {
 		// Make sure the exchange data is loaded to model
 		if (unsafeWindow.client.dataModel.model.exchangeaccountdata) {
 			// Check that there is atleast 1 free zex order slot
@@ -1403,18 +1407,18 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 				var charDiamonds = parseInt(unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds);
 				var ZenRate = parseInt(settings["banktransrate"]);
 				var ZenQty = Math.floor( (charDiamonds - parseInt(settings["bankcharmin"])) / ZenRate);
-
+				
 				console.log("Posting Zex buy listing for " + ZenQty + " ZEN at the rate of " + ZenRate + " AD/ZEN. AD remainder: " + charDiamonds + " - " + (ZenRate*ZenQty) + " = " + (charDiamonds-(ZenRate*ZenQty)));
 				unsafeWindow.client.createBuyOrder(ZenQty, ZenRate);
-			
+				
 			} else { console.log("Zen Max Listings Reached (5). Skipping Zex Posting.."); }
 		} else { console.log("Zen Exchange data did not load in time for transfer. Skipping Zex Posting.."); }
-	} 
+	}
 	
 	// Function used to check exchange data model and withdraw listed orders that use the settings zen transfer rate
 	function withdrawZexOffer() {
 		// Make sure the exchange data is loaded to model
-		if (unsafeWindow.client.dataModel.model.exchangeaccountdata) {		   
+		if (unsafeWindow.client.dataModel.model.exchangeaccountdata) {
 			if (unsafeWindow.client.dataModel.model.exchangeaccountdata.openorders.length >= 1) {
 				
 				var charDiamonds = parseInt(unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds);
@@ -1425,31 +1429,23 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 					// find any buy orders in the list with our set zen rate
 					if (parseInt(item.price) == ZenRate && item.ordertype == "Buy") {
 						// cancel/withdraw the order
- 						client.withdrawOrder(item.orderid);
+						client.withdrawOrder(item.orderid);
 						console.log("Withdrawing Zex listing for " + item.quantity + " ZEN at the rate of " + item.price + " . Total value in AD: " + item.totaltc);
 					}
 				});
-
+				
 			} else { console.log("No listings found on Zex. Skipping Zex Withrdaw.."); }
 		} else { console.log("Zen Exchange data did not load in time for transfer. Skipping Zex Withrdaw.."); }
-	} 
+	}
 	
 	// MAC-NW
 	
 	function switchChar() {
-
+		
 		if (settings["refinead"]) {
 			var _currencies = unsafeWindow.client.dataModel.model.ent.main.currencies;
 			if (_currencies.diamondsconvertleft && _currencies.roughdiamonds) {
-				var refined_diamonds;
-				if (_currencies.diamondsconvertleft < _currencies.roughdiamonds) {
-					refined_diamonds = _currencies.diamondsconvertleft
-				} else {
-					refined_diamonds = _currencies.roughdiamonds
-				}
-				chardiamonds[charcurrent] += refined_diamonds
-				console.log("Refining AD for", settings["nw_charname"+charcurrent] + ":", refined_diamonds);
-				console.log(settings["nw_charname"+charcurrent] + "'s", "Astral Diamonds:", chardiamonds[charcurrent]);
+				console.log("Refining AD");
 				unsafeWindow.client.sendCommand('Gateway_ConvertNumeric', 'Astral_Diamonds');
 				WaitForState("button.closeNotification").done(function() {
 					$("button.closeNotification").click();
@@ -1463,7 +1459,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			// Check that we dont take money from the character assigned as the banker // Zen Transfer / Listing
 			if (settings["bankchar"] != unsafeWindow.client.dataModel.model.ent.main.name) {
 				// Check the required min AD amount on character
-				if (settings["banktransmin"] && settings["bankcharmin"] && parseInt(unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds) >= ( parseInt(settings["banktransmin"]) + parseInt(settings["bankcharmin"]) )  ) {
+				if (settings["banktransmin"] && settings["bankcharmin"] && parseInt(unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds) >= ( parseInt(settings["banktransmin"]) + parseInt(settings["bankcharmin"]) )	 ) {
 					// Check that the rate is not less than the min & max
 					if (settings["banktransrate"] && parseInt(settings["banktransrate"]) >= 50 && parseInt(settings["banktransrate"]) <= 500) {
 						window.setTimeout(postZexOffer, delay.SHORT);
@@ -1484,7 +1480,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 					if (slot && _cRewardPat.test(slot.name)) {
 						if (slot.count >= 99)
 							slot.count = 99;
-						for (i = 1; i <= slot.count; i++) { 
+						for (i = 1; i <= slot.count; i++) {
 							window.setTimeout(function () {client.sendCommand('GatewayInventory_OpenRewardPack', slot.uid);}, 500);
 						}
 					}
@@ -1497,7 +1493,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 		
 		var chardelay, chardate = null, nowdate = new Date();
 		nowdate = nowdate.getTime();
-		curdiamonds = 0; 
+		curdiamonds = 0;
 		for (var cc = 0; cc < settings["charcount"]; cc++) {
 			if (chartimers[cc] != null) {
 				console.log("Date found for " + settings["nw_charname"+cc]);
@@ -1514,12 +1510,10 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 				console.log("No date found for " + settings["nw_charname"+cc] + ", switching now.");
 				break;
 			}
+			if(chardiamonds[cc] != null) {
+				curdiamonds += chardiamonds[cc];
+			}
 		}
-		for (var cc = 0; cc < settings["charcount"]; cc++) {
-			if(chardiamonds[cc] != null) { 
-				curdiamonds += Math.floor(chardiamonds[cc] / 50) * 50;
-			} 
-		} 
 		console.log("Next run for " + settings["nw_charname"+charcurrent] + " in " + parseInt(chardelay/1000) + " seconds.");
 		$("#prinfopane").empty().append("<h3 class='promo-image copy-top prh3'>Professions Robot<br />Next task for " + settings["nw_charname"+charcurrent] + "<br /><span data-timer='" + chardate + "' data-timer-length='2'></span><br />Diamonds: " + curdiamonds.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</h3>");
 		GM_setValue("charcurrent", charcurrent);
@@ -1527,31 +1521,31 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 	}
 	
 	/**
-	* Waits for the loading symbol to be hidden.
-	*
-	* @return {Deferred} A jQuery defferred object that will be resolved when loading is complete
-	*/
+* Waits for the loading symbol to be hidden.
+*
+* @return {Deferred} A jQuery defferred object that will be resolved when loading is complete
+*/
 	function WaitForLoad() {
 		return WaitForState("");
 	}
 	/**
-	* Creates a deferred object that will be resolved when the state is reached
-	*
-	* @param {string} query The query for the state to wait for
-	* @return {Deferred} A jQuery defferred object that will be resolved when the state is reached
-	*/
+* Creates a deferred object that will be resolved when the state is reached
+*
+* @param {string} query The query for the state to wait for
+* @return {Deferred} A jQuery defferred object that will be resolved when the state is reached
+*/
 	function WaitForState(query) {
 		var dfd = $.Deferred();
 		window.setTimeout(function() {AttemptResolve(query, dfd);}, delay.SHORT); // Doesn't work without a short delay
 		return dfd;
-	}   
+	}
 	/**
-	* Will continually test for the given query state and resolve the given deferred object when the state is reached
-	* and the loading symbol is not visible
-	*
-	* @param {string} query The query for the state to wait for
-	* @param {Deferred} dfd The jQuery defferred object that will be resolved when the state is reached
-	*/
+* Will continually test for the given query state and resolve the given deferred object when the state is reached
+* and the loading symbol is not visible
+*
+* @param {string} query The query for the state to wait for
+* @param {Deferred} dfd The jQuery defferred object that will be resolved when the state is reached
+*/
 	function AttemptResolve(query, dfd) {
 		if ((query === "" || $(query).length) && $("div.loading-image:visible").length === 0) {
 			dfd.resolve();
@@ -1561,27 +1555,27 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 		}
 	}
 	/**
-	* The main process loop:
-	* - Determine which page we are on and call the page specific logic
-	* - When processing is complete, process again later
-	*   - Use a short timer when something changed last time through
-	*   - Use a longer timer when waiting for tasks to complete
-	*/
+* The main process loop:
+* - Determine which page we are on and call the page specific logic
+* - When processing is complete, process again later
+*	- Use a short timer when something changed last time through
+*	- Use a longer timer when waiting for tasks to complete
+*/
 	function process() {
 		// Make sure the settings button exists
 		addSettings();
-
+		
 		// Enable/Disable the unconditional page reload depending on settings
-		loading_reset = settings["autoreload"]; 
-
+		loading_reset = settings["autoreload"];
+		
 		// Check if timer is paused
 		s_paused = settings["paused"]; // let the Page Reloading function know the pause state
 		if (settings["paused"]) {
 			// Just continue later - the deferred object is still set and nothing will resolve it until we get past this point
 			var timerHandle = window.setTimeout(function() {process();}, delay.DEFAULT);
 			return;
-		} 
-
+		}
+		
 		// Check for Gateway down
 		if (window.location.href.indexOf("gatewaysitedown") > -1) {
 			// Do a long delay and then retry the site
@@ -1589,13 +1583,13 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			window.setTimeout(function() {unsafeWindow.location.href = "http://gateway.playneverwinter.com";}, delay.MINS);
 			return;
 		}
-
+		
 		// Check for login or account guard and process accordingly
 		var currentPage = GetCurrentPage();
-		if      (currentPage == PAGES.LOGIN)       { page_LOGIN(); return; }
-		else if (currentPage == PAGES.GUARD)       { page_GUARD(); return; }
-		
-		window.setTimeout(function() {loginProcess();}, delay.SHORT);
+		if		(currentPage == PAGES.LOGIN)	   { page_LOGIN(); return; }
+		else if (currentPage == PAGES.GUARD)	   { page_GUARD(); return; }
+			
+			window.setTimeout(function() {loginProcess();}, delay.SHORT);
 		
 		// Continue again later
 		dfdNextRun.done(function(delayTimer) {
@@ -1622,8 +1616,8 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			// Just continue later - the deferred object is still set and nothing will resolve it until we get past this point
 			var timerHandle = window.setTimeout(function() {process();}, delay.DEFAULT);
 			return;
-		} 
-
+		}
+		
 		if (accountName) {
 			// load current character position and values
 			charcurrent =  GM_getValue("charcurrent", 0);
@@ -1639,23 +1633,23 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			else {
 				tasklist = defaultTasklist;
 			}
-
+			
 			var charName = settings["nw_charname"];
 			var fullCharName = charName + '@' + accountName;
-
+			
 			if (unsafeWindow.client.getCurrentCharAtName() != fullCharName) {
 				loadCharacter(fullCharName);
 				return;
 			}
-
+			
 			// Try to start tasks
 			if (processCharacter()) { return; }
-
+			
 			// Switch characters as necessary
-		switchChar();
+			switchChar();
 		}
 	}
-
+	
 	function loadCharacter(charname) {
 		// Load character and restart next load loop
 		console.log("Loading gateway script for", charname);
@@ -1670,7 +1664,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			window.setTimeout(function() {loadCharacter(charname);}, delay.SHORT);
 			return;
 		}
-
+		
 		if (settings["autoexchange"]) {
 			
 			unsafeWindow.client.dataModel.fetchExchangeAccountData();
@@ -1691,11 +1685,11 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 				// withdraw the balance from exchange
 				window.setTimeout(function () {
 					if (parseInt(client.dataModel.model.exchangeaccountdata.readytoclaimescrow) > 0) {
-					client.sendCommand("GatewayExchange_ClaimTC", client.dataModel.model.exchangeaccountdata.readytoclaimescrow);
+						client.sendCommand("GatewayExchange_ClaimTC", client.dataModel.model.exchangeaccountdata.readytoclaimescrow);
 						console.log("Attempting to withdraw exchange balancees... ClaimTC: " + client.dataModel.model.exchangeaccountdata.readytoclaimescrow);
 					}
 					if (parseInt(client.dataModel.model.exchangeaccountdata.readytoclaimmtc) > 0) {
-					client.sendCommand("GatewayExchange_ClaimMTC", client.dataModel.model.exchangeaccountdata.readytoclaimmtc);
+						client.sendCommand("GatewayExchange_ClaimMTC", client.dataModel.model.exchangeaccountdata.readytoclaimmtc);
 						console.log("Attempting to withdraw exchange balancees... ClaimMT: " + client.dataModel.model.exchangeaccountdata.readytoclaimmtc);
 					}
 					
@@ -1719,46 +1713,46 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			return;
 		// Add the required CSS
 		AddCss("\
-			#settingsButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 0px; top: 0px; padding: 3px; z-index: 1000;}\
-			#pauseButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 23px; top: 0px; padding: 3px; z-index: 1000;}\
-			/* MAC-NW -- Put Panel at a higher layer than status window */ #settingsPanel{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); color: rgb(0, 0, 0); position: fixed; overflow: auto; right: 0px; top: 0px; width: 550px;max-height:750px;font: 12px sans-serif; text-align: left; display: block; z-index: 1001;}\
-			#settings_title{font-weight: bolder; background: none repeat scroll 0% 0% rgb(204, 204, 204); border-bottom: 1px solid rgb(102, 102, 102); padding: 3px;}\
-			#settingsPanelButtonContainer {background: none repeat scroll 0% 0% rgb(204, 204, 204); border-top: 1px solid rgb(102, 102, 102);padding: 3px;text-align:center} \
-			#settingsPanel label.purple {font-weight:bold;color:#7C37F6}\
-			#settingsPanel label.blue {font-weight:bold;color:#007EFF}\
-			#settingsPanel label.green {font-weight:bold;color:#8AFF00}\
-			#settingsPanel label.white {font-weight:bold;color:#FFFFFF}\
-			#charPanel {width:98%;max-height:400px;overflow:auto;display:block;padding:3px;}\
-			#charPanel div div ul li { display: inline-block; width: 48%; }\
-			.inventory-container {float: left; clear: none; width: 270px; margin-right: 20px;}\
-			#prinfopane {position: fixed; top: 5px; left: 200px; display: block; z-index: 1000;}\
-			.prh3 {padding: 5px; height: auto!important; width: auto!important; background-color: rgba(0, 0, 0, 0.7);}\
-			.custom-radio{width:16px;height:16px;display:inline-block;position:relative;z-index:1;top:3px;background-color:#fff;margin:0 4px 0 2px;}\
-			.custom-radio:hover{background-color:black;} .custom-radio.selected{background-color:red;} .custom-radio-selected-text{color:darkred;font-weight:500;}\
-			.custom-radio input[type='radio']{margin:1px;position:absolute;z-index:2;cursor:pointer;outline:none;opacity:0;_nofocusline:expression(this.hideFocus=true);-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);filter:alpha(opacity=0);-khtml-opacity:0;-moz-opacity:0}\
-			#settingsPanel input[type='button'].button-green,#settingsPanel input[type='button'].button-red,#settingsPanel input[type='button'].button-yellow,#settingsPanel input[type='button'].button-blue{color:#eff;border-radius:4px;text-shadow:0 1px 1px rgba(0,0,0,0.2);font-size:110%;font-weight:bold;}\
-			.pure-button{display:inline-block;*display:inline;zoom:1;line-height:normal;white-space:nowrap;vertical-align:baseline;text-align:center;cursor:pointer;-webkit-user-drag:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pure-button::-moz-focus-inner{padding:0;border:0}.pure-button{font-family:inherit;font-size:100%;*font-size:90%;*overflow:visible;padding:.5em 1em;color:#444;color:rgba(0,0,0,.8);*color:#444;border:1px solid #999;border:0 rgba(0,0,0,0);background-color:#E6E6E6;text-decoration:none;border-radius:2px}.pure-button-hover,.pure-button:hover,.pure-button:focus{filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000', GradientType=0);background-image:-webkit-gradient(linear,0 0,0 100%,from(transparent),color-stop(40%,rgba(0,0,0,.05)),to(rgba(0,0,0,.1)));background-image:-webkit-linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));background-image:-moz-linear-gradient(top,rgba(0,0,0,.05) 0,rgba(0,0,0,.1));background-image:-o-linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));background-image:linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1))}.pure-button:focus{outline:0}.pure-button-active,.pure-button:active{box-shadow:0 0 0 1px rgba(0,0,0,.15) inset,0 0 6px rgba(0,0,0,.2) inset}.pure-button[disabled],.pure-button-disabled,.pure-button-disabled:hover,.pure-button-disabled:focus,.pure-button-disabled:active{border:0;background-image:none;filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);filter:alpha(opacity=40);-khtml-opacity:.4;-moz-opacity:.4;opacity:.4;cursor:not-allowed;box-shadow:none}.pure-button-hidden{display:none}.pure-button::-moz-focus-inner{padding:0;border:0}.pure-button-primary,.pure-button-selected,a.pure-button-primary,a.pure-button-selected{background-color:#0078e7;color:#fff}\
-			#settingsPanel input[type='button'].button-green{background:#1cb841; margin: 2px 20px 2px 2px;}\
-			#settingsPanel input[type='button'].button-red{background:#ca3c3c; margin: 2px 2px 2px 2px;}\
-			#settingsPanel input[type='button'].button-yellow{background:#df7514; margin: 2px 2px 2px 2px;}\
-			#settingsPanel input[type='button'].button-blue{background:#42b8dd; margin: 2px 2px 2px 2px;}\
-		");
-
+#settingsButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 0px; top: 0px; padding: 3px; z-index: 1000;}\
+#pauseButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 23px; top: 0px; padding: 3px; z-index: 1000;}\
+/* MAC-NW -- Put Panel at a higher layer than status window */ #settingsPanel{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); color: rgb(0, 0, 0); position: fixed; overflow: auto; right: 0px; top: 0px; width: 550px;max-height:750px;font: 12px sans-serif; text-align: left; display: block; z-index: 1001;}\
+#settings_title{font-weight: bolder; background: none repeat scroll 0% 0% rgb(204, 204, 204); border-bottom: 1px solid rgb(102, 102, 102); padding: 3px;}\
+#settingsPanelButtonContainer {background: none repeat scroll 0% 0% rgb(204, 204, 204); border-top: 1px solid rgb(102, 102, 102);padding: 3px;text-align:center} \
+#settingsPanel label.purple {font-weight:bold;color:#7C37F6}\
+#settingsPanel label.blue {font-weight:bold;color:#007EFF}\
+#settingsPanel label.green {font-weight:bold;color:#8AFF00}\
+#settingsPanel label.white {font-weight:bold;color:#FFFFFF}\
+#charPanel {width:98%;max-height:400px;overflow:auto;display:block;padding:3px;}\
+#charPanel div div ul li { display: inline-block; width: 48%; }\
+.inventory-container {float: left; clear: none; width: 270px; margin-right: 20px;}\
+#prinfopane {position: fixed; top: 5px; left: 200px; display: block; z-index: 1000;}\
+.prh3 {padding: 5px; height: auto!important; width: auto!important; background-color: rgba(0, 0, 0, 0.7);}\
+.custom-radio{width:16px;height:16px;display:inline-block;position:relative;z-index:1;top:3px;background-color:#fff;margin:0 4px 0 2px;}\
+.custom-radio:hover{background-color:black;} .custom-radio.selected{background-color:red;} .custom-radio-selected-text{color:darkred;font-weight:500;}\
+.custom-radio input[type='radio']{margin:1px;position:absolute;z-index:2;cursor:pointer;outline:none;opacity:0;_nofocusline:expression(this.hideFocus=true);-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);filter:alpha(opacity=0);-khtml-opacity:0;-moz-opacity:0}\
+#settingsPanel input[type='button'].button-green,#settingsPanel input[type='button'].button-red,#settingsPanel input[type='button'].button-yellow,#settingsPanel input[type='button'].button-blue{color:#eff;border-radius:4px;text-shadow:0 1px 1px rgba(0,0,0,0.2);font-size:110%;font-weight:bold;}\
+.pure-button{display:inline-block;*display:inline;zoom:1;line-height:normal;white-space:nowrap;vertical-align:baseline;text-align:center;cursor:pointer;-webkit-user-drag:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.pure-button::-moz-focus-inner{padding:0;border:0}.pure-button{font-family:inherit;font-size:100%;*font-size:90%;*overflow:visible;padding:.5em 1em;color:#444;color:rgba(0,0,0,.8);*color:#444;border:1px solid #999;border:0 rgba(0,0,0,0);background-color:#E6E6E6;text-decoration:none;border-radius:2px}.pure-button-hover,.pure-button:hover,.pure-button:focus{filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000', GradientType=0);background-image:-webkit-gradient(linear,0 0,0 100%,from(transparent),color-stop(40%,rgba(0,0,0,.05)),to(rgba(0,0,0,.1)));background-image:-webkit-linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));background-image:-moz-linear-gradient(top,rgba(0,0,0,.05) 0,rgba(0,0,0,.1));background-image:-o-linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));background-image:linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1))}.pure-button:focus{outline:0}.pure-button-active,.pure-button:active{box-shadow:0 0 0 1px rgba(0,0,0,.15) inset,0 0 6px rgba(0,0,0,.2) inset}.pure-button[disabled],.pure-button-disabled,.pure-button-disabled:hover,.pure-button-disabled:focus,.pure-button-disabled:active{border:0;background-image:none;filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);filter:alpha(opacity=40);-khtml-opacity:.4;-moz-opacity:.4;opacity:.4;cursor:not-allowed;box-shadow:none}.pure-button-hidden{display:none}.pure-button::-moz-focus-inner{padding:0;border:0}.pure-button-primary,.pure-button-selected,a.pure-button-primary,a.pure-button-selected{background-color:#0078e7;color:#fff}\
+#settingsPanel input[type='button'].button-green{background:#1cb841; margin: 2px 20px 2px 2px;}\
+#settingsPanel input[type='button'].button-red{background:#ca3c3c; margin: 2px 2px 2px 2px;}\
+#settingsPanel input[type='button'].button-yellow{background:#df7514; margin: 2px 2px 2px 2px;}\
+#settingsPanel input[type='button'].button-blue{background:#42b8dd; margin: 2px 2px 2px 2px;}\
+");
+		
 		// Add settings panel to page body
 		$("body").append(
 			'<div id="settingsPanel">\
-				<div id="settings_title">\
-					<img src='+image_prefs+' style="float: left; vertical-align: text-bottom;"\>\
-					<img id="settings_close" src='+image_close+' title="Click to hide preferences" style="float: right; vertical-align: text-bottom; cursor: pointer; display: block;"\>\
-					<span style="margin:3px">Settings</span>\
-				</div>\
-				<form style="margin: 0px; padding: 0px">\
-					<ul style="list-style: none outside none; max-height: 500px; overflow: auto; margin: 3px; padding: 0px;">\
-					</ul>\
-				</form>\
-			</div>'
+<div id="settings_title">\
+<img src='+image_prefs+' style="float: left; vertical-align: text-bottom;"\>\
+<img id="settings_close" src='+image_close+' title="Click to hide preferences" style="float: right; vertical-align: text-bottom; cursor: pointer; display: block;"\>\
+<span style="margin:3px">Settings</span>\
+</div>\
+<form style="margin: 0px; padding: 0px">\
+<ul style="list-style: none outside none; max-height: 500px; overflow: auto; margin: 3px; padding: 0px;">\
+</ul>\
+</form>\
+</div>'
 		);
-
+		
 		// Add each setting input
 		var settingsList = $("#settingsPanel form ul");
 		for (var i = 0; i < settingnames.length; i++) {
@@ -1766,93 +1760,93 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			var indent = (countLeadingSpaces(settingnames[i].title) >= 1) ? 1 : 0;
 			if ( i > 0 && settingnames[i].type.toString().replace(/password/, "text")  != settingnames[i-1].type.toString().replace(/password/, "text") )  // MAC-NW -- AD Consolidation FIX: Remove even/odd test
 				settingsList.append('<li style="margin-left:0em; width: 48%; display: inline-block;"/>&nbsp;</li>')
-
-			switch(settingnames[i].type) {
-				case "checkbox":
-					settingsList.append('<li title="'+settingnames[i].tooltip+'" style="padding-left:'+indent+'em; width: 48%; display: inline-block;"><input style="margin:4px" name="'+id+'" id="'+id+'" type="checkbox" /><label class="'+settingnames[i].class+'" for="'+id+'">'+settingnames[i].title+'</label></li>')
-					$('#'+id).prop('checked', settings[settingnames[i].name]);
-					break;
-				case "text":
-					settingsList.append('<li title="'+settingnames[i].tooltip+'" style="padding-left:'+indent+'em; margin-top:1em; width: 46%; display: inline-block;"<label class="'+settingnames[i].class+'" for="'+id+'">'+settingnames[i].title+'</label><input style="margin:4px; padding: 2px; min-width: 80%;" name="'+id+'" id="'+id+'" type="text" /></li>')
-					$('#'+id).val(settings[settingnames[i].name]);
-					break;
-				case "password":
-					settingsList.append('<li title="'+settingnames[i].tooltip+'" style="padding-left:'+indent+'em; margin-top:1em; width: 46%; display: inline-block;"'+settingnames[i].class+'" for="'+id+'">'+settingnames[i].title+'</label><input style="margin:4px; padding: 2px; min-width: 80%;" name="'+id+'" id="'+id+'" type="password" /></li>')
-					$('#'+id).val(settings[settingnames[i].name]);
-					break;
-				case "select":
-					settingsList.append('<li title="'+settingnames[i].tooltip+'" style="padding-left:'+indent+'em; width: 48%; display: inline-block;"'+settingnames[i].class+'" style="padding-left:4px" for="'+id+'">'+settingnames[i].title+'</label><select style="margin:4px" name="'+id+'" id="'+id+'" /></li>')
-					var options = settingnames[i].opts;
-					var select = $('#'+id);
-					for (var j = 0; j < options.length; j++) {
-						if (settings[settingnames[i].name] == options[j].path)
-							select.append('<option value="'+options[j].path+'" selected="selected">'+options[j].name+'</option>');
-						else 
-							select.append('<option value="'+options[j].path+'">'+options[j].name+'</option>');
-					}
-					break;
-				case "label":
-					settingsList.append('<li title="'+settingnames[i].tooltip+'" style="margin-left:'+indent+'em;><label class="'+settingnames[i].class+'">'+settingnames[i].title+'</label></li>')
-					break; 
-			}
+				
+				switch(settingnames[i].type) {
+					case "checkbox":
+						settingsList.append('<li title="'+settingnames[i].tooltip+'" style="padding-left:'+indent+'em; width: 48%; display: inline-block;"><input style="margin:4px" name="'+id+'" id="'+id+'" type="checkbox" /><label class="'+settingnames[i].class+'" for="'+id+'">'+settingnames[i].title+'</label></li>')
+						$('#'+id).prop('checked', settings[settingnames[i].name]);
+						break;
+					case "text":
+						settingsList.append('<li title="'+settingnames[i].tooltip+'" style="padding-left:'+indent+'em; margin-top:1em; width: 46%; display: inline-block;"<label class="'+settingnames[i].class+'" for="'+id+'">'+settingnames[i].title+'</label><input style="margin:4px; padding: 2px; min-width: 80%;" name="'+id+'" id="'+id+'" type="text" /></li>')
+						$('#'+id).val(settings[settingnames[i].name]);
+						break;
+					case "password":
+						settingsList.append('<li title="'+settingnames[i].tooltip+'" style="padding-left:'+indent+'em; margin-top:1em; width: 46%; display: inline-block;"'+settingnames[i].class+'" for="'+id+'">'+settingnames[i].title+'</label><input style="margin:4px; padding: 2px; min-width: 80%;" name="'+id+'" id="'+id+'" type="password" /></li>')
+						$('#'+id).val(settings[settingnames[i].name]);
+						break;
+					case "select":
+						settingsList.append('<li title="'+settingnames[i].tooltip+'" style="padding-left:'+indent+'em; width: 48%; display: inline-block;"'+settingnames[i].class+'" style="padding-left:4px" for="'+id+'">'+settingnames[i].title+'</label><select style="margin:4px" name="'+id+'" id="'+id+'" /></li>')
+						var options = settingnames[i].opts;
+						var select = $('#'+id);
+						for (var j = 0; j < options.length; j++) {
+							if (settings[settingnames[i].name] == options[j].path)
+								select.append('<option value="'+options[j].path+'" selected="selected">'+options[j].name+'</option>');
+							else
+								select.append('<option value="'+options[j].path+'">'+options[j].name+'</option>');
+						}
+						break;
+					case "label":
+						settingsList.append('<li title="'+settingnames[i].tooltip+'" style="margin-left:'+indent+'em;><label class="'+settingnames[i].class+'">'+settingnames[i].title+'</label></li>')
+						break;
+				}
 		}
 		
 		// Add character settings for each char
 		var addText = '\
-			<script type="text/javascript">\
-			<!--\
-			function click_position(obj)\
-			{\
-				change_position(obj.value)\
-			}\
-			\
-			function customRadio(radioName) {\
-				var radioButton = $( \'input[name="\'+ radioName +\'"]\');\
-				$(radioButton).each(function(){\
-					$(this).wrap( "<span class=\'custom-radio\'></span>" );\
-					if($(this).is(\':checked\')){\
-						$(this).parent().addClass("selected");\
-						$(this).parent().parent().addClass("custom-radio-selected-text");\
-					}\
-				});\
-				$(radioButton).click(function(){\
-					if($(this).is(\':checked\')){\
-						$(this).parent().addClass("selected");\
-						$(this).parent().parent().addClass("custom-radio-selected-text");\
-					}\
-					$(radioButton).not(this).each(function(){\
-						$(this).parent().removeClass("selected");\
-						$(this).parent().parent().removeClass("custom-radio-selected-text");\
-					});\
-				});\
-			}\
-			function change_position(val)\
-			{\
-				for (var i = 0; i < '+settings["charcount"]+'; i++)\
-				{\
-					document.getElementById("charContainer"+i).style.display="none";\
-				}\
-				document.getElementById("charContainer"+val).style.display="block";\
-			}\
-			//-->\
-			</script>\
-			<div id="charPanel">\
-				<div style="width:30%;float:left;max-height:400px;overflow:auto;">\
-			';
+<script type="text/javascript">\
+<!--\
+function click_position(obj)\
+{\
+change_position(obj.value)\
+}\
+\
+function customRadio(radioName) {\
+var radioButton = $( \'input[name="\'+ radioName +\'"]\');\
+$(radioButton).each(function(){\
+$(this).wrap( "<span class=\'custom-radio\'></span>" );\
+if($(this).is(\':checked\')){\
+$(this).parent().addClass("selected");\
+$(this).parent().parent().addClass("custom-radio-selected-text");\
+}\
+});\
+$(radioButton).click(function(){\
+if($(this).is(\':checked\')){\
+$(this).parent().addClass("selected");\
+$(this).parent().parent().addClass("custom-radio-selected-text");\
+}\
+$(radioButton).not(this).each(function(){\
+$(this).parent().removeClass("selected");\
+$(this).parent().parent().removeClass("custom-radio-selected-text");\
+});\
+});\
+}\
+function change_position(val)\
+{\
+for (var i = 0; i < '+settings["charcount"]+'; i++)\
+{\
+document.getElementById("charContainer"+i).style.display="none";\
+}\
+document.getElementById("charContainer"+val).style.display="block";\
+}\
+//-->\
+</script>\
+<div id="charPanel">\
+<div style="width:30%;float:left;max-height:400px;overflow:auto;">\
+';
 		for (var i = 0; i < settings["charcount"]; i++) {
 			addText += '\
-					<div><label for="value_'+i+'" style="display:block;padding-top:2px;"><input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_'+i+'" value="'+i+'" />'+settings["nw_charname"+i]+'</label></div>\
-				';
+<div><label for="value_'+i+'" style="display:block;padding-top:2px;"><input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_'+i+'" value="'+i+'" />'+settings["nw_charname"+i]+'</label></div>\
+';
 		}
 		addText += '\
-				</div>\
-				<div style="width:69%;float:right;">\
-			';
+</div>\
+<div style="width:69%;float:right;">\
+';
 		for (var i = 0; i < settings["charcount"]; i++) {
 			addText += '\
-					<div id="charContainer'+i+'" style="display:none">\
-						<ul style="list-style: none outside none; max-height: 500px; overflow: auto;">\
-				';
+<div id="charContainer'+i+'" style="display:none">\
+<ul style="list-style: none outside none; max-height: 500px; overflow: auto;">\
+';
 			var k = 0 + (i*charSettings.length/settings["charcount"]);
 			var id = 'settings_' + charSettings[k].name;
 			addText += '<li title="'+charSettings[k].tooltip+'"><input style="margin:4px; padding: 2px;" name="'+id+'" id="'+id+'" type="text" /></li>';
@@ -1863,19 +1857,19 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 				addText += '<li title="'+charSettings[k].tooltip+'"><input maxlength="2" size="1" style="margin:4px; padding: 2px;" name="'+id+'" id="'+id+'" type="text" /><label class="'+charSettings[k].class+'" for="'+id+'">'+charSettings[k].title+'</label></li>';
 			}
 			addText += '</ul>'
-
+			
 			// Add task list save buttons
 			addText += '\
-				<input id="save_tasklist'+i+'" type="button" class="button-green pure-button" value="Save Tasks" title="Saves current task list in script to this character">\
-				<input id="clear_tasklist'+i+'" type="button" class="button-red pure-button" value="Clear Tasks" title="Clears the saved task list for this character to use defaults">\
-					</div>';
+<input id="save_tasklist'+i+'" type="button" class="button-green pure-button" value="Save Tasks" title="Saves current task list in script to this character">\
+<input id="clear_tasklist'+i+'" type="button" class="button-red pure-button" value="Clear Tasks" title="Clears the saved task list for this character to use defaults">\
+</div>';
 		}
 		addText += '\
-				</div>\
-			</div>\
-			';
+</div>\
+</div>\
+';
 		$("#settingsPanel form").append(addText);
-
+		
 		// Add values to character input fields
 		for (var i = 0; i < charSettings.length; i++) {
 			var id = 'settings_' + charSettings[i].name;
@@ -1896,23 +1890,23 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 				setTimeout(function() { GM_setValue("tasklist"+num, ""); }, 0);
 			});
 		}
-
+		
 		// Add save/cancel buttons to panel
 		$("#settingsPanel form").append('\
-			<div id="settingsPanelButtonContainer">\
-				<input id="settings_save" class="button-blue pure-button" type="button" value="Save and Apply">\
-				<input id="settings_close" class="button-yellow pure-button" type="button" value="Close">\
-			</div>');
-
+<div id="settingsPanelButtonContainer">\
+<input id="settings_save" class="button-blue pure-button" type="button" value="Save and Apply">\
+<input id="settings_close" class="button-yellow pure-button" type="button" value="Close">\
+</div>');
+		
 		// Add open settings button to page
 		$("body").append('<div id="settingsButton"><img src="'+image_prefs+'" title="Click to show preferences" style="cursor: pointer; display: block;"></div>');
-
+		
 		// Add pause button to page
 		$("body").append('<div id="pauseButton"><img src="'+(settings["paused"]?image_play:image_pause)+'" title="Click to '+(settings["paused"]?"resume":"pause")+' task script" style="cursor: pointer; display: block;"></div>');
 		
 		// Add info pane
 		$("body").append("<div id='prinfopane' class='header-newrelease'>");
-
+		
 		// Add the javascript
 		$("#settingsPanel").hide();
 		$("#settingsButton").click(function() {
@@ -1932,15 +1926,15 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			$("#pauseButton img").attr("src",(settings["paused"]?image_play:image_pause));
 			$("#pauseButton img").attr("title","Click to "+(settings["paused"]?"resume":"pause")+" task script");
 		});
-
+		
 		// Use setTimeout to workaround permission issues when calling GM functions from main window
 		$("#settings_save").click(function() { setTimeout(function() { SaveSettings();}, 0)});
 		customRadio("radio_position");
 	}
-
+	
 	function SaveSettings() {
 		var charcount = settings["charcount"];
-
+		
 		// Get each value from the UI
 		for (var i = 0; i < settingnames.length; i++) {
 			var name = settingnames[i].name;
@@ -1969,7 +1963,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			if (settings[name] !== value) { settings[name] = value; } // Save to local cache
 			if (GM_getValue(name) !== value) { GM_setValue(name, value); } // Save to GM cache
 		}
-
+		
 		// Get character settings from UI
 		for (var i = 0; i < charSettings.length; i++) {
 			if (charSettings[i].type == 'void') { continue; }
@@ -1986,7 +1980,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 			unsafeWindow.location.href = "http://gateway.playneverwinter.com";
 			return;
 		}
-
+		
 		// Delete all saved settings // MAC-NW: Not sure this could of worked before with how it was coded...
 		if (settingwipe) {
 			var keys = GM_listValues();
@@ -2003,7 +1997,7 @@ var s_paused = false;      // extend the paused setting to the Page Reloading fu
 		$("#pauseButton").show();
 		$("#settingsPanel").hide();
 	}
-
+	
 	// Add the settings button and start a process timer
 	addSettings();
 	timerHandle = window.setTimeout(function() {process();}, delay.SHORT);
