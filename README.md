@@ -8,6 +8,7 @@ Neverwinter gateway - Professions Robot
 + refines AD
 + Transfers AD to one chracter (account)
 + Open rewardchest(99) per session
++ Sell item from inventory(current state sell "skill_ki" only)
 
 Contains helper script what add´s,
 
