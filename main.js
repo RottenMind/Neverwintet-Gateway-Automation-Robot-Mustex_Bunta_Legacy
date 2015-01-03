@@ -23,7 +23,7 @@ NW Gateway Professions Bot Contributors
 -----------------------------------
 Kakoura, Nametaken, rotten_mind, Frankescript, Brent
 */
-// @version 1.05.0.1G
+// @version BETA 1.05.0.1h
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -32,7 +32,12 @@ Kakoura, Nametaken, rotten_mind, Frankescript, Brent
 // ==/UserScript==
 
 /* RELEASE NOTES
-1.05.0.1G
+BETA 1.05.0.1h
+- added "sell skill kits", works same as "open_rewards" (experimental, inventory cleaning needs more specific "sell filter" and event what trigger "sell"  )
+- changed switching character and completing character task logic, trying prevent wrong task execution after  switch
+- refined "save settings" function 
+- WinterEvent tasklist got new additions
+1.05.01G
 - Github release
 1.05.0.1f
 - minor tasklist updates
@@ -573,7 +578,7 @@ state_idle++;
 				0:["Event_Winter_Tier0_Intro"],
 				1:["Event_Winter_Tier1_Rankup",/*"Event_Winter_Tier1_Shiny_Lure",*/"Event_Winter_Tier1_Refine","Event_Winter_Tier1_Gather"],
 				2:["Event_Winter_Tier1_Rankup_2",/*"Event_Winter_Tier1_Fishingpole_Blue","Event_Winter_Tier1_Shiny_Lure_Mass",*/"Event_Winter_Tier1_Refine_2","Event_Winter_Tier1_Gather_2"],
-				3:["Event_Winter_Tier1_Lightwine",/*"Event_Winter_Tier1_Mesmerizing_Lure",*/"Event_Winter_Tier1_Gather_3"],
+				3:[/*"Event_Winter_Tier1_Lightwine","Event_Winter_Tier1_Mesmerizing_Lure",*/"Event_Winter_Tier1_Gather_3"],
 			},
 		},
 		
@@ -814,7 +819,7 @@ state_idle++;
 			//20:["Alchemy_Tier3_Experimentation_Rank20"],
 			//19:["Alchemical Research","Rank 20 Experimentation","Upgrade Mixologist","Upgrade Apothecary","Hire an additional Apothecary"],
 			//20:["Alchemy_Tier2_Aquavitae_2"],
-			20:["Alchemy_Tier3_Protection_Potion_Major","Alchemy_Tier3_Potency_Potion_Major","Alchemy_Tier2_Aquaregia","Alchemy_Tier3_Refine_Basic","Alchemy_Tier3_Gather_Components"],
+			20:["Alchemy_Tier3_Protection_Potion_Major","Alchemy_Tier2_Aquaregia","Alchemy_Tier3_Refine_Basic","Alchemy_Tier3_Gather_Components"],
 		},
 	},
 ];
@@ -828,6 +833,7 @@ state_idle++;
 	{name: 'trainassets',		  title: 'Train Assets',						 def: true,	 type:'checkbox', tooltip:'Enable training/upgrading of asset worker resources'},
 	{name: 'refinead',			  title: 'Refine AD',							 def: true,	 type:'checkbox', tooltip:'Enable refining of AD on character switch'},
 	{name: 'openrewards',		  title: 'Open Reward Chests',					 def: false,  type:'checkbox', tooltip:'Enable opeing of leadership chests on character switch'}, //MAC-NW
+	{name: 'limitskillkits',	  title: 'Limit Skill Node Kit Stacks', def: false,  type:'checkbox', tooltip:'Enable removing skill node kits when there is more than 50 in a stack'}, //MAC-NW
 	{name: 'autoreload',		  title: 'Auto Reload',							 def: false, type:'checkbox', tooltip:'Enabling this will reload the gateway periodically. (Ensure Auto Login is enabled)'},
 	{name: 'autologin',			  title: 'Attempt to login automatically',		 def: false, type:'checkbox', tooltip:'Automatically attempt to login to the neverwinter gateway site'},
 	{name: 'nw_username',		  title: '	Neverwinter Username',				 def: '',	 type:'text',	  tooltip:''},
@@ -952,7 +958,6 @@ state_idle++;
 					var currentTasks = unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.filter(function(entry) { return entry.category == tasklist[i].taskName; });
 					if (currentTasks.length < settings[tasklist[i].taskName]) {
 						unsafeWindow.client.professionFetchTaskList('craft_' + tasklist[i].taskName);
-						unsafeWindow.client.dataModel.fetchVendor('Nw_Gateway_Professions_Merchant');
 						window.setTimeout(function() { createNextTask(tasklist[i], 0); }, delay.SHORT);
 						return true;
 					}
@@ -1441,7 +1446,10 @@ def.resolve();
 	// MAC-NW
 	
 	function switchChar() {
-		
+        
+        // MAC-NW -- Pause before processing additional features pre character swtich
+		PauseSettings();
+        
 		if (settings["refinead"]) {
 			var _currencies = unsafeWindow.client.dataModel.model.ent.main.currencies;
 			if (_currencies.diamondsconvertleft && _currencies.roughdiamonds) {
@@ -1489,6 +1497,30 @@ def.resolve();
 		}
 		//MAC-NW
 		
+        //MAC-NW
+		if (settings["limitskillkits"]) {
+			var _pbags = client.dataModel.model.ent.main.inventory.playerbags;
+			var _cRewardPat = /Item_Consumable_Skill/;
+			console.log("Removing Excess Skill Node Kits...");
+			$.each(_pbags, function( bi, bag ) {
+				bag.slots.forEach(function( slot ) {
+					if (slot && _cRewardPat.test(slot.name)) {
+                        if (slot.count > 50) {
+                            var vendor = {vendor:"Nw_Gateway_Professions_Merchant"};
+                            vendor.id = slot.uid;
+                            vendor.count = slot.count - 50;
+                            console.log('Selling',vendor.count,slot.name,'to vendor.');
+                            window.setTimeout(function () {client.sendCommand('GatewayVendor_SellItemToVendor', vendor);}, 500);
+						}
+					}
+				});
+			});
+		}
+		//MAC-NW
+        
+        // MAC-NW -- Unpause before processing additional features pre character swtich
+		PauseSettings();
+        
 		console.log("Switching Characters");
 		
 		var chardelay, chardate = null, nowdate = new Date();
@@ -1658,6 +1690,8 @@ def.resolve();
 		// MAC-NW -- AD Consolidation -- Banker Withdraw Secion
 		try {
 			var testChar = unsafeWindow.client.dataModel.model.ent.main.name;
+            unsafeWindow.client.dataModel.fetchVendor('Nw_Gateway_Professions_Merchant');
+            console.log("Loaded datamodel for", charname);
 		}
 		catch (e) {
 			// TODO: Use callback function
@@ -1671,6 +1705,7 @@ def.resolve();
 			
 			try {
 				var testExData = unsafeWindow.client.dataModel.model.exchangeaccountdata.openorders;
+                console.log("Loaded zen exchange data for", charname);
 			}
 			catch (e) {
 				// TODO: Use callback function
@@ -1703,8 +1738,20 @@ def.resolve();
 			unsafeWindow.client.dataModel.loadEntityByName(charname);
 			
 		} else { console.log("Zen Exchange AD transfer not enabled. Skipping Zex Posting.."); }
-		// MAC-NW
-		
+        // MAC-NW
+        
+        // MAC-NW -- Moved Professoin Merchant loading here with testing/waiting to make sure it loads
+		try {
+			var testProfMerchant = client.dataModel.model.vendor.items;
+            console.log("Loaded profession merchant for", charname);
+		}
+		catch (e) {
+			// TODO: Use callback function
+			window.setTimeout(function() {loadCharacter(charname);}, delay.SHORT);
+			return;
+		}
+        // MAC-NW
+        
 		dfdNextRun.resolve();
 	}
 	
@@ -1919,19 +1966,21 @@ document.getElementById("charContainer"+val).style.display="block";\
 			$("#pauseButton").show();
 			$("#settingsPanel").hide();
 		});
-		$("#pauseButton").click(function() {
-			settings["paused"] = !settings["paused"]
-			setTimeout(function() { GM_setValue("paused", settings["paused"]); }, 0);
-			$("#settings_paused").prop("checked", settings["paused"]);
-			$("#pauseButton img").attr("src",(settings["paused"]?image_play:image_pause));
-			$("#pauseButton img").attr("title","Click to "+(settings["paused"]?"resume":"pause")+" task script");
-		});
+		$("#pauseButton").click(PauseSettings);
 		
 		// Use setTimeout to workaround permission issues when calling GM functions from main window
 		$("#settings_save").click(function() { setTimeout(function() { SaveSettings();}, 0)});
 		customRadio("radio_position");
 	}
-	
+    
+	function PauseSettings() {
+			settings["paused"] = !settings["paused"]
+			setTimeout(function() { GM_setValue("paused", settings["paused"]); }, 0);
+			$("#settings_paused").prop("checked", settings["paused"]);
+			$("#pauseButton img").attr("src",(settings["paused"]?image_play:image_pause));
+			$("#pauseButton img").attr("title","Click to "+(settings["paused"]?"resume":"pause")+" task script");
+	}
+    
 	function SaveSettings() {
 		var charcount = settings["charcount"];
 		
