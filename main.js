@@ -1445,6 +1445,30 @@ def.resolve();
 	
 	// MAC-NW
 	
+	function vendorItemsLimited(_Pattern,_Limit) {
+        var _pbags = client.dataModel.model.ent.main.inventory.playerbags;
+        var limit = (parseInt(_Limit) > 99) ? 99 : parseInt(_Limit);
+        var itemMatches = [];
+        console.log("Removing Excess Skill Node Kits...");
+        $.each(_pbags, function( bi, bag ) {
+            bag.slots.forEach(function( slot ) {
+                if (slot && _Pattern.test(slot.name)) {
+                    if (!itemMatches[slot.name])
+                        itemMatches[slot.name]=[];
+                    itemMatches[slot.name][itemMatches[slot.name].length] = slot;
+                    if (slot.count > limit) {
+                        var vendor = {vendor:"Nw_Gateway_Professions_Merchant"};
+                        vendor.id = slot.uid;
+                        vendor.count = slot.count - 50;
+                        console.log('Selling',vendor.count,slot.name,'to vendor.');
+                        window.setTimeout(function () {client.sendCommand('GatewayVendor_SellItemToVendor', vendor);}, 500);
+                    }
+                }
+            });
+        });
+        console.log(itemMatches);
+    }
+    
 	function switchChar() {
         
         // MAC-NW -- Pause before processing additional features pre character swtich
@@ -1476,9 +1500,7 @@ def.resolve();
 			}
 			
 		} else { console.log("Zen Exchange AD transfer not enabled. Skipping Zex Posting.."); }
-		// MAC-NW
-		
-		//MAC-NW
+
 		if (settings["openrewards"]) {
 			var _pbags = client.dataModel.model.ent.main.inventory.playerbags;
 			var _cRewardPat = /Reward_Item_Chest/;
@@ -1495,31 +1517,14 @@ def.resolve();
 				});
 			});
 		}
-		//MAC-NW
-		
-        //MAC-NW
-		if (settings["limitskillkits"]) {
-			var _pbags = client.dataModel.model.ent.main.inventory.playerbags;
-			var _cRewardPat = /Item_Consumable_Skill/;
-			console.log("Removing Excess Skill Node Kits...");
-			$.each(_pbags, function( bi, bag ) {
-				bag.slots.forEach(function( slot ) {
-					if (slot && _cRewardPat.test(slot.name)) {
-                        if (slot.count > 50) {
-                            var vendor = {vendor:"Nw_Gateway_Professions_Merchant"};
-                            vendor.id = slot.uid;
-                            vendor.count = slot.count - 50;
-                            console.log('Selling',vendor.count,slot.name,'to vendor.');
-                            window.setTimeout(function () {client.sendCommand('GatewayVendor_SellItemToVendor', vendor);}, 500);
-						}
-					}
-				});
-			});
-		}
-		//MAC-NW
+
+		if (settings["limitskillkits"])
+            vendorItemsLimited(/Item_Consumable_Skill/,50);
         
         // MAC-NW -- Unpause before processing additional features pre character swtich
-		PauseSettings();
+		unPauseSettings();
+        
+        // MAC-NW (endchanges)
         
 		console.log("Switching Characters");
 		
@@ -1698,7 +1703,10 @@ def.resolve();
 			window.setTimeout(function() {loadCharacter(charname);}, delay.SHORT);
 			return;
 		}
-		
+        
+		// MAC-NW -- Pause before processing additional features pre character swtich
+		PauseSettings();
+        
 		if (settings["autoexchange"]) {
 			
 			unsafeWindow.client.dataModel.fetchExchangeAccountData();
@@ -1750,7 +1758,12 @@ def.resolve();
 			window.setTimeout(function() {loadCharacter(charname);}, delay.SHORT);
 			return;
 		}
-        // MAC-NW
+        
+        if (settings["limitskillkits"])
+            vendorItemsLimited(/Item_Consumable_Skill/,50);
+        
+        // MAC-NW -- Unpause before processing additional features pre character swtich
+		unPauseSettings();
         
 		dfdNextRun.resolve();
 	}
@@ -1975,6 +1988,14 @@ document.getElementById("charContainer"+val).style.display="block";\
     
 	function PauseSettings() {
 			settings["paused"] = !settings["paused"]
+			setTimeout(function() { GM_setValue("paused", settings["paused"]); }, 0);
+			$("#settings_paused").prop("checked", settings["paused"]);
+			$("#pauseButton img").attr("src",(settings["paused"]?image_play:image_pause));
+			$("#pauseButton img").attr("title","Click to "+(settings["paused"]?"resume":"pause")+" task script");
+	}
+    
+	function unPauseSettings() {
+			settings["paused"] = false;
 			setTimeout(function() { GM_setValue("paused", settings["paused"]); }, 0);
 			$("#settings_paused").prop("checked", settings["paused"]);
 			$("#pauseButton img").attr("src",(settings["paused"]?image_play:image_pause));
