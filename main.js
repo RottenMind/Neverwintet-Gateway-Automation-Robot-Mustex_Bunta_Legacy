@@ -23,7 +23,7 @@ NW Gateway Professions Bot Contributors
 -----------------------------------
 Kakoura, Nametaken, rotten_mind, Frankescript, Brent
 */
-// @version BETA 1.05.0.1h
+// @version BETA 1.05.0.1i
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -32,6 +32,9 @@ Kakoura, Nametaken, rotten_mind, Frankescript, Brent
 // ==/UserScript==
 
 /* RELEASE NOTES
+BETA 1.05.0.1i
+- edited "sell items" list
+- edited/added WARNING´s on tooltip
 BETA 1.05.0.1h
 - added "sell skill kits", works same as "open_rewards" (experimental, inventory cleaning needs more specific "sell filter" and event what trigger "sell"  )
 - changed switching character and completing character task logic, trying prevent wrong task execution after  switch
@@ -578,7 +581,7 @@ state_idle++;
 				0:["Event_Winter_Tier0_Intro"],
 				1:["Event_Winter_Tier1_Rankup",/*"Event_Winter_Tier1_Shiny_Lure",*/"Event_Winter_Tier1_Refine","Event_Winter_Tier1_Gather"],
 				2:["Event_Winter_Tier1_Rankup_2",/*"Event_Winter_Tier1_Fishingpole_Blue","Event_Winter_Tier1_Shiny_Lure_Mass",*/"Event_Winter_Tier1_Refine_2","Event_Winter_Tier1_Gather_2"],
-				3:[/*"Event_Winter_Tier1_Lightwine","Event_Winter_Tier1_Mesmerizing_Lure",*/"Event_Winter_Tier1_Gather_3"],
+				3:[/*"Event_Winter_Tier1_Heros_Feast","Event_Winter_Tier1_Lightwine","Event_Winter_Tier1_Sparkliest_Gem","Event_Winter_Tier1_Mesmerizing_Lure",*/"Event_Winter_Tier1_Gather_3"],
 			},
 		},
 		
@@ -833,7 +836,7 @@ state_idle++;
 	{name: 'trainassets',		  title: 'Train Assets',						 def: true,	 type:'checkbox', tooltip:'Enable training/upgrading of asset worker resources'},
 	{name: 'refinead',			  title: 'Refine AD',							 def: true,	 type:'checkbox', tooltip:'Enable refining of AD on character switch'},
 	{name: 'openrewards',		  title: 'Open Reward Chests',					 def: false,  type:'checkbox', tooltip:'Enable opeing of leadership chests on character switch'}, //MAC-NW
-	{name: 'limitskillkits',	  title: 'Limit Skill Node Kit Stacks', def: false,  type:'checkbox', tooltip:'Enable removing skill node kits when there is more than 50 in a stack'}, //MAC-NW
+	{name: 'limitskillkits',	  title: 'WARNING!!! Clean TRASH from inventory', def: false,  type:'checkbox', tooltip:'Enable removing TRASH when it exist, WARNING, all trash is gone, Skillkits, Rank1 - 2 GEMS, Rank1 - 3 HealingPotions!!!'}, //MAC-NW edited by Rottenmind
 	{name: 'autoreload',		  title: 'Auto Reload',							 def: false, type:'checkbox', tooltip:'Enabling this will reload the gateway periodically. (Ensure Auto Login is enabled)'},
 	{name: 'autologin',			  title: 'Attempt to login automatically',		 def: false, type:'checkbox', tooltip:'Automatically attempt to login to the neverwinter gateway site'},
 	{name: 'nw_username',		  title: '	Neverwinter Username',				 def: '',	 type:'text',	  tooltip:''},
@@ -972,7 +975,7 @@ state_idle++;
 		// TODO: Add code to get next task finish time
 		chartimers[charcurrent] = getNextFinishedTask();
 		
-		// Add diamond count	883			 // Add diamond count
+		// Add diamond count
 		chardiamonds[charcurrent] = unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds;
 		
 		return false;
@@ -1394,7 +1397,7 @@ def.resolve();
 		};
 		
 		// Make purchase
-		unsafeWindow.client.sendCommand("GatewayVendor_PurchaseVendorItem",{vendor:'Nw_Gateway_Professions_Merchant',store:'Store_Crafting_Resources',idx:resourceID[item],count:50}); // MAC-NW: Purchase of prof resources lowred from 100 to 30
+		unsafeWindow.client.sendCommand("GatewayVendor_PurchaseVendorItem",{vendor:'Nw_Gateway_Professions_Merchant',store:'Store_Crafting_Resources',idx:resourceID[item],count:50}); // MAC-NW: Purchase of prof resources lowered from 100 to 30
 		WaitForState("button.closeNotification").done(function() {
 			$("button.closeNotification").click();
 		});
@@ -1449,19 +1452,21 @@ def.resolve();
         var _pbags = client.dataModel.model.ent.main.inventory.playerbags;
         var limit = (parseInt(_Limit) > 99) ? 99 : parseInt(_Limit);
         var itemMatches = [];
-        console.log("Removing Excess Skill Node Kits...");
+        console.log("Removing TRASH be aware, there is no return...");
         $.each(_pbags, function( bi, bag ) {
             bag.slots.forEach(function( slot ) {
                 if (slot && _Pattern.test(slot.name)) {
                     if (!itemMatches[slot.name])
                         itemMatches[slot.name]=[];
                     itemMatches[slot.name][itemMatches[slot.name].length] = slot;
-                    if (slot.count > limit) {
+                    if (slot.count >= limit) { // edited by Rottenmind, maybe better use >=, because we want inventory get empty?
                         var vendor = {vendor:"Nw_Gateway_Professions_Merchant"};
                         vendor.id = slot.uid;
-                        vendor.count = slot.count - 50;
-                        console.log('Selling',vendor.count,slot.name,'to vendor.');
-                        window.setTimeout(function () {client.sendCommand('GatewayVendor_SellItemToVendor', vendor);}, 500);
+                        vendor.count = slot.count - limit; // edited by Rottenmind, I changed limit so using variable here is logical
+                        console.log('Selling TRASH',vendor.count,slot.name,'to vendor.');
+                       // for (i = 1; i <= vendor.count; i++) {
+						window.setTimeout(function () {client.sendCommand('GatewayVendor_SellItemToVendor', vendor);}, 1000); // edited by Rottenmind, sell works better with 1000
+						// }
                     }
                 }
             });
@@ -1471,7 +1476,7 @@ def.resolve();
     
 	function switchChar() {
         
-        // MAC-NW -- Pause before processing additional features pre character swtich
+        // MAC-NW -- Pause before processing additional features pre character switch
 		PauseSettings();
         
 		if (settings["refinead"]) {
@@ -1519,7 +1524,7 @@ def.resolve();
 		}
 
 		if (settings["limitskillkits"])
-            vendorItemsLimited(/Item_Consumable_Skill/,50);
+            vendorItemsLimited(/T1_Runestone|T1_Enchantment|T2_Enchantment|T2_Runestone|Item_Consumable_Skill|Potion_Healing_1|Potion_Healing_2|Potion_Healing_3|Item_Portable_Altar|Lockbox/,0); // T1_Runestone|T1_Enchantment|T2_Enchantment|T2_Runestone|Item_Consumable_Skill|Potion_Healing_1|Potion_Healing_2|Potion_Healing_3|Item_Portable_Altar|Lockbox, MAC-NW edited by Rottenmind
         
         // MAC-NW -- Unpause before processing additional features pre character swtich
 		unPauseSettings();
@@ -1704,7 +1709,7 @@ def.resolve();
 			return;
 		}
         
-		// MAC-NW -- Pause before processing additional features pre character swtich
+		// MAC-NW -- Pause before processing additional features pre character switch
 		PauseSettings();
         
 		if (settings["autoexchange"]) {
@@ -1748,7 +1753,7 @@ def.resolve();
 		} else { console.log("Zen Exchange AD transfer not enabled. Skipping Zex Posting.."); }
         // MAC-NW
         
-        // MAC-NW -- Moved Professoin Merchant loading here with testing/waiting to make sure it loads
+        // MAC-NW -- Moved Profession Merchant loading here with testing/waiting to make sure it loads
 		try {
 			var testProfMerchant = client.dataModel.model.vendor.items;
             console.log("Loaded profession merchant for", charname);
@@ -1760,9 +1765,10 @@ def.resolve();
 		}
         
         if (settings["limitskillkits"])
-            vendorItemsLimited(/Item_Consumable_Skill/,50);
+            vendorItemsLimited(/T1_Runestone|T1_Enchantment|T2_Enchantment|T2_Runestone|Item_Consumable_Skill|Potion_Healing_1|Potion_Healing_2|Potion_Healing_3|Item_Portable_Altar|Lockbox/,0); // T1_Runestone|T1_Enchantment|T2_Enchantment|T2_Runestone|Item_Consumable_Skill|Potion_Healing_1|Potion_Healing_2|Potion_Healing_3|Item_Portable_Altar|Lockbox, MAC-NW edited by Rottenmind 
+
         
-        // MAC-NW -- Unpause before processing additional features pre character swtich
+        // MAC-NW -- Unpause before processing additional features pre character switch
 		unPauseSettings();
         
 		dfdNextRun.resolve();
