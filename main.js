@@ -893,7 +893,7 @@ function _select_Gateway() { // Check for Gateway used to
                 //20:["Alchemy_Tier3_Experimentation_Rank20"],
                 //19:["Alchemical Research","Rank 20 Experimentation","Upgrade Mixologist","Upgrade Apothecary","Hire an additional Apothecary"],
                 //20:["Alchemy_Tier2_Aquavitae_2"],,"Alchemy_Tier3_Potency_Potion_Major"
-                20: ["Alchemy_Tier1_Fortification_Potion_Minor_Mass","Alchemy_Tier2_Dyepack_Scourge","Alchemy_Tier2_Dyepack_Devoted","Alchemy_Tier2_Dyepack_Control","Alchemy_Tier3_Protection_Potion_Major", "Alchemy_Tier2_Aquaregia", "Alchemy_Tier3_Refine_Basic", "Alchemy_Tier3_Gather_Components"],
+                20: ["Alchemy_Tier3_Protection_Potion_Major", "Alchemy_Tier2_Aquaregia", "Alchemy_Tier3_Refine_Basic", "Alchemy_Tier3_Gather_Components"],
             },
         },
     ];
@@ -1548,79 +1548,79 @@ function _select_Gateway() { // Check for Gateway used to
             buttonListIn[i].click();
             WaitForState("").done(function () {
                 
-                var $assets = $("div.modal-item-list a").has("img[src*='_Resource_'],img[src*='_Assets_'],img[src*='_Tools_'],img[src*='_Tool_'],img[src*='_Jewelersloupe_'],img[src*='_Bezelpusher_']"); //edited by RottenMind
-                var $persons = $("div.modal-item-list a").has("img[src*='_Follower_']");
-                var quality = [".Special", ".Gold", ".Silver", ".Bronze"];
-                var ic, $it;
-                
-                var clicked = false;
-                
-                // Try to avoid using up higher rank assets needlessly
-                if (prof.taskName === "Leadership") {
-                    var mercenarys = $("div.modal-item-list a.Bronze:contains('Mercenary')");
-                    var guards = $("div.modal-item-list a.Bronze:contains('Guard')");
-                    var footmen = $("div.modal-item-list a.Bronze:contains('Footman')");
-                    
-                    if (mercenarys.length) {
-                        clicked = true;
-                        mercenarys[0].click();
-                    }
-                    else if (guards.length) {
-                        clicked = true;
-                        guards[0].click();
-                    }
-                        else if (footmen.length) {
-                            clicked = true;
-                            footmen[0].click();
-                        }
-                        }
-                
-                // check resources & assets for best quality, in descending order
+                var $assets = $("div.modal-item-list a").has("img[src*='_Resource_'],img[src*='_Assets_'],img[src*='_Tools_'],img[src*='_Tool_']"); // edited by RottenMind
+            var $persons = $("div.modal-item-list a").has("img[src*='_Follower_']");
+            var quality = [".Special", ".Gold", ".Silver", ".Bronze"];
+            var ic, $it;
+
+            var clicked = false;
+
+            // Try to avoid using up higher rank assets needlessly
+            if (prof.taskName === "Leadership") {
+                var mercenarys = $("div.modal-item-list a.Bronze:contains('Mercenary')");
+                var guards = $("div.modal-item-list a.Bronze:contains('Guard')");
+                var footmen = $("div.modal-item-list a.Bronze:contains('Footman')");
+
+                if (mercenarys.length) {
+                    clicked = true;
+                    mercenarys[0].click();
+                }
+                else if (guards.length) {
+                    clicked = true;
+                    guards[0].click();
+                }
+                else if (footmen.length) {
+                    clicked = true;
+                    footmen[0].click();
+                }
+            }
+
+            // check resources & assets for best quality, in descending order
+            for (ic in quality) {
+                $it = $assets.filter(quality[ic]);
+                if ($it.length) {
+                    $it[0].click();
+                    clicked = true;
+                    break;
+                }
+            }
+
+            // if no asset was selected, check for persons for best speed, in descending order
+            if (!clicked) {
                 for (ic in quality) {
-                    $it = $assets.filter(quality[ic]);
+                    $it = $persons.filter(quality[ic]);
                     if ($it.length) {
                         $it[0].click();
                         clicked = true;
                         break;
                     }
                 }
-                
-                // if no asset was selected, check for persons for best speed, in descending order
-                if (!clicked) {
-                    for (ic in quality) {
-                        $it = $persons.filter(quality[ic]);
-                        if ($it.length) {
-                            $it[0].click();
-                            clicked = true;
-                            break;
-                        }
-                    }
-                }
-                
-                // if nothing was found at all, return immediately (skip other optional slots)
-                if (!clicked) {
-                    $("button.close-button").click();
-                    console.log("Nothing more to click..");
-                    WaitForState("").done(function () {
-                        // Let main loop continue
-                        def.resolve();
-                    });
-                }
-                
-                console.log("Clicked item");
+            }
+
+            // if nothing was found at all, return immediately (skip other optional slots)
+            if (!clicked) {
+                $("button.close-button").click();
+                console.log("Nothing more to click..");
                 WaitForState("").done(function () {
-                    // Get the new set of select buttons created since the other ones are removed when the asset loads
-                    var buttonList = Optional_Assets_lang(); //$("h3:contains('Optional Assets:')").closest("div").find("button");
-                    if (i < buttonList.length - 1) {
-                       SelectItemFor(buttonList, 0, def, prof); //SelectItemFor(buttonList, i + 1, def, prof);
-                    }
-                    else {
-                        // Let main loop continue
-                        def.resolve();
-                    }
+                    // Let main loop continue
+                    def.resolve();
                 });
+            }
+
+            console.log("Clicked item");
+            WaitForState("").done(function () {
+                // Get the new set of select buttons created since the other ones are removed when the asset loads
+                var buttonList = $("h3:contains('Optional Assets:')").closest("div").find("button");
+                if (i < buttonList.length - 1) {
+                    SelectItemFor(buttonList, i + 1, def, prof);
+                }
+                else {
+                    // Let main loop continue
+                    def.resolve();
+                }
             });
-        }// Advanced asset selection (END)
+        });
+    }// Advanced asset selection (END)
     }
     // Asset selection switch (END)
     
