@@ -2,34 +2,22 @@
 // @name Neverwinter gateway - Professions Robot
 // @description Automatically selects professions for empty slots
 // @namespace https://greasyfork.org/scripts/7061-neverwinter-gateway-professions-robot/
-// @include https://gateway.nw.ru.perfectworld.eu/
-// @include https://gateway.nw.ru.perfectworld.eu/*
-// @include http://gateway.nw.ru.perfectworld.eu/
-// @include http://gateway.nw.ru.perfectworld.eu/*
-// @include https://gateway.playneverwinter.com
-// @include https://gateway.playneverwinter.com/*
-// @include https://gatewaytest.playneverwinter.com
-// @include https://gatewaytest.playneverwinter.com/*
-// @include https://gatewaysitedown.playneverwinter.com
-// @include https://gatewaysitedown.playneverwinter.com/*
-// @include http://gateway.playneverwinter.com
-// @include http://gateway.playneverwinter.com/*
-// @include http://gatewaytest.playneverwinter.com
-// @include http://gatewaytest.playneverwinter.com/*
-// @include http://gatewaysitedown.playneverwinter.com
-// @include http://gatewaysitedown.playneverwinter.com/*
+// @include http://gateway*.playneverwinter.com/*
+// @include https://gateway*.playneverwinter.com/*
+// @include http://gateway.*.perfectworld.eu/*
+// @include https://gateway.*.perfectworld.eu/*
 // @originalAuthor Mustex/Bunta
 // @modifiedBy NW gateway Professions Bot Developers & Contributors
 
-/* NW Gateway Professions Bot Developers & Contributors
- NW Gateway Professions Bot Developers
- -----------------------------------
- Bluep, Numberb, mac-nw, Phr33d0m
- NW Gateway Professions Bot Contributors
- -----------------------------------
- Kakoura, Nametaken, rotten_mind, Frankescript, Brent
+/*
+=== NW Gateway Professions Bot Developers
+    - Bluep, Numberb, mac-nw, Phr33d0m
+ 
+=== NW Gateway Professions Bot Contributors
+    - Kakoura, Nametaken, rotten_mind, Frankescript, Brent
  */
-// @version 1.05.0.1k
+
+// @version 1.10test.1
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -38,10 +26,29 @@
 // ==/UserScript==
 
 /* RELEASE NOTES
+ 
+ 1.10test.1 (issues with language selection)
+ - FIX Profitems array(tested)
+ - added ZEX transfers limit to 5000 ZEN(tested)
+ - added UI enchanted, easy read now(some scrolling not good)
+ - removed Tasklist/Multitasklist selection, they need better implemention before use(train asset not working, TamperMonkey needs better "settings WIPE"), worth to add after fixes!!
+ - added asset selection Bunta/Advanced by Default to UI(tested)
+ - FIX missing strings from asset tools section(tested)
+ - added RU/GER button click(experimental) test result, only Start Task and Back -button works as they must if other than EN is selected, RU not tested, Optional Assets -selection NOT working 
+ - added Leadership asset auto buy(tested)
+ - improvments for AD transfer and reports to console log(tested)
+ - added "Leadership XP" use second tasklist
+ - added "Gateway_Reward"(tested)
+ - added Rank3 ench.Runes to UI(tested)
+ - added "Vendor all Altar Node skill kits" to UI(tested)
+ - edited Vendor rank1/rank2 enchants(tested)
+ 1.10.1
+ - patern undefined BUGfix
+ 1.10.0 - Release Candidate
  - Vendor Exclude filter has now higher "Safeguards" (it still might need added some unbound items eg. Glyphs, potions etc.
  - added Vendor Safeguards
  - separated Autovendor and PRofession items Vendor
- - SCA prototype to do daily Dice rolls
+ - SCA daily reward collection  by cycling through all configured characters. Leaving SCA will cancel this process.
  - Multi Url support for testing
  * gatewaytest
  * RU gateway (gateway.nw.ru.perfectworld.eu)
@@ -269,23 +276,23 @@ var s_paused = false;	   // extend the paused setting to the Page Reloading func
 // RottenMind (start), multi Url support
 function _select_Gateway() { // Check for Gateway used to
     if (window.location.href.indexOf("gatewaytest") > -1) { // detect gatewaytest Url
-        console.log("Gatewaytest detected as start page, Happy testung");
+        console.log("GatewayTEST detected");
         return "http://gatewaytest.playneverwinter.com";
     }
-    else if (window.location.href.indexOf("nw.ru.perfectworld") > -1) { // detect RU GAteway... Сибирский NW, радости тестирования
-        console.log("GatewayRU detected as start page, радости тестирования");
+    else if (window.location.href.indexOf("nw.ru.perfectworld") > -1) {
+        console.log("GatewayRU detected");
         return "http://gateway.nw.ru.perfectworld.eu";
     }
-    else { // must go somewhere
-        console.log("LIVE Gateway detected happy grinding");
-        return "http://gateway.playneverwinter.com";
-    }
+        else { // must go somewhere
+            console.log("Gateway detected");
+            return "http://gateway.playneverwinter.com";
+        }
 }
 // RottenMind (END)
 
 (function () {
     var $ = unsafeWindow.$;
-
+    
     //MAC-NW
     $.fn.waitUntilExists = function (handler, shouldRunHandlerOnce, isChild) {
         var found = 'found';
@@ -300,7 +307,7 @@ function _select_Gateway() { // Check for Gateway used to
         } else if (shouldRunHandlerOnce && $elements.length) {
             window.clearInterval(window.waitUntilExists_Intervals[this.selector]);
         }
-        return $this;
+            return $this;
     }
     // MAC-NW - Wait for tooltip to come up so we can alter the list
     $('.tooltip-menu button').waitUntilExists(function () {
@@ -320,22 +327,26 @@ function _select_Gateway() { // Check for Gateway used to
                 console.log("ERROR: Did not succeed to add open all tooltip.");
             }
     });
-
+    
     $('.vendor-quantity-block span.attention').waitUntilExists(function () {
         if ($('.vendor-quantity-block span.attention span').length)
             $('.vendor-quantity-block span.attention').replaceWith('<div class="input-field button"><div class="input-bg-left"></div><div class="input-bg-mid"></div><div class="input-bg-right"></div><button onclick="$(\'input[name=inventorySellQty]\').val(\'' + $(".vendor-quantity-block span.attention span").text() + '\');">All (' + $(".vendor-quantity-block span.attention span").text() + ')</button></div>');
     });
-
+    
     $('div.notification div.messages li').waitUntilExists(function () {
         if ($("div.notification div.messages li").length > 2)
             $("div.notification div.messages li").eq(0).remove();
     });
-
+    
+    // Always disable SCA tutorial if its active
+    $('#help-dimmer.help-cont.whenTutorialActive').waitUntilExists(function () {
+        client.toggleHelp();
+    });
+    
     //MAC-NW
-
+    
     var state_loading = 0;	  // If "Page Loading" takes longer than 30 seconds, reload page (maybe a javascript error)
     var state_loading_time = 30;  // default of 30 seconds
-    var chardiamonds = {};
     var state_idle = 0;	  // If the page is idle for longer than 60 seconds, reload page (maybe a javascript error)
     var state_idle_time = 120; // default of 120 seconds
     var reload_hours = [2, 5, 8, 11, 14, 17, 20, 23]; // logout and reload every three hours - 2:29 - 5:29 - 8:29 - 11:29 - 14:29 - 17:29 - 20:29 - 23:29
@@ -353,14 +364,14 @@ function _select_Gateway() { // Check for Gateway used to
                     return;
                 }
             }
-
+            
             // check for errors
             if ($("title").text().match(/Error/) || $("div.modal-content h3").text().match(/Disconnected/)) {
                 console.log("Error detected - relogging");
                 unsafeWindow.location.href = current_Gateway ; // edited by RottenMind
                 return;
             }
-
+            
             if ($("div.loading-image:visible").length) {
                 last_location = location.href;
                 state_idle = 0;
@@ -376,8 +387,8 @@ function _select_Gateway() { // Check for Gateway used to
             }
             // TODO: Add check for gateway disconnected
             //<div class="modal-content" id="modal_content"><h3>Disconnected from Gateway</h3><p>You have been disconnected.</p><button type="button" class="modal-button" onclick="window.location.reload(true);">Close</button>
-
-
+            
+            
             /* Can't use idle check with dataModel methods
              else if (location.href == last_location) {
              state_loading = 0;
@@ -403,7 +414,7 @@ function _select_Gateway() { // Check for Gateway used to
 })();
 
 (function () {
-
+    
     /**
      * Add a string of CSS to the main page
      *
@@ -421,7 +432,7 @@ function _select_Gateway() { // Check for Gateway used to
     function countLeadingSpaces(str) {
         return str.match(/^(\s*)/)[1].length;
     }
-
+    
     var image_pause = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAY" +
         "AAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2" +
         "ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG" +
@@ -561,8 +572,8 @@ function _select_Gateway() { // Check for Gateway used to
         "pBQpI8GJDTR050zkNzK0bMMZLvUNZ8yCfy6Wvbc1NVyi4dloXjqWvds6uvp41pFmpVOKJWd" +
         "6bgwxkmTMIotWKpwrfBkZl7uMonUHf5wSlV2+fUZrjnXdzrmyy7djD8GWTW9e51z557o1Tz" +
         "85FH/WkOkaHQAAAABJRU5ErkJggg==";
-
-
+    
+    
     // Setup global closure variables
     var $ = unsafeWindow.jQuery;
     var timerHandle = 0;
@@ -578,7 +589,7 @@ function _select_Gateway() { // Check for Gateway used to
         DEFAULT: 10000, // default delay
         TIMEOUT: 60000, // delay for cycle processing timeout
     };
-
+    
     /*
      * Tasklist can be modified to configure the training you want to perform.
      * The configurable options window sets how many profession slots you want to use for each profession.
@@ -882,23 +893,28 @@ function _select_Gateway() { // Check for Gateway used to
                 //20:["Alchemy_Tier3_Experimentation_Rank20"],
                 //19:["Alchemical Research","Rank 20 Experimentation","Upgrade Mixologist","Upgrade Apothecary","Hire an additional Apothecary"],
                 //20:["Alchemy_Tier2_Aquavitae_2"],,"Alchemy_Tier3_Potency_Potion_Major"
-                20: ["Alchemy_Tier3_Protection_Potion_Major", "Alchemy_Tier2_Aquaregia", "Alchemy_Tier3_Refine_Basic", "Alchemy_Tier3_Gather_Components"],
+                20: ["Alchemy_Tier1_Fortification_Potion_Minor_Mass","Alchemy_Tier2_Dyepack_Scourge","Alchemy_Tier2_Dyepack_Devoted","Alchemy_Tier2_Dyepack_Control","Alchemy_Tier3_Protection_Potion_Major", "Alchemy_Tier2_Aquaregia", "Alchemy_Tier3_Refine_Basic", "Alchemy_Tier3_Gather_Components"],
             },
         },
     ];
-
-    // Load Settings
-    var settingnames = [
+        
+        // Load Settings
+        var settingnames = [
         {name: 'paused', title: 'Pause Script', def: false, type: 'checkbox', tooltip: 'Disable All Automation'},
         {name: 'debug', title: 'Enable Debug', def: false, type: 'checkbox', tooltip: 'Enable all debug output to console', onsave: function (newValue, oldValue) {
-            console = newValue ? unsafeWindow.console || fouxConsole : fouxConsole;
+        console = newValue ? unsafeWindow.console || fouxConsole : fouxConsole;
         }},
+        {name: 'Buntas_orig_Assets', title: 'Buntas ORig. Asset select', def: false, type: 'checkbox', tooltip: 'Select Assets with Buntas way'},
+        {name: 'lang_DE', title: 'DE_lang', def: false, type: 'checkbox', tooltip: 'Switch buttons click to DE(no full support)'},
         {name: 'optionals', title: 'Fill Optional Assets', def: true, type: 'checkbox', tooltip: 'Enable to include selecting the optional assets of tasks'},
-        {name: 'autopurchase', title: 'Auto Purchase Resources', def: true, type: 'checkbox', tooltip: 'Automatically purchase required resources from gateway shop (100 at a time)'},
+        {name: 'autopurchase', title: 'Auto Purchase Resources', def: true, type: 'checkbox', tooltip: 'Automatically purchase required resources from gateway shop (100 at a time)'}, //lang_GER
         {name: 'trainassets', title: 'Train Assets', def: true, type: 'checkbox', tooltip: 'Enable training/upgrading of asset worker resources'},
         {name: 'refinead', title: 'Refine AD', def: true, type: 'checkbox', tooltip: 'Enable refining of AD on character switch'},
         {name: 'openrewards', title: 'Open Reward Chests', def: false, type: 'checkbox', tooltip: 'Enable opeing of leadership chests on character switch'}, //MAC-NW
-        {name: 'autovendor_kits', title: 'Vendor/Maintain Node Kit Stacks', def: false, type: 'checkbox', tooltip: 'Limit skill kits stacks to 50, vendor kits unusable by class, remove all if player has one bag or full bags'},
+        {name: 'autoreload', title: 'Auto Reload', def: false, type: 'checkbox', tooltip: 'Enabling this will reload the gateway periodically. (Ensure Auto Login is enabled)'},
+        {name: 'autovendor_junk', title: 'Auto Vendor junk..', def: false, type: 'checkbox', tooltip: 'Vendor all (currently) winterfest fireworks+lanterns'}, //MAC-NW
+        {name: 'autovendor_kits_altars_limit', title: 'Vendor/Maintain Altar Node Kit Stacks', def: false, type: 'checkbox', tooltip: 'Limit skill kits stacks to 50/Altars80, vendor kits unusable by class, remove all if player has one bag or full bags'}, // edited by RottenMind
+        {name: 'autovendor_kits_altars_all', title: 'Vendor All Altar Node Kit Stacks', def: false, type: 'checkbox', tooltip: 'Sell ALL skill kits  Altars.'}, // RottenMind
         {name: 'autovendor_profresults', title: 'Vendor/Maintain Prof Crafted Levelup Items', def: false, type: 'checkbox', tooltip: 'Vendor off Tier 1 to 5 items produced and reused for leveling crafting professions.'},
         {name: 'autovendor_pots1', title: 'Auto Vendor minor potions (lvl 1)', def: false, type: 'checkbox', tooltip: 'Vendor all minor potions (lvl 1) found in player bags'}, //MAC-NW
         {name: 'autovendor_pots2', title: 'Auto Vendor lesser potions (lvl 15)', def: false, type: 'checkbox', tooltip: 'Vendor all lesser potions (lvl 15) found in player bags'}, //MAC-NW
@@ -906,21 +922,20 @@ function _select_Gateway() { // Check for Gateway used to
         {name: 'autovendor_pots4', title: 'Auto Vendor greater potions (lvl 45)', def: false, type: 'checkbox', tooltip: 'Vendor all greater potions (lvl 45) found in player bags'}, //MAC-NW
         {name: 'autovendor_rank1', title: 'Auto Vendor enchants & runes Rank 1', def: false, type: 'checkbox', tooltip: 'Vendor all Rank 1 enchantments & runestones found in player bags'}, //MAC-NW
         {name: 'autovendor_rank2', title: 'Auto Vendor enchants & runes Rank 2', def: false, type: 'checkbox', tooltip: 'Vendor all Rank 2 enchantments & runestones found in player bags'}, //MAC-NW
-        {name: 'autovendor_junk', title: 'Auto Vendor junk..', def: false, type: 'checkbox', tooltip: 'Vendor all (currently) winterfest fireworks+lanterns'}, //MAC-NW
-        {name: 'autoreload', title: 'Auto Reload', def: false, type: 'checkbox', tooltip: 'Enabling this will reload the gateway periodically. (Ensure Auto Login is enabled)'},
-        {name: 'autologin', title: 'Attempt to login automatically', def: false, type: 'checkbox', tooltip: 'Automatically attempt to login to the neverwinter gateway site'},
-        {name: 'nw_username', title: '	Neverwinter Username', def: '', type: 'text', tooltip: ''},
-        {name: 'nw_password', title: '	Neverwinter Password', def: '', type: 'password', tooltip: ''},
-        {name: 'charcount', title: '	Number of Characters', def: '2', type: 'text', tooltip: 'Enter number of characters to use (reload page to update settings form)'},
+        {name: 'autovendor_rank3', title: 'Auto Vendor enchants & runes Rank 3', def: false, type: 'checkbox', tooltip: 'Vendor all Rank 3 enchantments & runestones found in player bags'}, // edited by RottenMind
+        {name: 'autologin', title: 'Attempt to login automatically', def: false, type: 'checkbox', tooltip: 'Automatically attempt to login to the neverwinter gateway site', border: true},
+        {name: 'nw_username', title: 'Neverwinter Username', def: '', type: 'text', tooltip: ''},
+        {name: 'nw_password', title: 'Neverwinter Password', def: '', type: 'password', tooltip: ''},
         // MAC-NW AD Consolidation
-        {name: 'autoexchange', title: 'Consolidate AD via ZEX', def: false, type: 'checkbox', tooltip: 'Automatically attempt to post, cancel and withdraw AD via ZEX and consolidate to designated character'},
-        {name: 'bankchar', title: '	Character Name of Banker', def: '', type: 'text', tooltip: 'Enter name of the character to hold account AD'},
-        {name: 'banktransmin', title: '	Min AD for Transfer', def: '22000', type: 'text', tooltip: 'Enter minimum AD limit for it to be cosidered for transfer off a character'},
-        {name: 'bankcharmin', title: '	Min Character balance', def: '8000', type: 'text', tooltip: 'Enter the amount of AD to always keep available on characters'},
-        {name: 'banktransrate', title: '	AD per Zen Rate (in zen)', def: '300', type: 'text', tooltip: 'Enter default rate to use for transfering through ZEX'},
+        {name: 'autoexchange', title: 'Consolidate AD via ZEX', def: false, type: 'checkbox', tooltip: 'Automatically attempt to post, cancel and withdraw AD via ZEX and consolidate to designated character', border: true},
+        {name: 'bankchar', title: 'Character Name of Banker', def: '', type: 'text', tooltip: 'Enter name of the character to hold account AD'},
+        {name: 'banktransmin', title: 'Min AD for Transfer', def: '22000', type: 'text', tooltip: 'Enter minimum AD limit for it to be cosidered for transfer off a character'},
+        {name: 'bankcharmin', title: 'Min Character balance', def: '8000', type: 'text', tooltip: 'Enter the amount of AD to always keep available on characters'},
+        {name: 'banktransrate', title: 'AD per Zen Rate (in zen)', def: '300', type: 'text', tooltip: 'Enter default rate to use for transfering through ZEX'},
+        {name: 'charcount', title: 'Enter number of characters to use (Save and Apply to update settings form)', def: '2', type: 'text', tooltip: 'Enter number of characters to use (Save and Apply to update settings form)', border: true},
         // MAC-NW
     ];
-
+    
     // Load local settings cache (unsecured)
     var settings = {};
     for (var i = 0; i < settingnames.length; i++) {
@@ -935,14 +950,14 @@ function _select_Gateway() { // Check for Gateway used to
             settingnames[i].onsave(settings[settingnames[i].name], settings[settingnames[i].name]);
         }
     }
-
+    
     if (settings["charcount"] < 1) {
         settings["charcount"] = 1;
     }
     if (settings["charcount"] > 99) {
         settings["charcount"] = 99;
     }
-
+    
     var charSettings = [];
     for (var i = 0; i < settings["charcount"]; i++) {
         charSettings.push({name: 'nw_charname' + i, title: 'Character', def: 'Character ' + (i + 1), type: 'text', tooltip: 'Characters Name'});
@@ -958,21 +973,21 @@ function _select_Gateway() { // Check for Gateway used to
         charSettings.push({name: 'Artificing' + i, title: 'Artificing', def: '0', type: 'text', tooltip: 'Number of slots to assign to Artificing'});
         charSettings.push({name: 'Weaponsmithing' + i, title: 'Weaponsmithing', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing'});
         charSettings.push({name: 'Alchemy' + i, title: 'Alchemy', def: '0', type: 'text', tooltip: 'Number of slots to assign to Alchemy'});
-
+        
         // task settings are slightly different
         charSettings.push({name: 'tasklist' + i, title: 'Task List', def: '', type: 'void', tooltip: ''});
     }
-
+    
     for (var i = 0; i < charSettings.length; i++) {
         settings[charSettings[i].name] = GM_getValue(charSettings[i].name, charSettings[i].def);
     }
-
+    
     // Page Settings
     var PAGES = Object.freeze({
         LOGIN: {name: "Login", path: "div#login"},
         GUARD: {name: "Account Guard", path: "div#page-accountguard"},
     });
-
+    
     /**
      * Uses the page settings to determine which page is currently displayed
      */
@@ -983,7 +998,7 @@ function _select_Gateway() { // Check for Gateway used to
             }
         }
     }
-
+    
     /**
      * Logs in to gateway
      * No client.dataModel exists at this stage
@@ -1000,7 +1015,7 @@ function _select_Gateway() { // Check for Gateway used to
         //}
         dfdNextRun.resolve(delay.LONG);
     }
-
+    
     /**
      * Action to perform on account guard page
      */
@@ -1008,7 +1023,7 @@ function _select_Gateway() { // Check for Gateway used to
         // Do nothing on the guard screen
         dfdNextRun.resolve(delay.LONG);
     }
-
+    
     /**
      * Collects rewards for tasks or starts new tasks
      * Function is called once per new task and returns true if an action is created
@@ -1017,7 +1032,7 @@ function _select_Gateway() { // Check for Gateway used to
     function processCharacter() {
         // Switch to professions page to show task progression
         unsafeWindow.location.hash = "#char(" + encodeURI(unsafeWindow.client.getCurrentCharAtName()) + ")/professions";
-
+        
         // Collect rewards for completed tasks and restart
         if (unsafeWindow.client.dataModel.model.ent.main.itemassignments.complete) {
             unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.forEach(function (entry) {
@@ -1028,12 +1043,12 @@ function _select_Gateway() { // Check for Gateway used to
             dfdNextRun.resolve();
             return true;
         }
-
-
+        
+        
         // Check for available slots and start new task
         if (unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.filter(function (entry) {
-                return (!entry.islockedslot && !entry.uassignmentid);
-            }).length) {
+            return (!entry.islockedslot && !entry.uassignmentid);
+        }).length) {
             // Go through the professions to assign tasks until specified slots filled
             for (var i = 0; i < tasklist.length; i++) {
                 if (settings[tasklist[i].taskName] > 0) { //MAC-NW
@@ -1054,53 +1069,53 @@ function _select_Gateway() { // Check for Gateway used to
         else {
             console.log("No available task slots");
         }
-
+        
         // TODO: Add code to get next task finish time
         chartimers[charcurrent] = getNextFinishedTask();
-
+        
         // Add diamond count
         chardiamonds[charcurrent] = unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds;
-
+        console.log(settings["nw_charname"+charcurrent] + "'s", "Astral Diamonds:", chardiamonds[charcurrent]);
         return false;
     }
-
+    
     /**
      * Switch to a character's swordcoast adventures and collect the daily reward
      */
     function processSwordCoastDailies(_charStartIndex) {
         var _accountName = unsafeWindow.client.dataModel.model.loginInfo.publicaccountname;
         var _charIndex = (!_charStartIndex || parseInt(_charStartIndex) > (charSettings.length + 1) || parseInt(_charStartIndex) < 0)
-            ? 0 : parseInt(_charStartIndex);
+        ? 0 : parseInt(_charStartIndex);
         var _fullCharName = settings["nw_charname" + _charIndex] + '@' + _accountName;
         var _hasLoginDaily = 0;
         var _isLastChar = false;
         var _scaHashMatch = /\/adventures$/;
         if (!settings["paused"])
             PauseSettings("pause");
-
+        
         // Switch to professions page to show task progression
         if (!_scaHashMatch.test(unsafeWindow.location.hash)) {
             return;
         } else if (unsafeWindow.location.hash != "#char(" + encodeURI(_fullCharName) + ")/adventures") {
             unsafeWindow.location.hash = "#char(" + encodeURI(_fullCharName) + ")/adventures";
         }
-
-        if (settings["nw_charname" + (_charIndex+1)] === undefined)
-            _isLastChar = true;
-
+            
+            if (settings["nw_charname" + (_charIndex+1)] === undefined)
+                _isLastChar = true;
+        
         WaitForState("").done(function () {
             try {
                 _hasLoginDaily = client.dataModel.model.gatewaygamedata.dailies.left.logins;
             } catch (e) {
                 // TODO: Use callback function
                 window.setTimeout(function () {
-                    processSwordCoastDaily(_charIndex);
+                    processSwordCoastDailies(_charIndex);
                 }, delay.SHORT);
                 return;
             }
-
+            
             console.log("Checking SCA Dialy for", _fullCharName, "...");
-
+            
             // Do SCA daily dice roll if the button comes up
             WaitForState(".daily-dice-intro").done(function () {
                 $(".daily-dice-intro button").trigger('click');
@@ -1108,7 +1123,7 @@ function _select_Gateway() { // Check for Gateway used to
                     $(".daily-awards-button button").trigger('click');
                 });
             });
-
+            
             // If Dice roll dialog is non existant
             WaitForNotState(".modal-window.daily-dice").done(function () {
                 if (_isLastChar) {
@@ -1123,7 +1138,7 @@ function _select_Gateway() { // Check for Gateway used to
             });
         });
     }
-
+    
     /**
      * Finds the task finishing next & returns the date or NULL otherwise
      *
@@ -1146,7 +1161,7 @@ function _select_Gateway() { // Check for Gateway used to
         }
         return next;
     }
-
+    
     /**
      * Iterative approach to finding the next task to assign to an open slot.
      *
@@ -1162,7 +1177,7 @@ function _select_Gateway() { // Check for Gateway used to
             }, delay.SHORT);
             return false;
         }
-
+        
         // Check level
         var level = unsafeWindow.client.dataModel.model.ent.main.itemassignmentcategories.categories.filter(function (entry) {
             return entry.name == prof.taskName;
@@ -1175,13 +1190,13 @@ function _select_Gateway() { // Check for Gateway used to
         }
         console.log(prof.taskName, "is level", level);
         console.log("createNextTask", list.length, i);
-
+        
         var taskName = list[i];
         console.log("Searching for task:", taskName);
-
+        
         // Search for task to start
         var task = searchForTask(taskName, prof.taskName);
-
+        
         /** TODO: Use this	code once below can be replaced properly
          if (task === null) {
 		 console.log("Skipping task selection to purchase resources");
@@ -1196,8 +1211,8 @@ function _select_Gateway() { // Check for Gateway used to
 		 createNextTask(prof, i+1);
 		 }
          **/
-
-
+        
+        
         // Finish createNextTask function
         if (task === null) {
             console.log("Skipping task selection to purchase resources");
@@ -1211,9 +1226,9 @@ function _select_Gateway() { // Check for Gateway used to
             WaitForState("div.page-professions-taskdetails").done(function () {
                 // Click all buttons and select an item to use in the slot
                 var def = $.Deferred();
-                var buttonList = $("h3:contains('Optional Assets:')").closest("div").find("button");
-                if (buttonList.length && settings["optionals"]) {
-                    SelectItemFor(buttonList, 0, def, prof);
+                var buttonList = Optional_Assets_lang(); //Optional_Assets_lang(); //$("h3:contains('Optional Assets:')").closest("div").find("button"); 
+                if (buttonList.length && settings["optionals"]) { 
+                    window.setTimeout(function () {SelectItemFor(buttonList, 0, def, prof);}, 500);
                 }
                 else {
                     def.resolve();
@@ -1223,7 +1238,7 @@ function _select_Gateway() { // Check for Gateway used to
                     console.log("Items Populated");
                     // Click the Start Task Button
                     //Get the start task button if it is enabled
-                    var enabledButton = $("div.footer-body > div.input-field.button:not('.disabled') > button:contains('Start Task')");
+                    var enabledButton = Start_task_lang(); //$("div.footer-body > div.input-field.button:not('.disabled') > button:contains('Start Task'))");
                     if (enabledButton.length) {
                         console.log("Clicking Start Task Button");
                         enabledButton.click();
@@ -1235,7 +1250,7 @@ function _select_Gateway() { // Check for Gateway used to
                     }
                     else { // Button not enabled, something required was probably missing
                         // Go back
-                        $("div.footer-body > div.input-field.button > button:contains('Back')").click();
+                        Back_lang();  //$("div.footer-body > div.input-field.button > button:contains('Назад','Zurück','Back')").click(); //$("div.footer-body > div.input-field.button > button:contains('Back')").click();
                         WaitForState("").done(function () {
                             // continue with the next one
                             console.log('Finding next task');
@@ -1250,7 +1265,7 @@ function _select_Gateway() { // Check for Gateway used to
             createNextTask(prof, i + 1);
         }
     }
-
+    
     /**
      * Checks task being started for requirements and initiates beginning task if found
      *
@@ -1263,38 +1278,73 @@ function _select_Gateway() { // Check for Gateway used to
         var thisTask = unsafeWindow.client.dataModel.model.craftinglist['craft_' + profname].entries.filter(function (entry) {
             return entry.def && entry.def.name == taskname;
         })[0];
-
+        
         // If no task is returned we either have three of this task already, the task is a rare that doesn't exist currently, or we have the name wrong in tasklist
         if (!thisTask) {
             console.log('Could not find task for:', taskname);
             return false;
         }
-
+        
         // start task if requirements are met
         if (!thisTask.failedrequirementsreasons.length) {
             return thisTask;
         }
-
+        
         // Too high level
         if (thisTask.failslevelrequirements) {
             console.log("Task level is too high:", taskname);
             return false;
         }
-
+        
         var searchItem = null;
         var searchAsset = false;
-
+        
+        // Check for and buy missing armor & weapon leadership assets
+        if (thisTask.failsresourcesrequirements && profname == "Leadership" && settings["autopurchase"]) {
+            var failedAssets = thisTask.required.filter(function(entry) { return !entry.fillsrequirements; });
+            
+            if (failedAssets.length) {
+                var failedArmor = failedAssets.filter(function(entry) { return entry.categories.indexOf("Armor") >= 0; });
+                var failedWeapon = failedAssets.filter(function(entry) { return entry.categories.indexOf("Weapon") >= 0; });
+                var _buyResult = false;
+                // Buy Leadership Armor Asset
+                if (failedArmor.length) {
+                    console.log("Buying leadership asset:", failedArmor[0].icon);
+                    _buyResult = buyTaskAsset(18);
+                    unsafeWindow.client.professionFetchTaskList("craft_Leadership");
+                }
+                // Buy Leadership Infantry Weapon Asset
+                if (failedWeapon.length) {
+                    console.log("Buying leadership asset:", failedWeapon[0].icon);
+                    _buyResult = buyTaskAsset(4);
+                    unsafeWindow.client.professionFetchTaskList("craft_Leadership");
+                }
+                if (_buyResult === false)
+                    return false;
+                else
+                    return null;
+            } 
+            
+        }
+        
         // Missing assets or ingredients
         if (thisTask.failsresourcesrequirements) {
             var failedAssets = thisTask.required.filter(function (entry) {
                 return !entry.fillsrequirements;
             });
-
+            
             // Missing required assets
             if (failedAssets.length) {
                 var failedCrafter = failedAssets.filter(function (entry) {
                     return entry.categories.indexOf("Person") >= 0;
                 });
+                var failedArmor = failedAssets.filter(function (entry) {
+                    return entry.categories.indexOf("Armor") >= 0;
+                });
+                var failedWeapon = failedAssets.filter(function (entry) {
+                    return entry.categories.indexOf("Weapon") >= 0;
+                });
+                // Train Assets
                 if (failedCrafter.length && settings["trainassets"]) {
                     console.log("Found required asset:", failedCrafter[0].icon);
                     searchItem = failedCrafter[0].icon;
@@ -1305,19 +1355,18 @@ function _select_Gateway() { // Check for Gateway used to
                     console.log("Not enough assets for task:", taskname);
                     return false;
                 }
-            }
-
+            }					
             // Check for craftable or buyable ingredients
             else {
                 var failedResources = thisTask.consumables.filter(function (entry) {
                     return entry.required && !entry.fillsrequirements;
                 });
-
+                
                 // Check first required ingredient only
                 // If it fails to buy or craft task cannot be completed anyway
                 // If it succeeds script will search for tasks anew
                 var itemName = failedResources[0].hdef.match(/\[(\w+)\]/)[1];
-
+                
                 // purchase buyable resources
                 if (itemName.match(/^Crafting_Resource_(Charcoal|Rocksalt|Spool_Thread|Porridge|Solvent|Brimstone|Coal|Moonseasalt|Quicksilver|Spool_Threadsilk)$/)) {
                     if (settings["autopurchase"]) {
@@ -1336,15 +1385,15 @@ function _select_Gateway() { // Check for Gateway used to
                 }
             }
         }
-
-
+        
+        
         // either no craftable items/assets found or other task requirements are not met
         // Skip crafting ingredient tasks for Leadership
         if (searchItem === null || !searchItem.length || (profname == 'Leadership' && !searchAsset && !searchItem.match(/Crafting_Asset_Craftsman/))) {
             console.log("Failed to resolve item requirements for task:", taskname);
             return false;
         }
-
+        
         // Generate list of available tasks to search ingredients/assets from
         console.log("Searching ingredient tasks for:", profname);
         var taskList = unsafeWindow.client.dataModel.model.craftinglist['craft_' + profname].entries.filter(function (entry) {
@@ -1352,12 +1401,12 @@ function _select_Gateway() { // Check for Gateway used to
             if (entry.isheader) {
                 return false;
             }
-
+            
             // Too high level
             if (entry.failslevelrequirements) {
                 return false;
             }
-
+            
             // Rewards do not contain item we want to make
             if (searchAsset) {
                 if (entry.def.icon != searchItem || !entry.def.name.match(/Recruit/) || entry.def.requiredrank > 14) {
@@ -1366,43 +1415,43 @@ function _select_Gateway() { // Check for Gateway used to
             }
             else {
                 if (!(entry.rewards.some(function (itm) {
-                        try {
-                            return itm.hdef.match(/\[(\w+)\]/)[1] == searchItem;
-                        } catch (e) {
-                        }
-                    }))) {
+                    try {
+                        return itm.hdef.match(/\[(\w+)\]/)[1] == searchItem;
+                    } catch (e) {
+                    }
+                }))) {
                     return false;
                 }
             }
-
+            
             // Skip mass production tasks
             if (entry.def.displayname.match(/^(Batch|Mass|Deep|Intensive) /)) {
                 return false;
             }
-
+            
             // Skip trading tasks
             if (entry.def.displayname.match(/rading$/)) {
                 return false;
             }
-
+            
             // Skip looping Transmute tasks
             if (entry.def.displayname.match(/^(Transmute|Create) /)) {
                 return false;
             }
-
+            
             return true;
         });
-
+        
         if (!taskList.length) {
             console.log("No ingredient tasks found for:", taskname, searchItem);
             return false;
         }
-
+        
         // Use more efficient Empowered task for Aqua Vitae if available.
         if (searchItem == "Crafting_Resource_Aquavitae" && taskList.length > 1) {
             taskList.shift();
         }
-
+        
         // Should really only be one result now but lets iterate through anyway.
         for (var i = 0; i < taskList.length; i++) {
             console.log("Attempting search for ingredient task:", taskList[i].def.name);
@@ -1413,7 +1462,7 @@ function _select_Gateway() { // Check for Gateway used to
         }
         return false;
     }
-
+    
     /** --------- MAC-NW : Unused old function
      * Fills resource slots and begins a profession task
      *
@@ -1425,7 +1474,7 @@ function _select_Gateway() { // Check for Gateway used to
 	 //client.dataModel.addDefaultResources();
 	 client.professionStartAssignment(taskDetail.def.name);
 	 }*/
-
+    
     /**
      * Selects the highest level asset for the i'th button in the list. Uses an iterative approach
      * in order to apply a sufficient delay after the asset is assigned
@@ -1434,127 +1483,147 @@ function _select_Gateway() { // Check for Gateway used to
      * @param {int} i The current iteration number. Will select assets for the i'th button
      * @param {Deferred} jQuery Deferred object to resolve when all of the assets have been assigned
      */
+    // Asset selection switch (Start)
     function SelectItemFor(buttonListIn, i, def, prof) {
-        buttonListIn[i].click();
-        WaitForState("").done(function () {
-
-            var $assets = $("div.modal-item-list a").has("img[src*='_Resource_'],img[src*='_Assets_']");
-            var $persons = $("div.modal-item-list a").has("img[src*='_Follower_']");
-            var quality = [".Special", ".Gold", ".Silver", ".Bronze"];
-            var ic, $it;
-
-            var clicked = false;
-
-            // Try to avoid using up higher rank assets needlessly
-            if (prof.taskName === "Leadership") {
-                var mercenarys = $("div.modal-item-list a.Bronze:contains('Mercenary')");
-                var guards = $("div.modal-item-list a.Bronze:contains('Guard')");
-                var footmen = $("div.modal-item-list a.Bronze:contains('Footman')");
-
-                if (mercenarys.length) {
-                    clicked = true;
-                    mercenarys[0].click();
+        if (settings["Buntas_orig_Assets"]) { //buntas Orig asset selection (Start)
+            buttonListIn[i].click();
+            WaitForState("").done(function () {
+                var specialItems = $("div.modal-item-list a.Special");
+                var goldItems = $("div.modal-item-list a.Gold");
+                var silverItems = $("div.modal-item-list a.Silver");
+                var bronzeItems = $("div.modal-item-list a.Bronze");
+                var clicked = false;
+                // Try to avoid using up higher rank assets needlessly
+                if (prof.taskName === "Leadership") {
+                    var mercenarys = $("div.modal-item-list a.Bronze:contains('Mercenary')");
+                    var guards = $("div.modal-item-list a.Bronze:contains('Guard')");
+                    var footmen = $("div.modal-item-list a.Bronze:contains('Footman')");
+                    if (mercenarys.length) {
+                        clicked = true;
+                        mercenarys[0].click();
+                    }
+                    else if (guards.length) {
+                        clicked = true;
+                        guards[0].click();
+                    }
+                        else if (footmen.length) {
+                            clicked = true;
+                            footmen[0].click();
+                        }
+                        }
+                // TODO: add remaining professions in the same way for bronze tier assets.
+                if (!clicked) {
+                    // Click the highest slot
+                    if (specialItems.length) {
+                        specialItems[0].click();
+                    }
+                    else if (goldItems.length) {
+                        goldItems[0].click();
+                    }
+                        else if (silverItems.length) {
+                            silverItems[0].click();
+                        }
+                        else if (bronzeItems.length) {
+                            bronzeItems[0].click();
+                        }
+                            else {
+                                $("button.close-button").click();
+                            }
                 }
-                else if (guards.length) {
-                    clicked = true;
-                    guards[0].click();
-                }
-                else if (footmen.length) {
-                    clicked = true;
-                    footmen[0].click();
-                }
-            }
-
-            // check resources & assets for best quality, in descending order
-            for (ic in quality) {
-                $it = $assets.filter(quality[ic]);
-                if ($it.length) {
-                    $it[0].click();
-                    clicked = true;
-                    break;
-                }
-            }
-
-            // if no asset was selected, check for persons for best speed, in descending order
-            if (!clicked) {
+                console.log("Clicked item");
+                WaitForState("").done(function () {
+                    // Get the new set of select buttons created since the other ones are removed when the asset loads
+                    var buttonList = $("h3:contains('Optional Assets:')").closest("div").find("button");
+                    if (i < buttonList.length - 1) {
+                        SelectItemFor(buttonList, i + 1, def, prof);
+                    }
+                    else {
+                        // Let main loop continue
+                        def.resolve();
+                    }
+                });
+            });
+        }//buntas Orig asset selection (END)
+        else { // Advanced asset selection (Start)
+            buttonListIn[i].click();
+            WaitForState("").done(function () {
+                
+                var $assets = $("div.modal-item-list a").has("img[src*='_Resource_'],img[src*='_Assets_'],img[src*='_Tools_'],img[src*='_Tool_']"); // edited by RottenMind
+                var $persons = $("div.modal-item-list a").has("img[src*='_Follower_']");
+                var quality = [".Special", ".Gold", ".Silver", ".Bronze"];
+                var ic, $it;
+                
+                var clicked = false;
+                
+                // Try to avoid using up higher rank assets needlessly
+                if (prof.taskName === "Leadership") {
+                    var mercenarys = $("div.modal-item-list a.Bronze:contains('Mercenary')");
+                    var guards = $("div.modal-item-list a.Bronze:contains('Guard')");
+                    var footmen = $("div.modal-item-list a.Bronze:contains('Footman')");
+                    
+                    if (mercenarys.length) {
+                        clicked = true;
+                        mercenarys[0].click();
+                    }
+                    else if (guards.length) {
+                        clicked = true;
+                        guards[0].click();
+                    }
+                        else if (footmen.length) {
+                            clicked = true;
+                            footmen[0].click();
+                        }
+                        }
+                
+                // check resources & assets for best quality, in descending order
                 for (ic in quality) {
-                    $it = $persons.filter(quality[ic]);
+                    $it = $assets.filter(quality[ic]);
                     if ($it.length) {
                         $it[0].click();
                         clicked = true;
                         break;
                     }
                 }
-            }
-
-            // if nothing was found at all, return immediately (skip other optional slots)
-            if (!clicked) {
-                $("button.close-button").click();
-                console.log("Nothing more to click..");
+                
+                // if no asset was selected, check for persons for best speed, in descending order
+                if (!clicked) {
+                    for (ic in quality) {
+                        $it = $persons.filter(quality[ic]);
+                        if ($it.length) {
+                            $it[0].click();
+                            clicked = true;
+                            break;
+                        }
+                    }
+                }
+                
+                // if nothing was found at all, return immediately (skip other optional slots)
+                if (!clicked) {
+                    $("button.close-button").click();
+                    console.log("Nothing more to click..");
+                    WaitForState("").done(function () {
+                        // Let main loop continue
+                        def.resolve();
+                    });
+                }
+                
+                console.log("Clicked item");
                 WaitForState("").done(function () {
-                    // Let main loop continue
-                    def.resolve();
+                    // Get the new set of select buttons created since the other ones are removed when the asset loads
+                    var buttonList = Optional_Assets_lang(); //$("h3:contains('Optional Assets:')").closest("div").find("button");
+                    if (i < buttonList.length - 1) {
+                       SelectItemFor(buttonList, 0, def, prof); //SelectItemFor(buttonList, i + 1, def, prof);
+                    }
+                    else {
+                        // Let main loop continue
+                        def.resolve();
+                    }
                 });
-            }
-
-            console.log("Clicked item");
-            WaitForState("").done(function () {
-                // Get the new set of select buttons created since the other ones are removed when the asset loads
-                var buttonList = $("h3:contains('Optional Assets:')").closest("div").find("button");
-                if (i < buttonList.length - 1) {
-                    SelectItemFor(buttonList, i + 1, def, prof);
-                }
-                else {
-                    // Let main loop continue
-                    def.resolve();
-                }
             });
-        });
+        }// Advanced asset selection (END)
     }
-
-    /* ################# original
-     function SelectItemFor(buttonListIn, i, def, prof) {
-     buttonListIn[i].click();
-     WaitForState("").done(function() {
-     var specialItems = $("div.modal-item-list a.Special");
-     var goldItems = $("div.modal-item-list a.Gold");
-     var silverItems = $("div.modal-item-list a.Silver");
-     var bronzeItems = $("div.modal-item-list a.Bronze");
-     var clicked = false;
-     // Try to avoid using up higher rank assets needlessly
-     if (prof.taskName === "Leadership") {
-     var mercenarys = $("div.modal-item-list a.Bronze:contains('Mercenary')");
-     var guards = $("div.modal-item-list a.Bronze:contains('Guard')");
-     var footmen = $("div.modal-item-list a.Bronze:contains('Footman')");
-     if (mercenarys.length)	 { clicked = true; mercenarys[0].click(); }
-     else if (guards.length)	 { clicked = true; guards[0].click(); }
-     else if (footmen.length) { clicked = true; footmen[0].click(); }
-     }
-     // TODO: add remaining professions in the same way for bronze tier assets.
-     if (!clicked) {
-     // Click the highest slot
-     if (specialItems.length)	 { specialItems[0].click(); }
-     else if (goldItems.length)	 { goldItems[0].click(); }
-     else if (silverItems.length) { silverItems[0].click(); }
-     else if (bronzeItems.length) { bronzeItems[0].click(); }
-     else { $("button.close-button").click(); }
-     }
-     console.log("Clicked item");
-     WaitForState("").done(function() {
-     // Get the new set of select buttons created since the other ones are removed when the asset loads
-     var buttonList = $("h3:contains('Optional Assets:')").closest("div").find("button");
-     if (i < buttonList.length - 1) {
-     SelectItemFor(buttonList, i+1, def, prof);
-     }
-     else {
-     // Let main loop continue
-     def.resolve();
-     }
-     });
-     });
-     }
-     */
-
+    // Asset selection switch (END)
+    
     /**
      * Will buy a given purchasable resource
      *
@@ -1562,7 +1631,7 @@ function _select_Gateway() { // Check for Gateway used to
      */
     function buyResource(item) {
         console.log("Purchasing resources:", item);
-
+        
         var resourceID = {
             Crafting_Resource_Charcoal: 0,
             Crafting_Resource_Rocksalt: 1,
@@ -1575,16 +1644,38 @@ function _select_Gateway() { // Check for Gateway used to
             Crafting_Resource_Quicksilver: 8,
             Crafting_Resource_Spool_Threadsilk: 9,
         };
-
+        
         // Make purchase
         unsafeWindow.client.sendCommand("GatewayVendor_PurchaseVendorItem", {vendor: 'Nw_Gateway_Professions_Merchant', store: 'Store_Crafting_Resources', idx: resourceID[item], count: 50}); // MAC-NW: Purchase of prof resources lowred from 100 to 30
         WaitForState("button.closeNotification").done(function () {
             $("button.closeNotification").click();
         });
     }
-
-    // MAC-NW -- AD Transfer through exchange functions (Consolidation)
-
+    
+    /** DRAFT
+     * Will buy a missing leadership assets
+     *
+     * @param {String} item reference from assetID
+     */
+    function buyTaskAsset(_itemNo) {
+        var _returnHast = unsafeWindow.location.hash;
+        unsafeWindow.location.hash = unsafeWindow.location.hash.replace(/\)\/.+/, ')/professions/vendor');
+        WaitForState("").done(function () {
+            if ($('span.alert-red button[data-url-silent="/professions/vendor/Store_Crafting_Assets/'+_itemNo+'"]').length) {
+                return false;
+            } else if($('button[data-url-silent="/professions/vendor/Store_Crafting_Assets/'+_itemNo+'"]').length)
+            {
+                $('button[data-url-silent="/professions/vendor/Store_Crafting_Assets/'+_itemNo+'"]').trigger('click');
+                WaitForState(".modal-confirm button").done(function () {
+                    $('.modal-confirm button').eq(1).trigger('click');
+                    unsafeWindow.location.hash = _returnHast;
+                    return null;
+                });
+            }
+                });
+    }
+    
+    
     // Function used to check exchange data model and post calculated AD/Zen for transfer if all requirements are met
     function postZexOffer() {
         // Make sure the exchange data is loaded to model
@@ -1595,10 +1686,10 @@ function _select_Gateway() { // Check for Gateway used to
                 var charDiamonds = parseInt(unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds);
                 var ZenRate = parseInt(settings["banktransrate"]);
                 var ZenQty = Math.floor((charDiamonds - parseInt(settings["bankcharmin"])) / ZenRate);
-
+                ZenQty = (ZenQty > 5000) ? 5000 : ZenQty;
                 console.log("Posting Zex buy listing for " + ZenQty + " ZEN at the rate of " + ZenRate + " AD/ZEN. AD remainder: " + charDiamonds + " - " + (ZenRate * ZenQty) + " = " + (charDiamonds - (ZenRate * ZenQty)));
                 unsafeWindow.client.createBuyOrder(ZenQty, ZenRate);
-
+                
             } else {
                 console.log("Zen Max Listings Reached (5). Skipping Zex Posting..");
             }
@@ -1606,16 +1697,16 @@ function _select_Gateway() { // Check for Gateway used to
             console.log("Zen Exchange data did not load in time for transfer. Skipping Zex Posting..");
         }
     }
-
+    
     // Function used to check exchange data model and withdraw listed orders that use the settings zen transfer rate
     function withdrawZexOffer() {
         // Make sure the exchange data is loaded to model
         if (unsafeWindow.client.dataModel.model.exchangeaccountdata) {
             if (unsafeWindow.client.dataModel.model.exchangeaccountdata.openorders.length >= 1) {
-
+                
                 var charDiamonds = parseInt(unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds);
                 var ZenRate = parseInt(settings["banktransrate"]);
-
+                
                 // cycle through the zex listings
                 unsafeWindow.client.dataModel.model.exchangeaccountdata.openorders.forEach(function (item) {
                     // find any buy orders in the list with our set zen rate
@@ -1625,7 +1716,7 @@ function _select_Gateway() { // Check for Gateway used to
                         console.log("Withdrawing Zex listing for " + item.quantity + " ZEN at the rate of " + item.price + " . Total value in AD: " + item.totaltc);
                     }
                 });
-
+                
             } else {
                 console.log("No listings found on Zex. Skipping Zex Withrdaw..");
             }
@@ -1633,9 +1724,9 @@ function _select_Gateway() { // Check for Gateway used to
             console.log("Zen Exchange data did not load in time for transfer. Skipping Zex Withrdaw..");
         }
     }
-
+    
     // MAC-NW
-
+    
     function vendorItemsLimited(_items) {
         var _pbags = client.dataModel.model.ent.main.inventory.playerbags;
         var _delay = 400;
@@ -1648,7 +1739,7 @@ function _select_Gateway() { // Check for Gateway used to
         var _profitems = [];
         // Pattern for items to leave out of auto vendoring (safeguard)
         var _excludeItems =/(Gemfood|Gem_Upgrade_Resource|Artifact|Hoard|Coffer|Fuse|Ward|Preservation|Armor_Enhancement|Weapon_Enhancement|T[5-9]_Enchantment|T[5-9]_Runestones|T10_Enchantment|T10_Runestones|4c_Personal|Item_Potion_Companion_Xp|Gateway_Rewardpack|Consumable_Id_Scroll|Dungeon_Delve_Key)/; // edited by RottenMind 17.01.2015
-
+        
         if (settings["autovendor_profresults"]) {
             /** Profession leveling result item cleanup logic for T1-4 crafted results
              * Created by RM on 14.1.2015.
@@ -1656,37 +1747,37 @@ function _select_Gateway() { // Check for Gateway used to
              * Items on list must be checked and tested.
              */
             /*#1, Tier3, end list, sell allways all, "TierX" is here "TX" !!*/
-            /*_profitems[0] = {
+            /*_profitems[_profitems.length] = {
                 pattern : /^Crafted_(Jewelcrafting_Waist_Offense_3|Jewelcrafting_Neck_Defense_3|Jewelcrafting_Waist_Defense_3|Med_Armorsmithing_T3_Chain_Armor_Set_1|Med_Armorsmithing_T3_Chain_Pants2|Med_Armorsmithing_T3_Chain_Shirt2|Med_Armorsmithing_T3_Chain_Helm_Set_1|Med_Armorsmithing_T3_Chain_Pants|Med_Armorsmithing_T3_Chain_Boots_Set_1|Hvy_Armorsmithing_T3_Plate_Armor_Set_1|Hvy_Armorsmithing_T3_Plate_Pants2|Hvy_Armorsmithing_T3_Plate_Shirt2|Hvy_Armorsmithing_T3_Plate_Helm_Set_1|Hvy_Armorsmithing_T3_Plate_Boots_Set_1|Leatherworking_T3_Leather_Armor_Set_1|Leatherworking_T3_Leather_Pants2|Leatherworking_T3_Leather_Shirt2|Leatherworking_T3_Leather_Helm_Set_1|Leatherworking_T3_Leather_Boots_Set_1|Tailoring_T3_Cloth_Armor_Set_3|Tailoring_T3_Cloth_Armor_Set_2|Tailoring_T3_Cloth_Armor_Set_1|Tailoring_T3_Cloth_Pants2_Set2|Tailoring_T3_Cloth_Shirt2|Tailoring_T3_Cloth_Helm_Set_1|Artificing_T3_Pactblade_Temptation_5|Artificing_T3_Icon_Virtuous_5|Weaponsmithing_T3_Dagger_4)$/,
                 limit : 0,
                 count : 0
             };*/ // moved to selljunk filter, RottenMind
             /*#2, Tier2 - tier3 mixed, upgrade, sell if inventory full, "TierX" is here "TX" */
-            _profitems[1] = {
+            _profitems[_profitems.length] = {
                 pattern : /^Crafted_(Jewelcrafting_Neck_Misc_2|Jewelcrafting_Waist_Misc_2|Med_Armorsmithing_T3_Chain_Pants|Med_Armorsmithing_T3_Chain_Shirt|Hvy_Armorsmithing_T3_Plate_Pants|Hvy_Armorsmithing_T3_Plate_Shirt|Leatherworking_T3_Leather_Pants|Leatherworking_T3_Leather_Shirt|Tailoring_T3_Cloth_Shirt|Tailoring_T3_Cloth_Pants||Artificing_T3_Pactblade_Temptation_4|Artificing_T3_Icon_Virtuous_4|Weaponsmithing_T2_Dagger_3|Weaponsmithing_T2_Dagger_3)$/,
                 limit : 0,
                 count : 0
             };
             /*#3, Tier2, upgrade, sell if inventory full, "TierX" is here "TX" */
-            _profitems[2] = {
+            _profitems[_profitems.length] = {
                 pattern : /^Crafted_(Jewelcrafting_Neck_Offense_2|Jewelcrafting_Waist_Offense_2|Med_Armorsmithing_T2_Chain_Armor_Set_1|Med_Armorsmithing_T2_Chain_Pants_2|Med_Armorsmithing_T2_Chain_Boots_Set_1|Med_Armorsmithing_T2_Chain_Shirt_2|Med_Armorsmithing_T2_Chain_Pants_1|Med_Armorsmithing_T2_Chain_Shirt|Hvy_Armorsmithing_T2_Plate_Armor_Set_1|Hvy_Armorsmithing_T2_Plate_Pants_2|Hvy_Armorsmithing_T2_Plate_Boots_Set_1|Hvy_Armorsmithing_T2_Plate_Shirt_2|Hvy_Armorsmithing_T2_Plate_Pants_1|Hvy_Armorsmithing_T2_Shield_Set_1|Hvy_Armorsmithing_T2_Plate_Shirt|Leatherworking_T2_Leather_Shirt|Leatherworking_T2_Leather_Boots_Set_1|Leatherworking_T2_Leather_Shirt_2|Leatherworking_T2_Leather_Pants_1|Leatherworking_T2_Leather_Armor_Set_1|Leatherworking_T2_Leather_Pants_2|Tailoring_T2_Cloth_Armor_Set_1|Tailoring_T2_Cloth_Pants_2|Tailoring_T2_Cloth_Boots_Set_1|Tailoring_T2_Cloth_Shirt_2|Tailoring_T2_Cloth_Pants_1|Artificing_T2_Pactblade_Temptation_3|Artificing_T1_Icon_Virtuous_2|Weaponsmithing_T2_Dagger_2)$/,
                 limit : 0,
                 count : 0
             };
             /*#4, Tier1, upgrade, sell if inventory full, "TierX" is here "TX" */
-            _profitems[3] = {
+            _profitems[_profitems.length] = {
                 pattern : /^Crafted_(Jewelcrafting_Neck_Misc_1|Jewelcrafting_Waist_Misc_1|Med_Armorsmithing_T1_Chain_Armor_Set_1|Med_Armorsmithing_T1_Chain_Boots_Set_1|Hvy_Armorsmithing_Plate_Armor_1|Hvy_Armorsmithing_T1_Plate_Armor_Set_1|Hvy_Armorsmithing_T1_Plate_Boots_Set_1|Leatherworking_T1_Leather_Boots_Set_1|Leatherworking_T1_Leather_Boots_Set_1|Leatherworking_T1_Leather_Armor_Set_1|Tailoring_T1_Cloth_Armor_1|Tailoring_T1_Cloth_Pants_1|Tailoring_T1_Cloth_Boots_Set_1|Artificing_T1_Pactblade_Convergence_2|Artificing_T1_Icon_Virtuous_2|Weaponsmithing_T1_Dagger_1)$/,
                 limit : 0,
                 count : 0
             };
             /*#5, Tier0, upgrade, sell if inventory full, taskilist "Tier1" is here "empty" or "_" must replace (_T1_|_)*/
-            _profitems[4] = {
+            _profitems[_profitems.length] = {
                 pattern : /^Crafted_(Jewelcrafting_Waist_Offense_1|Jewelcrafting_Neck_Offense_1|Med_Armorsmithing_Chain_Boots_1|Med_Armorsmithing_Chain_Shirt_1|Med_Armorsmithing_Chain_Armor_1|Med_Armorsmithing_Chain_Pants_1|Hvy_Armorsmithing_Plate_Boots_1|Hvy_Armorsmithing_Plate_Shirt_1|Hvy_Armorsmithing_Shield_1|Leatherworking_Tier0_Intro_1|Leatherworking_Leather_Boots_1|Leatherworking_Leather_Shirt_1|Leatherworking_Leather_Armor_1|Leatherworking_Leather_Pants_1|Tailoring_Cloth_Boots_1|Tailoring_Cloth_Shirt_1|Artificing_T1_Pactblade_Convergence_1|Artificing_Icon_Virtuous_1|Artificing_Symbol_Virtuous_1|Weaponsmithing_Dagger_1)$/,
                 limit : 0,
                 count : 0
             };
         }
-
+        
         $.each(_pbags, function (bi, bag) {
             bag.slots.forEach(function (slot) {
                 // Match unused slots
@@ -1697,24 +1788,24 @@ function _select_Gateway() { // Check for Gateway used to
                 else if ( _excludeItems.test(slot.name) || slot.bound || slot.rarity == "Special" || slot.rarity ==  "Gold") {
                     _bagUsed++;
                 }
-                // Match everything else
-                else {
-                    if (settings["autovendor_profresults"]) {
-                        for (i = 0; i < _profitems.length; i++) {
-                            if (_profitems[i].pattern.test(slot.name))
-                                _profitems[i].count++;
+                    // Match everything else
+                    else {
+                        if (settings["autovendor_profresults"]) {
+                            for (i = 0; i < _profitems.length; i++) {
+                                if (_profitems[i].pattern.test(slot.name))
+                                    _profitems[i].count++;
+                            }
                         }
+                        _tmpBag[_tmpBag.length] = slot;
+                        _bagUsed++;
                     }
-                    _tmpBag[_tmpBag.length] = slot;
-                    _bagUsed++;
-                }
             });
         });
-
+        
         if (settings["autovendor_profresults"]) {
             _tmpBag.forEach(function (slot) {
-                for (i = 0; i < _profitems.length; i++) {
-                    if (slot && _profitems[i].pattern.test(slot.name) && !slot.bound && _profitems[i].count > 3 && Inventory_bagspace() <= 7 ) { //Tthis can be set lower after bagspace is detected
+                for (i = 0; i < _profitems.length; i++) { // edited by RottenMind
+                    if (slot && _profitems[i].pattern.test(slot.name) && !slot.bound && _profitems[i].count > 3 && Inventory_bagspace() <= 7 ) { // edited by RottenMind
                         var vendor = {
                             vendor : "Nw_Gateway_Professions_Merchant"
                         };
@@ -1722,7 +1813,7 @@ function _select_Gateway() { // Check for Gateway used to
                         vendor.count = 1;
                         console.log('Selling', vendor.count, slot.name, 'to vendor.');
                         window.setTimeout(function () {
-                            /* testing only client.sendCommand('GatewayVendor_SellItemToVendor', vendor); */
+                            client.sendCommand('GatewayVendor_SellItemToVendor', vendor);
                         }, _delay);
                         _profitems[i].count--;
                         break;
@@ -1730,20 +1821,20 @@ function _select_Gateway() { // Check for Gateway used to
                 }
             });
         }
-
+        
         _tmpBag.forEach(function (slot) {
             for (i = 0; i < _items.length; i++) {
                 var _Limit = (parseInt(_items[i].limit) > 99) ? 99 : _items[i].limit;
                 if (slot && _items[i].pattern.test(slot.name) && !slot.bound) {
                     // Node Kits vendor logic for restricted bag space
-                    if (settings["autovendor_kits"]) {
+                    if (settings["autovendor_kits_altars_limit"] && /^Item_Consumable_Skill/.test(slot.name)) {
                         if ( _bagCount < 2 || _bagUnused < 6 ||
                             (slot.name == "Item_Consumable_Skill_Dungeoneering" && (_classType == "Player_Guardian" || _classType == "Player_Greatweapon")) ||
                             (slot.name == "Item_Consumable_Skill_Arcana" && (_classType == "Player_Controller" || _classType == "Player_Scourge")) ||
                             (slot.name == "Item_Consumable_Skill_Religion" && _classType == "Player_Devoted") ||
                             (slot.name == "Item_Consumable_Skill_Thievery" && _classType == "Player_Trickster") ||
                             (slot.name == "Item_Consumable_Skill_Nature" && _classType == "Player_Archer")
-                        ) {
+                           ) {
                             _Limit = 0;
                         }
                     }
@@ -1765,26 +1856,34 @@ function _select_Gateway() { // Check for Gateway used to
                 }
             }
         });
-
+        
         return _sellCount;
     }
-
+    
     function switchChar() {
-
+        
         if (settings["refinead"]) {
             var _currencies = unsafeWindow.client.dataModel.model.ent.main.currencies;
             if (_currencies.diamondsconvertleft && _currencies.roughdiamonds) {
-                console.log("Refining AD");
+                var refined_diamonds;
+                if (_currencies.diamondsconvertleft < _currencies.roughdiamonds) {
+                    refined_diamonds = _currencies.diamondsconvertleft
+                } else {
+                    refined_diamonds = _currencies.roughdiamonds
+                }
+                chardiamonds[charcurrent] += refined_diamonds
+                console.log("Refining AD for", settings["nw_charname"+charcurrent] + ":", refined_diamonds);
+                console.log(settings["nw_charname"+charcurrent] + "'s", "Astral Diamonds:", chardiamonds[charcurrent]);
                 unsafeWindow.client.sendCommand('Gateway_ConvertNumeric', 'Astral_Diamonds');
                 WaitForState("button.closeNotification").done(function () {
                     $("button.closeNotification").click();
                 });
             }
         }
-
+        
         // MAC-NW -- AD Consolidation
         if (settings["autoexchange"]) {
-
+            
             // Check that we dont take money from the character assigned as the banker // Zen Transfer / Listing
             if (settings["bankchar"] != unsafeWindow.client.dataModel.model.ent.main.name) {
                 // Check the required min AD amount on character
@@ -1799,14 +1898,14 @@ function _select_Gateway() { // Check for Gateway used to
                     console.log("Character does not have minimum AD balance to do funds transfer. Skipping Zex Posting..");
                 }
             }
-
+            
         } else {
             console.log("Zen Exchange AD transfer not enabled. Skipping Zex Posting..");
         }
-
+        
         if (settings["openrewards"]) {
             var _pbags = unsafeWindow.client.dataModel.model.ent.main.inventory.playerbags;
-            var _cRewardPat = /Reward_Item_Chest/;
+            var _cRewardPat = /Reward_Item_Chest|Gateway_Rewardpack/;
             console.log("Opening Rewards");
             $.each(_pbags, function (bi, bag) {
                 bag.slots.forEach(function (slot) {
@@ -1822,14 +1921,14 @@ function _select_Gateway() { // Check for Gateway used to
                 });
             });
         }
-
+        
         // Check Vendor Options & Vendor matched items
         vendorJunk();
-
+        
         // MAC-NW (endchanges)
-
+        
         console.log("Switching Characters");
-
+        
         var chardelay, chardate = null, nowdate = new Date();
         nowdate = nowdate.getTime();
         curdiamonds = 0;
@@ -1851,8 +1950,10 @@ function _select_Gateway() { // Check for Gateway used to
                 console.log("No date found for " + settings["nw_charname" + cc] + ", switching now.");
                 break;
             }
+        }
+        for (var cc = 0; cc < settings["charcount"]; cc++) {
             if (chardiamonds[cc] != null) {
-                curdiamonds += chardiamonds[cc];
+                curdiamonds += Math.floor(chardiamonds[cc] / 50) * 50;
             }
         }
         console.log("Next run for " + settings["nw_charname" + charcurrent] + " in " + parseInt(chardelay / 1000) + " seconds.");
@@ -1860,7 +1961,7 @@ function _select_Gateway() { // Check for Gateway used to
         GM_setValue("charcurrent", charcurrent);
         dfdNextRun.resolve(chardelay);
     }
-
+    
     /**
      * Waits for the loading symbol to be hidden.
      *
@@ -1927,10 +2028,10 @@ function _select_Gateway() { // Check for Gateway used to
     function process() {
         // Make sure the settings button exists
         addSettings();
-
+        
         // Enable/Disable the unconditional page reload depending on settings
         loading_reset = settings["autoreload"];
-
+        
         // Check if timer is paused
         s_paused = settings["paused"]; // let the Page Reloading function know the pause state
         if (settings["paused"]) {
@@ -1940,7 +2041,7 @@ function _select_Gateway() { // Check for Gateway used to
             }, delay.DEFAULT);
             return;
         }
-
+        
         // Check for Gateway down
         if (window.location.href.indexOf("gatewaysitedown") > -1) {
             // Do a long delay and then retry the site
@@ -1950,7 +2051,7 @@ function _select_Gateway() { // Check for Gateway used to
             }, delay.MINS);
             return;
         }
-
+        
         // Check for login or account guard and process accordingly
         var currentPage = GetCurrentPage();
         if (currentPage == PAGES.LOGIN) {
@@ -1961,11 +2062,11 @@ function _select_Gateway() { // Check for Gateway used to
             page_GUARD();
             return;
         }
-
-        window.setTimeout(function () {
-            loginProcess();
-        }, delay.SHORT);
-
+            
+            window.setTimeout(function () {
+                loginProcess();
+            }, delay.SHORT);
+        
         // Continue again later
         dfdNextRun.done(function (delayTimer) {
             dfdNextRun = $.Deferred();
@@ -1974,7 +2075,7 @@ function _select_Gateway() { // Check for Gateway used to
             }, typeof delayTimer !== 'undefined' ? delayTimer : delay.DEFAULT);
         });
     }
-
+    
     function loginProcess() {
         // Get logged on account details
         var accountName;
@@ -1988,7 +2089,7 @@ function _select_Gateway() { // Check for Gateway used to
             }, delay.SHORT);
             return;
         }
-
+        
         // Check if timer is paused again to avoid starting new task between timers
         s_paused = settings["paused"]; // let the Page Reloading function know the pause state
         if (settings["paused"]) {
@@ -1998,7 +2099,7 @@ function _select_Gateway() { // Check for Gateway used to
             }, delay.DEFAULT);
             return;
         }
-
+        
         if (accountName) {
             // load current character position and values
             charcurrent = GM_getValue("charcurrent", 0);
@@ -2006,7 +2107,7 @@ function _select_Gateway() { // Check for Gateway used to
                 j = i + (charcurrent * charSettings.length / settings["charcount"]);
                 settings[charSettings[j].name.replace(new RegExp(charcurrent + "$"), '')] = settings[charSettings[j].name];
             }
-
+            
             // Load task list from settings if saved
             if (settings["tasklist"].length) {
                 tasklist = JSON.parse(settings["tasklist"]);
@@ -2014,30 +2115,30 @@ function _select_Gateway() { // Check for Gateway used to
             else {
                 tasklist = defaultTasklist;
             }
-
+            
             var charName = settings["nw_charname"];
             var fullCharName = charName + '@' + accountName;
-
+            
             if (unsafeWindow.client.getCurrentCharAtName() != fullCharName) {
                 loadCharacter(fullCharName);
                 return;
             }
-
+            
             // Try to start tasks
             if (processCharacter()) {
                 return;
             }
-
+            
             // Switch characters as necessary
             switchChar();
         }
     }
-
+    
     function loadCharacter(charname) {
         // Load character and restart next load loop
         console.log("Loading gateway script for", charname);
         unsafeWindow.client.dataModel.loadEntityByName(charname);
-
+        
         // MAC-NW -- AD Consolidation -- Banker Withdraw Secion
         try {
             var testChar = unsafeWindow.client.dataModel.model.ent.main.name;
@@ -2051,11 +2152,11 @@ function _select_Gateway() { // Check for Gateway used to
             }, delay.SHORT);
             return;
         }
-
+        
         if (settings["autoexchange"]) {
-
+            
             unsafeWindow.client.dataModel.fetchExchangeAccountData();
-
+            
             try {
                 var testExData = unsafeWindow.client.dataModel.model.exchangeaccountdata.openorders;
                 console.log("Loaded zen exchange data for", charname);
@@ -2067,7 +2168,7 @@ function _select_Gateway() { // Check for Gateway used to
                 }, delay.SHORT);
                 return;
             }
-
+            
             // Check to see if this is the designated banker character
             if (settings["bankchar"] == unsafeWindow.client.dataModel.model.ent.main.name) {
                 // This is the banker -- withdraw any buy listings that match the transfer rate set in panel
@@ -2082,21 +2183,21 @@ function _select_Gateway() { // Check for Gateway used to
                         client.sendCommand("GatewayExchange_ClaimMTC", client.dataModel.model.exchangeaccountdata.readytoclaimmtc);
                         console.log("Attempting to withdraw exchange balancees... ClaimMT: " + client.dataModel.model.exchangeaccountdata.readytoclaimmtc);
                     }
-
+                    
                 }, delay.SHORT);
             }
-
+            
             WaitForState("button.closeNotification").done(function () {
                 $("button.closeNotification").click();
             });
-
+            
             unsafeWindow.client.dataModel.loadEntityByName(charname);
-
+            
         } else {
             console.log("Zen Exchange AD transfer not enabled. Skipping Zex Posting..");
         }
         // MAC-NW
-
+        
         // MAC-NW -- Moved Professoin Merchant loading here with testing/waiting to make sure it loads
         try {
             var testProfMerchant = client.dataModel.model.vendor.items;
@@ -2109,13 +2210,13 @@ function _select_Gateway() { // Check for Gateway used to
             }, delay.SHORT);
             return;
         }
-
+        
         // Check Vendor Options & Vendor matched items
         vendorJunk();
-
+        
         dfdNextRun.resolve();
     }
-
+    
     function addSettings() {
         if ($("#settingsButton").length)
             return;
@@ -2145,7 +2246,7 @@ function _select_Gateway() { // Check for Gateway used to
 #settingsPanel input[type='button'].button-yellow{background:#df7514; margin: 2px 2px 2px 2px;}\
 #settingsPanel input[type='button'].button-blue{background:#42b8dd; margin: 2px 2px 2px 2px;}\
 ");
-
+        
         // Add settings panel to page body
         $("body").append(
             '<div id="settingsPanel">\
@@ -2160,44 +2261,56 @@ function _select_Gateway() { // Check for Gateway used to
 </form>\
 </div>'
         );
-
+        
         // Add each setting input
         var settingsList = $("#settingsPanel form ul");
         for (var i = 0; i < settingnames.length; i++) {
             var id = 'settings_' + settingnames[i].name;
             var indent = (countLeadingSpaces(settingnames[i].title) >= 1) ? 1 : 0;
-            if (id == 'autoexchange')
-                settingsList.append('<li style="margin-left:0em; width: 48%; display: inline-block;"/>&nbsp;</li>')
-            switch (settingnames[i].type) {
-                case "checkbox":
-                    settingsList.append('<li title="' + settingnames[i].tooltip + '" style="padding-left:' + indent + 'em; width: 48%; display: inline-block;"><input style="margin:4px" name="' + id + '" id="' + id + '" type="checkbox" /><label class="' + settingnames[i].class + '" for="' + id + '">' + settingnames[i].title + '</label></li>')
-                    $('#' + id).prop('checked', settings[settingnames[i].name]);
-                    break;
-                case "text":
-                    settingsList.append('<li title="' + settingnames[i].tooltip + '" style="padding-left:' + indent + 'em; margin-top:1em; width: 46%; display: inline-block;"<label class="' + settingnames[i].class + '" for="' + id + '">' + settingnames[i].title + '</label><input style="margin:4px; padding: 2px; min-width: 80%;" name="' + id + '" id="' + id + '" type="text" /></li>')
-                    $('#' + id).val(settings[settingnames[i].name]);
-                    break;
-                case "password":
-                    settingsList.append('<li title="' + settingnames[i].tooltip + '" style="padding-left:' + indent + 'em; margin-top:1em; width: 46%; display: inline-block;"' + settingnames[i].class + '" for="' + id + '">' + settingnames[i].title + '</label><input style="margin:4px; padding: 2px; min-width: 80%;" name="' + id + '" id="' + id + '" type="password" /></li>')
-                    $('#' + id).val(settings[settingnames[i].name]);
-                    break;
-                case "select":
-                    settingsList.append('<li title="' + settingnames[i].tooltip + '" style="padding-left:' + indent + 'em; width: 48%; display: inline-block;"' + settingnames[i].class + '" style="padding-left:4px" for="' + id + '">' + settingnames[i].title + '</label><select style="margin:4px" name="' + id + '" id="' + id + '" /></li>')
-                    var options = settingnames[i].opts;
-                    var select = $('#' + id);
-                    for (var j = 0; j < options.length; j++) {
-                        if (settings[settingnames[i].name] == options[j].path)
-                            select.append('<option value="' + options[j].path + '" selected="selected">' + options[j].name + '</option>');
+            /*if ((settingnames[i].type == 'text' && settingnames[i-1].type == 'checkbox') || (settingnames[i-1] && settingnames[i].type == 'checkbox' && settingnames[i-1].type == 'text'))
+                settingsList.append('<li style="margin-left:0em; width: 48%; display: inline-block;"/>&nbsp;</li>')*/
+            var border = "";
+            if (settingnames[i].border)
+                border = "border-top: #000 solid 1px;"
+                switch (settingnames[i].type) {
+                    case "checkbox":
+                        var _checkWidth="48%";
+                        if (i < 9)
+                            _checkWidth="31%";
+                        if (settingnames[i].border)
+                            _checkWidth="98%";
+                        settingsList.append('<li title="' + settingnames[i].tooltip + '" style="' + border + 'padding-left:' + indent + 'em; width: ' + _checkWidth +'; display: inline-block;"><input style="margin:4px" name="' + id + '" id="' + id + '" type="checkbox" /><label class="' + settingnames[i].class + '" for="' + id + '">' + settingnames[i].title + '</label></li>')
+                        $('#' + id).prop('checked', settings[settingnames[i].name]);
+                        break;
+                    case "text":
+                        if (settingnames[i].border)
+                            _inputkWidth="95%; padding: 10px";
                         else
-                            select.append('<option value="' + options[j].path + '">' + options[j].name + '</option>');
-                    }
-                    break;
-                case "label":
-                    settingsList.append('<li title="' + settingnames[i].tooltip + '" style="margin-left:' + indent + 'em;><label class="' + settingnames[i].class + '">' + settingnames[i].title + '</label></li>')
-                    break;
-            }
+                            _inputkWidth="46%";
+                        settingsList.append('<li title="' + settingnames[i].tooltip + '" style="' + border + 'padding-left:' + indent + 'em; margin-top:1em; width: ' + _inputkWidth + '; display: inline-block;"<label class="' + settingnames[i].class + '" for="' + id + '">' + settingnames[i].title + '</label><input style="margin:4px; padding: 2px; min-width: 80%;" name="' + id + '" id="' + id + '" type="text" /></li>')
+                        $('#' + id).val(settings[settingnames[i].name]);
+                        break;
+                    case "password":
+                        settingsList.append('<li title="' + settingnames[i].tooltip + '" style="' + border + 'padding-left:' + indent + 'em; margin-top:1em; width: 46%; display: inline-block;"' + settingnames[i].class + '" for="' + id + '">' + settingnames[i].title + '</label><input style="margin:4px; padding: 2px; min-width: 80%;" name="' + id + '" id="' + id + '" type="password" /></li>')
+                        $('#' + id).val(settings[settingnames[i].name]);
+                        break;
+                    case "select":
+                        settingsList.append('<li title="' + settingnames[i].tooltip + '" style="' + border + 'padding-left:' + indent + 'em; width: 48%; display: inline-block;"' + settingnames[i].class + '" style="padding-left:4px" for="' + id + '">' + settingnames[i].title + '</label><select style="margin:4px" name="' + id + '" id="' + id + '" /></li>')
+                        var options = settingnames[i].opts;
+                        var select = $('#' + id);
+                        for (var j = 0; j < options.length; j++) {
+                            if (settings[settingnames[i].name] == options[j].path)
+                                select.append('<option value="' + options[j].path + '" selected="selected">' + options[j].name + '</option>');
+                            else
+                                select.append('<option value="' + options[j].path + '">' + options[j].name + '</option>');
+                        }
+                        break;
+                    case "label":
+                        settingsList.append('<li title="' + settingnames[i].tooltip + '" style="' + border + 'margin-left:' + indent + 'em;><label class="' + settingnames[i].class + '">' + settingnames[i].title + '</label></li>')
+                        break;
+                }
         }
-
+        
         // Add character settings for each char
         var addText = '\
 <script type="text/javascript">\
@@ -2266,7 +2379,7 @@ document.getElementById("charContainer"+val).style.display="block";\
                 addText += '<li title="' + charSettings[k].tooltip + '"><input maxlength="2" size="1" style="margin:4px; padding: 2px;" name="' + id + '" id="' + id + '" type="text" /><label class="' + charSettings[k].class + '" for="' + id + '">' + charSettings[k].title + '</label></li>';
             }
             addText += '</ul>'
-
+            
             // Add task list save buttons
             addText += '\
 <input id="save_tasklist' + i + '" type="button" class="button-green pure-button" value="Save Tasks" title="Saves current task list in script to this character">\
@@ -2278,13 +2391,13 @@ document.getElementById("charContainer"+val).style.display="block";\
 </div>\
 ';
         $("#settingsPanel form").append(addText);
-
+        
         // Add values to character input fields
         for (var i = 0; i < charSettings.length; i++) {
             var id = 'settings_' + charSettings[i].name;
             $('#' + id).val(settings[charSettings[i].name]);
         }
-
+        
         // Add code to tasklist buttons
         for (var i = 0; i < settings["charcount"]; i++) {
             $("#save_tasklist" + i).click(function () {
@@ -2294,7 +2407,7 @@ document.getElementById("charContainer"+val).style.display="block";\
                     GM_setValue("tasklist" + num, JSON.stringify(defaultTasklist));
                 }, 0);
             });
-
+            
             $("#clear_tasklist" + i).click(function () {
                 var num = this.id.replace("clear_tasklist", "");
                 charSettings["tasklist" + num] = "";
@@ -2303,7 +2416,7 @@ document.getElementById("charContainer"+val).style.display="block";\
                 }, 0);
             });
         }
-
+        
         // Add save/cancel buttons to panel
         $("#settingsPanel form").append('\
 <div id="settingsPanelButtonContainer">\
@@ -2311,16 +2424,16 @@ document.getElementById("charContainer"+val).style.display="block";\
 <input id="settings_close" class="button-yellow pure-button" type="button" value="Close">\
 <input id="settings_sca" class="button-red pure-button" type="button" value="Cycle SCA">\
 </div>');
-
+        
         // Add open settings button to page
         $("body").append('<div id="settingsButton"><img src="' + image_prefs + '" title="Click to show preferences" style="cursor: pointer; display: block;"></div>');
-
+        
         // Add pause button to page
         $("body").append('<div id="pauseButton"><img src="' + (settings["paused"] ? image_play : image_pause) + '" title="Click to ' + (settings["paused"] ? "resume" : "pause") + ' task script" style="cursor: pointer; display: block;"></div>');
-
+        
         // Add info pane
         $("body").append("<div id='prinfopane' class='header-newrelease'>");
-
+        
         // Add the javascript
         $("#settingsPanel").hide();
         $("#settingsButton").click(function () {
@@ -2334,7 +2447,7 @@ document.getElementById("charContainer"+val).style.display="block";\
             $("#settingsPanel").hide();
         });
         $("#pauseButton").click(PauseSettings);
-
+        
         // Use setTimeout to workaround permission issues when calling GM functions from main window
         $("#settings_save").click(function () {
             setTimeout(function () {
@@ -2347,7 +2460,7 @@ document.getElementById("charContainer"+val).style.display="block";\
             processSwordCoastDailies();
         });
         customRadio("radio_position");
-
+        
         $('#update-content-inventory-bags-0 .bag-header').waitUntilExists(function () {
             if ($('#update-content-inventory-bags-0 .bag-header div').length && !$('#update-content-inventory-bags-0 .bag-header div.autovendor').length) {
                 $('#update-content-inventory-bags-0 .bag-header').append('<div class="input-field button light autovendor"><div class="input-bg-left"></div><div class="input-bg-mid"></div><div class="input-bg-right"></div><button id="nwprofs-autovendor">Auto Vendor</button></div>');
@@ -2355,7 +2468,7 @@ document.getElementById("charContainer"+val).style.display="block";\
             }
         });
     }
-
+    
     function PauseSettings(_action) {
         if (_action != "pause" || _action != "unpause")
             _action = "toggle";
@@ -2372,10 +2485,10 @@ document.getElementById("charContainer"+val).style.display="block";\
         $("#pauseButton img").attr("src", (settings["paused"] ? image_play : image_pause));
         $("#pauseButton img").attr("title", "Click to " + (settings["paused"] ? "resume" : "pause") + " task script");
     }
-
+    
     function SaveSettings() {
         var charcount = settings["charcount"];
-
+        
         // Get each value from the UI
         for (var i = 0; i < settingnames.length; i++) {
             var name = settingnames[i].name;
@@ -2408,7 +2521,7 @@ document.getElementById("charContainer"+val).style.display="block";\
                 GM_setValue(name, value);
             } // Save to GM cache
         }
-
+        
         // Get character settings from UI
         for (var i = 0; i < charSettings.length; i++) {
             if (charSettings[i].type == 'void') {
@@ -2424,14 +2537,14 @@ document.getElementById("charContainer"+val).style.display="block";\
                 GM_setValue(name, value);
             } // Save to GM cache
         }
-
+        
         // If character numbers have changed reload page
         if (charcount != settings["charcount"]) {
             console.log("Reloading gateway to update character count");
             unsafeWindow.location.href = current_Gateway ; // edited by RottenMind
             return;
         }
-
+        
         // Delete all saved settings // MAC-NW: Not sure this could of worked before with how it was coded...
         if (settingwipe) {
             var keys = GM_listValues();
@@ -2440,7 +2553,7 @@ document.getElementById("charContainer"+val).style.display="block";\
                 GM_deleteValue(key);
             }
         }
-
+        
         // Close the panel
         $("#settingsButton").show();
         $("#pauseButton img").attr("src", (settings["paused"] ? image_play : image_pause));
@@ -2448,17 +2561,18 @@ document.getElementById("charContainer"+val).style.display="block";\
         $("#pauseButton").show();
         $("#settingsPanel").hide();
     }
-
+    
     function vendorJunk(evnt) {
-
         var _vendorItems = [];
         var _sellCount = 0;
-
-        if (settings["autovendor_kits"]) {
+        if (settings["autovendor_kits_altars_limit"]) {
             _vendorItems[_vendorItems.length] = {pattern: /^Item_Consumable_Skill/, limit: 50};
+            _vendorItems[_vendorItems.length] = {pattern: /^Item_Portable_Altar$/, limit: 80};
         }
-        /*if (settings["autovendor_altars"])
-         _vendorItems[_vendorItems.length] = {pattern: /^Item_Portable_Altar$/, limit: 80};*/ // removed for now
+        if (settings["autovendor_kits_altars_all"]) {
+            _vendorItems[_vendorItems.length] = {pattern: /^Item_Portable_Altar$/, limit: 0};
+            _vendorItems[_vendorItems.length] = {pattern: /^Item_Consumable_Skill/, limit: 0};
+        }
         if (settings["autovendor_rank1"]) {
             _vendorItems[_vendorItems.length] = {pattern: /^T1_Enchantment/, limit: 0};
             _vendorItems[_vendorItems.length] = {pattern: /^T1_Runestone/, limit: 0};
@@ -2466,6 +2580,10 @@ document.getElementById("charContainer"+val).style.display="block";\
         if (settings["autovendor_rank2"]) {
             _vendorItems[_vendorItems.length] = {pattern: /^T2_Enchantment/, limit: 0};
             _vendorItems[_vendorItems.length] = {pattern: /^T2_Runestone/, limit: 0};
+        }
+        if (settings["autovendor_rank3"]) {
+            _vendorItems[_vendorItems.length] = {pattern: /^T3_Enchantment/, limit: 0};
+            _vendorItems[_vendorItems.length] = {pattern: /^T3_Runestone/, limit: 0};
         }
         if (settings["autovendor_pots1"]) {
             _vendorItems[_vendorItems.length] = {
@@ -2499,10 +2617,12 @@ document.getElementById("charContainer"+val).style.display="block";\
             _vendorItems[_vendorItems.length] = {pattern: /^Object_Decoration_/, limit: 0};
             _vendorItems[_vendorItems.length] = {pattern: /_Green_T[1-5]_Unid$/, limit: 0}; // Unidentified Green Gear
         }
-        if (settings["autovendor_profresults"]) {
+        // edited by RottenMind
+        if (settings["autovendor_profresults"]) { 
             _vendorItems[_vendorItems.length] = {
                 pattern: /^Crafted_(Jewelcrafting_Waist_Offense_3|Jewelcrafting_Neck_Defense_3|Jewelcrafting_Waist_Defense_3|Med_Armorsmithing_T3_Chain_Armor_Set_1|Med_Armorsmithing_T3_Chain_Pants2|Med_Armorsmithing_T3_Chain_Shirt2|Med_Armorsmithing_T3_Chain_Helm_Set_1|Med_Armorsmithing_T3_Chain_Pants|Med_Armorsmithing_T3_Chain_Boots_Set_1|Hvy_Armorsmithing_T3_Plate_Armor_Set_1|Hvy_Armorsmithing_T3_Plate_Pants2|Hvy_Armorsmithing_T3_Plate_Shirt2|Hvy_Armorsmithing_T3_Plate_Helm_Set_1|Hvy_Armorsmithing_T3_Plate_Boots_Set_1|Leatherworking_T3_Leather_Armor_Set_1|Leatherworking_T3_Leather_Pants2|Leatherworking_T3_Leather_Shirt2|Leatherworking_T3_Leather_Helm_Set_1|Leatherworking_T3_Leather_Boots_Set_1|Tailoring_T3_Cloth_Armor_Set_3|Tailoring_T3_Cloth_Armor_Set_2|Tailoring_T3_Cloth_Armor_Set_1|Tailoring_T3_Cloth_Pants2_Set2|Tailoring_T3_Cloth_Shirt2|Tailoring_T3_Cloth_Helm_Set_1|Artificing_T3_Pactblade_Temptation_5|Artificing_T3_Icon_Virtuous_5|Weaponsmithing_T3_Dagger_4)$/, limit: 0 };
         }
+        // edited by RottenMind
         if (_vendorItems.length > 0) {
             console.log("Attempting to vendor selected items...");
             _sellCount = vendorItemsLimited(_vendorItems);
@@ -2515,13 +2635,13 @@ document.getElementById("charContainer"+val).style.display="block";\
             }
         }
     }
-
+    
     /** Start, Helpers added by users.
      * Adds fetures, options to base script and can be easily removed if needed
      * Add description so anyone can see if they can use Function somewhere
      * Use "brackets" around function start and end //yourname
      */
-//RottenMind, returns inventory space, use Inventory_bagspace(); gives current free bags slots, from MAC-NW function
+    //RottenMind, returns inventory space, use Inventory_bagspace(); gives current free bags slots, from MAC-NW function
     function Inventory_bagspace() {
         var _pbags = client.dataModel.model.ent.main.inventory.playerbags;
         var _bagUnused = 0;
@@ -2532,9 +2652,38 @@ document.getElementById("charContainer"+val).style.display="block";\
                 }
             });
         });
+        
         return _bagUnused;
     }
-//RottenMind
+    //RottenMind
+    
+    //RottenMind language selection, add settings "lang_GER", replace  button clikers "start task", "back", "optional assets", limitted support for RU/GER
+    function Start_task_lang() {
+        var enabledButton_EN = $("div.footer-body > div.input-field.button:not('.disabled') > button:contains('Start Task')");
+        var enabledButton_DE = $("div.footer-body > div.input-field.button:not('.disabled') > button:contains('Aufgabe beginnen')");
+        var enabledButton_RU = $("div.footer-body > div.input-field.button:not('.disabled') > button:contains('Начать поручение')");
+        if (settings["lang_DE"]) {return enabledButton_DE;}
+        else if (current_Gateway == "http://gateway.nw.ru.perfectworld.eu") {return enabledButton_RU;}
+            else {return enabledButton_EN;}
+    }
+    function Optional_Assets_lang() {
+        var Optional_Assets_EN = $("h3:contains('Optional Assets:')").closest("div").find("button");
+        var Optional_Assets_DE = $("h3:contains('Optionale Ressourcen:')").closest("div").find("button");
+        var Optional_Assets_RU = $("h3:contains('Дополнительные средства:')").closest("div").find("button");
+        if (settings["language_DE"]) {return Optional_Assets_DE;}
+        else if (current_Gateway == "http://gateway.nw.ru.perfectworld.eu") {return Optional_Assets_RU;}
+            else {return Optional_Assets_EN;}
+    }
+    function Back_lang() {
+        var Back_EN = $("div.footer-body > div.input-field.button > button:contains('Back')").click();
+        var Back_DE = $("div.footer-body > div.input-field.button > button:contains('Zurück')").click();
+        var Back_RU = $("div.footer-body > div.input-field.button > button:contains('Назад')").click();
+        if (settings["lang_DE"]) {return Back_DE;}
+        else if (current_Gateway == "http://gateway.nw.ru.perfectworld.eu") {return Back_RU;}
+            else {return Back_EN;}
+    }
+    // RottenMind
+    
     /** End, Helpers added by users.*/
     
     // Add the settings button and start a process timer
