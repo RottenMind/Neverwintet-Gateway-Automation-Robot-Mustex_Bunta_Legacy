@@ -1548,7 +1548,7 @@ function _select_Gateway() { // Check for Gateway used to
             buttonListIn[i].click();
             WaitForState("").done(function () {
                 
-                var $assets = $("div.modal-item-list a").has("img[src*='_Resource_'],img[src*='_Assets_'],img[src*='_Tools_'],img[src*='_Tool_']"); // edited by RottenMind
+            var $assets = $("div.modal-item-list a").has("img[src*='_Resource_'],img[src*='_Assets_'],img[src*='_Tools_'],img[src*='_Tool_'],img[src*='_Jewelersloupe_'],img[src*='_Bezelpusher_']"); //edited by RottenMind
             var $persons = $("div.modal-item-list a").has("img[src*='_Follower_']");
             var quality = [".Special", ".Gold", ".Silver", ".Bronze"];
             var ic, $it;
