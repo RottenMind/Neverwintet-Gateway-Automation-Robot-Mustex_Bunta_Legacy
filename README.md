@@ -8,7 +8,7 @@ Neverwinter gateway - Professions Robot
 + refines AD
 + Transfers AD to one chracter (account)
 + Open rewardchest(99) per session
-+ Sell item from inventory(current list sell, T1 - 3 healing potions, Lockbox, Rank1 - 2 enchants, Portable altars)
++ Sell item from inventory(current list UI controlled, T1 - T3 healing potions, Lockbox, Rank1 - 3 enchants, Portable altars/skillkits)
 
 Contains helper script what add´s,
 
