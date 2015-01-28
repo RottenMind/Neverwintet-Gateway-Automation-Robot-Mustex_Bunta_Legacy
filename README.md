@@ -3,6 +3,7 @@ Neverwintet-Gateway-Automation-Robot-Mustex_Bunta_Legacy
 
 Neverwinter gateway - Professions Robot 
 
++ work with RU gateway
 + fills professions slots
 + level professions
 + refines AD
