@@ -972,7 +972,7 @@ function _select_Gateway() { // Check for Gateway used to
             1: ["Alchemy_Tier1_Experiment_Rank2", "Alchemy_Tier1_Experimentation_Rank1"],
             2: ["Alchemy_Tier1_Experiment_Rank3", "Alchemy_Tier1_Experimentation_Rank2"],
             3: ["Alchemy_Tier1_Experiment_Rank4", "Alchemy_Tier1_Experimentation_Rank3"],
-            4: ["Alchemy_Tier1_Experiment_Rank5", "Alchemy_Tier1_Experimentation_Rank4","Alchemy_Tier1_Aquavitae"],
+            4: ["Alchemy_Tier1_Experiment_Rank5", "Alchemy_Tier1_Experimentation_Rank4"],
             5: ["Alchemy_Tier1_Experiment_Rank6", "Alchemy_Tier1_Experimentation_Rank5"],
             6: ["Alchemy_Tier1_Experiment_Rank7", "Alchemy_Tier1_Experimentation_Rank6"],
             7: ["Alchemy_Tier2_Experiment_Rank08", "Alchemy_Tier2_Experimentation_Rank07"],
@@ -1560,13 +1560,13 @@ function _select_Gateway() { // Check for Gateway used to
             return false;
         }
 
-        // Use more efficient Empowered task for Aqua Vitae/ Aqua Regia if available. Crafting_Resource_Aquaregia
-        if (searchItem == "Crafting_Resource_Aquavitae" || "Crafting_Resource_Aquaregia" && taskList.length > 1) {
+        // Use more efficient Empowered task for Aqua Vitae/ Aqua Regia if available.
+        if (searchItem == "Crafting_Resource_Aquavitae" && taskList.length > 1) {
             taskList.shift();
         }
-        /*if (searchItem == "Crafting_Resource_Aquaregia" && taskList.length > 1) {
-         taskList.shift();
-         }*/
+        if (searchItem == "Crafting_Resource_Aquaregia" && taskList.length > 1) {
+            taskList.shift();
+        }
 
         // Should really only be one result now but lets iterate through anyway.
         for (var i = 0; i < taskList.length; i++) {
