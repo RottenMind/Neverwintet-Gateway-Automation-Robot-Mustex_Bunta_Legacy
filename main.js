@@ -2036,6 +2036,9 @@ function _select_Gateway() { // Check for Gateway used to
         if (searchItem == "Crafting_Resource_Aquavitae" && taskList.length > 1) {
             taskList.shift();
         }
+        if (searchItem == "Crafting_Resource_Aquaregia" && taskList.length > 1) {
+            taskList.shift();
+        }
 
         // Should really only be one result now but lets iterate through anyway.
         for (var i = 0; i < taskList.length; i++) {
@@ -2330,7 +2333,7 @@ function _select_Gateway() { // Check for Gateway used to
 		//var _tmpBag = [];
 		var _profitems = [];
 		// Pattern for items to leave out of auto vendoring (safeguard)
-		var _excludeItems = /(^Crafting_Resource_(Charcoal|Rocksalt|Spool_Thread|Porridge|Solvent|Brimstone|Coal|Moonseasalt|Quicksilver|Spool_Threadsilk)$|Crafting_Asset|Craftsman|Aqua|Vitriol|Residuum|Shard|Crystal|District_Map|Local_Map|Bill_Of_Sale|Refugee|Asset_Tool|Tool|Gemfood|Gem_Upgrade_Resource|Crafting_Resource_Elemental|Artifact|Hoard|Coffer|Fuse|Ward|Preservation|Armor_Enhancement|Weapon_Enhancement|T[5-9]_Enchantment|T[5-9]_Runestones|T10_Enchantment|T10_Runestones|4c_Personal|Item_Potion_Companion_Xp|Gateway_Rewardpack|Consumable_Id_Scroll|Dungeon_Delve_Key)/; // edited by RottenMind 17.01.2015
+		var _excludeItems = /(^Crafting_Resource_(Charcoal|Rocksalt|Spool_Thread|Porridge|Solvent|Brimstone|Coal|Moonseasalt|Quicksilver|Spool_Threadsilk|Clues_Bandit_Hq|Clothscraps_T4|Clothbolt_T4)$|Potion_Potency|Potion_Protection|Taffeta|Crafting_Asset|Craftsman|Aqua|Vitriol|Residuum|Shard|Crystal|District_Map|Local_Map|Bill_Of_Sale|Refugee|Asset_Tool|Tool|Gemfood|Gem_Upgrade_Resource|Crafting_Resource_Elemental|Elemental|Artifact|Hoard|Coffer|Fuse|Ward|Preservation|Armor_Enhancement|Weapon_Enhancement|T[5-9]_Enchantment|T[5-9]_Runestones|T10_Enchantment|T10_Runestones|4c_Personal|Item_Potion_Companion_Xp|Gateway_Rewardpack|Consumable_Id_Scroll|Dungeon_Delve_Key)/; // edited by RottenMind 08.03.2015
 		if (settings["autovendor_profresults"]) {
 			/** Profession leveling result item cleanup logic for T1-4 crafted results
 			 * Created by RM on 14.1.2015.
@@ -2399,7 +2402,7 @@ function _select_Gateway() { // Check for Gateway used to
 					//  _bagUnused++;
 				}
 				// Match items to exclude from auto vendoring, dont add to _tmpBag: Exclude pattern list - bound - Epic Quality - Blue Quality - Green Quality(might cause problems)
-				else if (_excludeItems.test(slot.name) || slot.bound || slot.rarity == "Special" || slot.rarity == "Gold") { // || slot.rarity == "Silver") {
+				else if (_excludeItems.test(slot.name) || slot.bound || slot.rarity == "Special" || slot.rarity == "Gold" || slot.rarity == "Silver") {
 					// _bagUsed++;
 				}
 				// Match everything else
