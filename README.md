@@ -1,4 +1,4 @@
-Neverwintet-Gateway-Automation-Robot-Mustex_Bunta_Legacy
+Neverwinter Gateway Automation Robot, Mustex_Bunta_Legacy
 ========================================================
 
 Neverwinter gateway - Professions Robot 
@@ -23,7 +23,7 @@ Website, https://greasyfork.org/scripts/7061-neverwinter-gateway-professions-rob
 Script is tested with,
 ----------------------
 + Portable Chrome + Tampermonkey (updated versions)
-+ Opera + Tampermonkey (updated versions)
+
 
 if you find that script works with some other browser + xxxMonkey feel free to tell it.
 
@@ -43,9 +43,8 @@ It is then Modified by Bunta,
 
 https://greasyfork.org/en/scripts/771-neverwinter-gateway-professions-robot 
 
-Now script get lotsa changes and are modified by community Devs and Contributors, 
+Script ismodified by community Devs and Contributors, 
 but script is still Mustex/Bunta´s Neverwinter Gateway - Professions Robot and they are original Authors. 
 
-If you like see new features, new tasklist, you have problems with script or anything script related feel free to write and ask, but remember that changes are made by users who have skill to do so. I just try keep script updated and harmful changes away from it.
 
 If you like it and want give away money, please Donate to original Authors.
