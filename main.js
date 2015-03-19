@@ -18,7 +18,7 @@
  - Kakoura, Nametaken, rotten_mind, Frankescript, dlebedynskyi
  */
 
-// @version 10.06.01
+// @version 1.10.06.01
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -27,7 +27,7 @@
 // ==/UserScript==
 
 /* RELEASE NOTES
- 10.06.01
+ 1.10.06.01
  - Version number reset, back to old
  1.10.5PreMod6.04
  - Leadership task updates
