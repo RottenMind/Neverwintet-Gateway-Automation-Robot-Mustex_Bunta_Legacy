@@ -1467,7 +1467,7 @@ time / (1 + speedBonus)
         {name: 'banktransmin', title: 'Min AD for Transfer', def: '5000', type: 'text', tooltip: 'Enter minimum AD limit for it to be cosidered for transfer off a character'},
         {name: 'bankcharmin', title: 'Min Character balance', def: '600', type: 'text', tooltip: 'Enter the amount of AD to always keep available on characters'},
         {name: 'banktransrate', title: 'AD per Zen Rate (in zen)', def: '300', type: 'text', tooltip: 'Enter default rate to use for transfering through ZEX'},
-        {name: 'charcount', title: 'Enter number of characters to use (Save and Apply to update settings form)', def: '3', type: 'text', tooltip: 'Enter number of characters to use (Save and Apply to update settings form)', border: true},
+        {name: 'charcount', title: 'Enter number of characters to use (Save and Apply to update settings form)', def: '1', type: 'text', tooltip: 'Enter number of characters to use (Save and Apply to update settings form)', border: true},
         // MAC-NW
     ];
 
