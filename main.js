@@ -18,7 +18,7 @@
  - Kakoura, Nametaken, rotten_mind, Frankescript, dlebedynskyi
  */
 
-// @version 1.10.06.01
+// @version 1.10.5.01
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -27,22 +27,27 @@
 // ==/UserScript==
 
 /* RELEASE NOTES
- 1.10.06.01
- - Version number reset, back to old
+ 1.10.5.01
+ - added error trap
+ - Jewelcrafting tasklist 20 - 25
+ - Leadership_XP mining_claims limit up 1000
+ 1.10.5
+ - Mod6 additions
+ - Vendor list updated
  1.10.5PreMod6.04
  - Leadership task updates
  1.10.5PreMod6.03
-  - exclude list update
+ - exclude list update
  1.10.5PreMod6.02
-  - added task selection if specific item not in inventory "Mining claim" by WloBep
-  - added loop counter to prevent infinite loop when "Start task" -bugged
+ - added task selection if specific item not in inventory "Mining claim" by WloBep
+ - added loop counter to prevent infinite loop when "Start task" -bugged
  1.10.5.1
-  - tasklist edited
-  - some other changes by  user "Glowing Crystalline Entity"
+ - tasklist edited
+ - some other changes by  user "Glowing Crystalline Entity"
  1.10.5
-  - Mod6 professions added
-  - added Empowered Aquaregia
-  - ZAX FIX
+ - Mod6 professions added
+ - added Empowered Aquaregia
+ - ZAX FIX
  1.10.4
  - profession sell filter update
  1.10.3
@@ -380,8 +385,8 @@ function _select_Gateway() { // Check for Gateway used to
     var reload_timer = setInterval(function () {
         if (!s_paused) {
             if (startedTask["lastTaskCount"] >= 20) {
-               unsafeWindow.location.href = current_Gateway;
-               return;
+                unsafeWindow.location.href = current_Gateway;
+                return;
             }
             if (loading_reset) {
                 var loading_date = new Date();
@@ -672,119 +677,119 @@ function _select_Gateway() { // Check for Gateway used to
             24: ["Leadership_Tier3_13_Patrol","Leadership_Tier4_22r_Capturebandithq","Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
             25: ["Leadership_Tier3_13_Patrol","Leadership_Tier4_25r_Huntexperiment","Leadership_Tier4_22r_Capturebandithq","Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_25_Battleelementalcultists", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
 
-/*
+            /*
 
-"Leadership_Tier1_2_Guardduty"                                 0/2   ->  0
-"Leadership_Tier1_4_Protect"                                 100/2   -> 50
-"Leadership_Tier2_8_Protect"                                 200/6   -> 33.33
-"Leadership_Tier2_10_Battle"                                 400/6   -> 66.66
-"Leadership_Tier3_16_Fight"                                  400/6   -> 66.66
+             "Leadership_Tier1_2_Guardduty"                                 0/2   ->  0
+             "Leadership_Tier1_4_Protect"                                 100/2   -> 50
+             "Leadership_Tier2_8_Protect"                                 200/6   -> 33.33
+             "Leadership_Tier2_10_Battle"                                 400/6   -> 66.66
+             "Leadership_Tier3_16_Fight"                                  400/6   -> 66.66
 
-"Leadership_Tier3_18_Resell", 3x "Leadership_Tier2_8_Protect"  1000/26 -> 38.46
-"Leadership_Tier3_18_Resell"                                 400/8   -> 50
-"Leadership_Tier2_8_Protect"                                 200/6   -> 33.33
+             "Leadership_Tier3_18_Resell", 3x "Leadership_Tier2_8_Protect"  1000/26 -> 38.46
+             "Leadership_Tier3_18_Resell"                                 400/8   -> 50
+             "Leadership_Tier2_8_Protect"                                 200/6   -> 33.33
 
-"Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", 3x "Leadership_Tier1_5_Explore"  800/16  -> 50
-"Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart"      800/10  -> 80
-"Leadership_Tier2_12_Taxes"                                  800/8   -> 100
-"Leadership_Tier2_9_Chart"                                     0/2   -> 0
-"Leadership_Tier1_5_Explore"                                   0/2   -> 0
+             "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", 3x "Leadership_Tier1_5_Explore"  800/16  -> 50
+             "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart"      800/10  -> 80
+             "Leadership_Tier2_12_Taxes"                                  800/8   -> 100
+             "Leadership_Tier2_9_Chart"                                     0/2   -> 0
+             "Leadership_Tier1_5_Explore"                                   0/2   -> 0
 
-2x "Leadership_Tier2_12_Taxes", Leadership_Tier2_10r_Seekmaps  1600/22   -> 72.72
-"Leadership_Tier2_12_Taxes"                                      800/8   -> 100
-"Leadership_Tier2_10r_Seekmaps"                                    0/6   -> 0  (2x District Maps) (1x optional)
+             2x "Leadership_Tier2_12_Taxes", Leadership_Tier2_10r_Seekmaps  1600/22   -> 72.72
+             "Leadership_Tier2_12_Taxes"                                      800/8   -> 100
+             "Leadership_Tier2_10r_Seekmaps"                                    0/6   -> 0  (2x District Maps) (1x optional)
 
-"Leadership_Tier2_12_Taxes", Leadership_Tier2_9_Chart, Leadership_Tier1_6r_Protectsurvey   800/18 -> 44.44
-"Leadership_Tier2_12_Taxes", Leadership_Tier2_9_Chart                                      800/16 -> 50
-Leadership_Tier2_12_Taxes"                                         800/8 -> 100
-"Leadership_Tier2_9_Chart"                                         0/2   -> 0
-Leadership_Tier1_6r_Protectsurvey                                    0/8 -> 0 (3x Local Map)
+             "Leadership_Tier2_12_Taxes", Leadership_Tier2_9_Chart, Leadership_Tier1_6r_Protectsurvey   800/18 -> 44.44
+             "Leadership_Tier2_12_Taxes", Leadership_Tier2_9_Chart                                      800/16 -> 50
+             Leadership_Tier2_12_Taxes"                                         800/8 -> 100
+             "Leadership_Tier2_9_Chart"                                         0/2   -> 0
+             Leadership_Tier1_6r_Protectsurvey                                    0/8 -> 0 (3x Local Map)
 
-Leadership_Tier3_17_Deliver, 3x Leadership_Tier3_13_Patrol   1200/20 -> 60
-"Leadership_Tier3_17_Deliver"                                1200/8  -> 150 (No, because we can get a purple chest if we use this with Leadership_Tier3_20r_Master3)
-Leadership_Tier3_13_Patrol                                      0/4  -> 0
+             Leadership_Tier3_17_Deliver, 3x Leadership_Tier3_13_Patrol   1200/20 -> 60
+             "Leadership_Tier3_17_Deliver"                                1200/8  -> 150 (No, because we can get a purple chest if we use this with Leadership_Tier3_20r_Master3)
+             Leadership_Tier3_13_Patrol                                      0/4  -> 0
 
-// Has an asset slot... so marginally better if you have better people....
-"Leadership_Tier1_4r_Gatherdiamonds"                           400/8 -> 50 (1x optional)
+             // Has an asset slot... so marginally better if you have better people....
+             "Leadership_Tier1_4r_Gatherdiamonds"                           400/8 -> 50 (1x optional)
 
-Leadership_Tier3_13r_Protectdiamonds, 1x Leadership_Tier3_13_Patrol  1600/16 -> 100
-Leadership_Tier3_13r_Protectdiamonds                                 1600/12 -> 133.33
-Leadership_Tier3_13_Patrol                                              0/4  -> 0
+             Leadership_Tier3_13r_Protectdiamonds, 1x Leadership_Tier3_13_Patrol  1600/16 -> 100
+             Leadership_Tier3_13r_Protectdiamonds                                 1600/12 -> 133.33
+             Leadership_Tier3_13_Patrol                                              0/4  -> 0
 
-Leadership_Tier2_8r_Givehome                                          800/12 -> 66.66  (Barrel of Goods)
+             Leadership_Tier2_8r_Givehome                                          800/12 -> 66.66  (Barrel of Goods)
 
-"Leadership_Tier3_15r_Raidtreasury"                                    400/8 -> 50 (1x optional) (blue chest)
-Leadership_Tier3_14_Assemble                                             0/4 -> 0
+             "Leadership_Tier3_15r_Raidtreasury"                                    400/8 -> 50 (1x optional) (blue chest)
+             Leadership_Tier3_14_Assemble                                             0/4 -> 0
 
-Leadership_Tier3_19r_Siegekeep, 3x Leadership_Tier3_19_Acquire       1600/48 ->  33.33 (1x optional) (purple chest)
-Leadership_Tier3_19r_Siegekeep                                       1600/12 -> 133.33 (1x optional) (purple chest)
-Leadership_Tier3_19_Acquire                                             0/12 -> 0
+             Leadership_Tier3_19r_Siegekeep, 3x Leadership_Tier3_19_Acquire       1600/48 ->  33.33 (1x optional) (purple chest)
+             Leadership_Tier3_19r_Siegekeep                                       1600/12 -> 133.33 (1x optional) (purple chest)
+             Leadership_Tier3_19_Acquire                                             0/12 -> 0
 
-Leadership_Tier3_20r_Master1, 1x Leadership_Tier3_14_Assemble, 3x Build Shelters   1600/52 ->  30.77
-Leadership_Tier3_20r_Master1, 1x Leadership_Tier3_14_Assemble                      1600/16 -> 100
-Leadership_Tier3_20r_Master1                                                       1600/12 -> 133.33
-Leadership_Tier3_14_Assemble                                                          0/4  -> 0
-Build Shelters (L16)                                                                  0/12 -> 0
+             Leadership_Tier3_20r_Master1, 1x Leadership_Tier3_14_Assemble, 3x Build Shelters   1600/52 ->  30.77
+             Leadership_Tier3_20r_Master1, 1x Leadership_Tier3_14_Assemble                      1600/16 -> 100
+             Leadership_Tier3_20r_Master1                                                       1600/12 -> 133.33
+             Leadership_Tier3_14_Assemble                                                          0/4  -> 0
+             Build Shelters (L16)                                                                  0/12 -> 0
 
-Leadership_Tier3_20r_Master2, 1x Leadership_Tier3_19_Acquire, 3x Build Shelters    1600/60 ->  26.66
-Leadership_Tier3_20r_Master2, 1x Leadership_Tier3_19_Acquire,                      1600/24 ->  66.66
-Leadership_Tier3_20r_Master2                                                       1600/12 -> 133.33
-Leadership_Tier3_19_Acquire                                                           0/12 -> 0
-Build Shelters (L16)                                                                  0/12 -> 0
+             Leadership_Tier3_20r_Master2, 1x Leadership_Tier3_19_Acquire, 3x Build Shelters    1600/60 ->  26.66
+             Leadership_Tier3_20r_Master2, 1x Leadership_Tier3_19_Acquire,                      1600/24 ->  66.66
+             Leadership_Tier3_20r_Master2                                                       1600/12 -> 133.33
+             Leadership_Tier3_19_Acquire                                                           0/12 -> 0
+             Build Shelters (L16)                                                                  0/12 -> 0
 
-Leadership_Tier3_20r_Master3, 1x Leadership_Tier3_13_Patrol, 3x Build Shelters      1600/52 ->  30.77
-Leadership_Tier3_20r_Master3  1x Leadership_Tier3_13_Patrol                         1600/16 -> 100
-Leadership_Tier3_20r_Master3                                                        1600/12 -> 133.33
-Leadership_Tier3_13_Patrol                                                              0/4 -> 0
-Build Shelters (L16)                                                                   0/12 -> 0
+             Leadership_Tier3_20r_Master3, 1x Leadership_Tier3_13_Patrol, 3x Build Shelters      1600/52 ->  30.77
+             Leadership_Tier3_20r_Master3  1x Leadership_Tier3_13_Patrol                         1600/16 -> 100
+             Leadership_Tier3_20r_Master3                                                        1600/12 -> 133.33
+             Leadership_Tier3_13_Patrol                                                              0/4 -> 0
+             Build Shelters (L16)                                                                   0/12 -> 0
 
-Leadership_Tier3_20_Destroy                                                         1600/12 -> 133.33
+             Leadership_Tier3_20_Destroy                                                         1600/12 -> 133.33
 
-Leadership_Tier3_16r_Buildshelters   12hr -> purple chest, Mark of Gratitude
-15 Refugees
-
-
-/professions-tasks/Leadership/Leadership_Tier3_15_Rescue  0/8 -> 8
-/professions-tasks/Leadership/Leadership_Tier2_8r_Helpneedy 
-
-/professions-tasks/Leadership/Leadership_Tier2_11r_Escortgoods    400/12 -> 33.33  (2x Bill Of Sale)
+             Leadership_Tier3_16r_Buildshelters   12hr -> purple chest, Mark of Gratitude
+             15 Refugees
 
 
-*/
+             /professions-tasks/Leadership/Leadership_Tier3_15_Rescue  0/8 -> 8
+             /professions-tasks/Leadership/Leadership_Tier2_8r_Helpneedy
+
+             /professions-tasks/Leadership/Leadership_Tier2_11r_Escortgoods    400/12 -> 33.33  (2x Bill Of Sale)
 
 
-/*
-            0: ["Leadership_Tier0_Intro_1"],
-            1: ["Leadership_Tier0_Intro_5", "Leadership_Tier0_Intro_4", "Leadership_Tier0_Intro_3", "Leadership_Tier0_Intro_2"],
-            2: ["Leadership_Tier1_Feedtheneedy", "Leadership_Tier1_2_Guardduty", "Leadership_Tier1_2_Training"],
-            3: ["Leadership_Tier1_Feedtheneedy", "Leadership_Tier1_2_Guardduty", "Leadership_Tier1_2_Training"],
-            4: ["Leadership_Tier1_Feedtheneedy", "Leadership_Tier1_4_Protect", "Leadership_Tier1_2_Guardduty", "Leadership_Tier1_2_Training"],
-            5: ["Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore", "Leadership_Tier1_2_Guardduty"],
-            6: ["Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore", "Leadership_Tier1_2_Guardduty"],
-            7: ["Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore", "Leadership_Tier1_2_Guardduty"],
-            8: ["Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore", "Leadership_Tier1_2_Guardduty"],
-            9: ["Leadership_Tier1_4_Protect", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            // Begin prioritizing "Battle Undead"
-            10: ["Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            11: ["Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            12: ["Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            // Add "protect diamonds rare" and the patrol quest as a backup
-            13: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            14: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            15: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            // AD Production mode: Spellplague + Battle Undead
-            16: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            17: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_17_Deliver", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            18: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_17_Deliver", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            19: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_17_Deliver", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            // 20
-            20: ["Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            21: ["Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            22: ["Leadership_Tier4_22r_Capturebandithq","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            23: ["Leadership_Tier4_22r_Capturebandithq","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            24: ["Leadership_Tier4_22r_Capturebandithq","Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            25: ["Leadership_Tier4_25r_Huntexperiment","Leadership_Tier4_22r_Capturebandithq","Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_25_Battleelementalcultists", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-*/
+             */
+
+
+            /*
+             0: ["Leadership_Tier0_Intro_1"],
+             1: ["Leadership_Tier0_Intro_5", "Leadership_Tier0_Intro_4", "Leadership_Tier0_Intro_3", "Leadership_Tier0_Intro_2"],
+             2: ["Leadership_Tier1_Feedtheneedy", "Leadership_Tier1_2_Guardduty", "Leadership_Tier1_2_Training"],
+             3: ["Leadership_Tier1_Feedtheneedy", "Leadership_Tier1_2_Guardduty", "Leadership_Tier1_2_Training"],
+             4: ["Leadership_Tier1_Feedtheneedy", "Leadership_Tier1_4_Protect", "Leadership_Tier1_2_Guardduty", "Leadership_Tier1_2_Training"],
+             5: ["Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore", "Leadership_Tier1_2_Guardduty"],
+             6: ["Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore", "Leadership_Tier1_2_Guardduty"],
+             7: ["Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore", "Leadership_Tier1_2_Guardduty"],
+             8: ["Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore", "Leadership_Tier1_2_Guardduty"],
+             9: ["Leadership_Tier1_4_Protect", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             // Begin prioritizing "Battle Undead"
+             10: ["Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             11: ["Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             12: ["Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             // Add "protect diamonds rare" and the patrol quest as a backup
+             13: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             14: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             15: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4_Protect", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             // AD Production mode: Spellplague + Battle Undead
+             16: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             17: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_17_Deliver", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             18: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_17_Deliver", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             19: ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_17_Deliver", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             // 20
+             20: ["Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             21: ["Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             22: ["Leadership_Tier4_22r_Capturebandithq","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             23: ["Leadership_Tier4_22r_Capturebandithq","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             24: ["Leadership_Tier4_22r_Capturebandithq","Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             25: ["Leadership_Tier4_25r_Huntexperiment","Leadership_Tier4_22r_Capturebandithq","Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_25_Battleelementalcultists", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+             */
 
         },
     };
@@ -794,20 +799,20 @@ Leadership_Tier3_16r_Buildshelters   12hr -> purple chest, Mark of Gratitude
         taskName: "Leadership",
         level: {
 
-/* Info here isn't reflected in list below as yet.
-Leadership_Tier1_Feedtheneedy Exp5/0.166 -> 30
-Leadership_Tier1_2_Training   Exp80/4    -> 20
-Leadership_Tier1_2_Guardduty  Exp40/2    -> 20
-Leadership_Tier1_4_Protect    Exp40/2    -> 20
-Leadership_Tier1_5_Explore    Exp40/2    -> 20
-Leadership_Tier2_7_Training   Exp160/8   -> 20
-Leadership_Tier2_7_Raid       Exp80/4    -> 20
-Leadership_Tier2_9_Chart      Exp80/2    -> 40
-Leadership_Tier2_9_Chart, 3x Leadership_Tier1_5_Explore      Exp200/8    -> 25
-Leadership_Tier3_13_Training  Exp240/8   -> 30
-Leadership_Tier3_13_Patrol    Exp120/4   -> 30
-Leadership_Tier3_14_Assemble  Exp120/4   -> 30
-*/
+            /* Info here isn't reflected in list below as yet.
+             Leadership_Tier1_Feedtheneedy Exp5/0.166 -> 30
+             Leadership_Tier1_2_Training   Exp80/4    -> 20
+             Leadership_Tier1_2_Guardduty  Exp40/2    -> 20
+             Leadership_Tier1_4_Protect    Exp40/2    -> 20
+             Leadership_Tier1_5_Explore    Exp40/2    -> 20
+             Leadership_Tier2_7_Training   Exp160/8   -> 20
+             Leadership_Tier2_7_Raid       Exp80/4    -> 20
+             Leadership_Tier2_9_Chart      Exp80/2    -> 40
+             Leadership_Tier2_9_Chart, 3x Leadership_Tier1_5_Explore      Exp200/8    -> 25
+             Leadership_Tier3_13_Training  Exp240/8   -> 30
+             Leadership_Tier3_13_Patrol    Exp120/4   -> 30
+             Leadership_Tier3_14_Assemble  Exp120/4   -> 30
+             */
 
 
             0: ["Leadership_Tier0_Intro_1"],
@@ -844,12 +849,12 @@ Leadership_Tier3_14_Assemble  Exp120/4   -> 30
         taskListName: "WinterEvent",
         taskName: "WinterEvent",
         level: {
-/*
-        0:["Event_Winter_Tier1_Heros_Feast, Event_Winter_Tier1_Lightwine, Event_Winter_Tier1_Sparkliest_Gem"],
-        1:["Event_Winter_Tier1_Heros_Feast, Event_Winter_Tier1_Lightwine, Event_Winter_Tier1_Sparkliest_Gem"],
-        2:["Event_Winter_Tier1_Heros_Feast, Event_Winter_Tier1_Lightwine, Event_Winter_Tier1_Sparkliest_Gem"],
-        3:["Event_Winter_Tier1_Heros_Feast, Event_Winter_Tier1_Lightwine, Event_Winter_Tier1_Sparkliest_Gem"],
-*/
+            /*
+             0:["Event_Winter_Tier1_Heros_Feast, Event_Winter_Tier1_Lightwine, Event_Winter_Tier1_Sparkliest_Gem"],
+             1:["Event_Winter_Tier1_Heros_Feast, Event_Winter_Tier1_Lightwine, Event_Winter_Tier1_Sparkliest_Gem"],
+             2:["Event_Winter_Tier1_Heros_Feast, Event_Winter_Tier1_Lightwine, Event_Winter_Tier1_Sparkliest_Gem"],
+             3:["Event_Winter_Tier1_Heros_Feast, Event_Winter_Tier1_Lightwine, Event_Winter_Tier1_Sparkliest_Gem"],
+             */
 
             0: ["Event_Winter_Tier0_Intro"],
             1: ["Event_Winter_Tier1_Rankup", /*"Event_Winter_Tier1_Shiny_Lure",*/"Event_Winter_Tier1_Refine", "Event_Winter_Tier1_Gather"],
@@ -862,19 +867,19 @@ Leadership_Tier3_14_Assemble  Exp120/4   -> 30
         taskListName: "Event_Siege",
         taskName: "Event_Siege",
         level: {
-        0:["Event_Siege_Tier0_Intro"], // Hire a Siege Master
-        1:["Event_Siege_Tier1_Donate_Majorinjury", "Event_Siege_Tier1_Donate_Injury", "Event_Siege_Tier1_Donate_Resources_T3", "Event_Siege_Tier1_Donate_Resources_T2"],
-/*
-            0: ["Event_Siege_Tier0_Intro"], // Hire a Siege Master
-            //1:["Event_Siege_Tier1_Donate_Minorinjury"], // Create Defense Supplies from Minor Injury Kits
-            //1:["Event_Siege_Tier1_Donate_Injury"], // Create Defense Supplies from Injury Kits
-            //1:["Event_Siege_Tier1_Donate_Majorinjury"], // Create Defense Supplies from Major Injury Kits
-            //1:["Event_Siege_Tier1_Donate_Altar_10"], // Create Defense Supplies from 10 Portable Altars
-            //1:["Event_Siege_Tier1_Donate_Altar_50"], // Create Defense Supplies from 50 Portable Altars
-            //1:["Event_Siege_Tier1_Donate_Resources_T2"], // Create Defense Supplies from Tier 2 crafting resources
-            //1:["Event_Siege_Tier1_Donate_Resources_T3"], // Create Defense Supplies from Tier 3 crafting resources
-            1: ["Event_Siege_Tier1_Donate_Resources_T3", "Event_Siege_Tier1_Donate_Resources_T2", "Event_Siege_Tier1_Donate_Minorinjury", "Event_Siege_Tier1_Donate_Injury", "Event_Siege_Tier1_Donate_Majorinjury", "Event_Siege_Tier1_Donate_Altar_10"],
-*/
+            0:["Event_Siege_Tier0_Intro"], // Hire a Siege Master
+            1:["Event_Siege_Tier1_Donate_Majorinjury", "Event_Siege_Tier1_Donate_Injury", "Event_Siege_Tier1_Donate_Resources_T3", "Event_Siege_Tier1_Donate_Resources_T2"],
+            /*
+             0: ["Event_Siege_Tier0_Intro"], // Hire a Siege Master
+             //1:["Event_Siege_Tier1_Donate_Minorinjury"], // Create Defense Supplies from Minor Injury Kits
+             //1:["Event_Siege_Tier1_Donate_Injury"], // Create Defense Supplies from Injury Kits
+             //1:["Event_Siege_Tier1_Donate_Majorinjury"], // Create Defense Supplies from Major Injury Kits
+             //1:["Event_Siege_Tier1_Donate_Altar_10"], // Create Defense Supplies from 10 Portable Altars
+             //1:["Event_Siege_Tier1_Donate_Altar_50"], // Create Defense Supplies from 50 Portable Altars
+             //1:["Event_Siege_Tier1_Donate_Resources_T2"], // Create Defense Supplies from Tier 2 crafting resources
+             //1:["Event_Siege_Tier1_Donate_Resources_T3"], // Create Defense Supplies from Tier 3 crafting resources
+             1: ["Event_Siege_Tier1_Donate_Resources_T3", "Event_Siege_Tier1_Donate_Resources_T2", "Event_Siege_Tier1_Donate_Minorinjury", "Event_Siege_Tier1_Donate_Injury", "Event_Siege_Tier1_Donate_Majorinjury", "Event_Siege_Tier1_Donate_Altar_10"],
+             */
         },
     };
 
@@ -897,7 +902,7 @@ Leadership_Tier3_14_Assemble  Exp120/4   -> 30
         taskListName: "Jewelcrafting",
         taskName: "Jewelcrafting",
         level: {
-           // Gather Mithral Ore and Exotic Pelts (14): Jewelcrafting_Tier3_Gather_Basic,
+            // Gather Mithral Ore and Exotic Pelts (14): Jewelcrafting_Tier3_Gather_Basic,
             // Semi-Precious Gem and Tough Leather Strip Crafting (7): Jewelcrafting_Tier2_Refine_Basic,
             // Gather High Quality Iron Ore and Tough Pelts (7): Jewelcrafting_Tier2_Gather_Basic, 
             // Craft Raw Gems and Simple Leather Strips (1): Jewelcrafting_Tier1_Refine_Basic,
@@ -929,23 +934,22 @@ Leadership_Tier3_14_Assemble  Exp120/4   -> 30
             22: ["Jewelcrafting_Tier3_Neck_Defense_3", "Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
             23: ["Jewelcrafting_Tier3_Neck_Defense_3", "Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
             24: ["Jewelcrafting_Tier3_Neck_Defense_3", "Jewelcrafting_Tier3_Waist_Defense_3", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
-            25: ["Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
+            25: ["Jewelcrafting_Tier2_Refine_Basic", "Jewelcrafting_Tier1_Refine_Basic"],
 
+            /*
 
-/*
+             Jewelcrafting_Tier3_Gather_Basic         60/30 -> 2
+             Jewelcrafting_Tier3_Gather_Basic_Mass  800/480 -> 1.66
 
-Jewelcrafting_Tier3_Gather_Basic         60/30 -> 2
-Jewelcrafting_Tier3_Gather_Basic_Mass  800/480 -> 1.66
+             10%
+             60/(30/1.1)  -> 2.2
+             800/(480/1.1) -> 1.833
 
-10%
-60/(30/1.1)  -> 2.2
-800/(480/1.1) -> 1.833
+             25%:
+             60/(30/1.25)  -> 2.5
+             800/(480/1.25) -> 2.0833
 
-25%:
-60/(30/1.25)  -> 2.5
-800/(480/1.25) -> 2.0833
-
-*/
+             */
 
 
 
@@ -1033,42 +1037,42 @@ Jewelcrafting_Tier3_Gather_Basic_Mass  800/480 -> 1.66
         taskListName: "Leatherworking",
         taskName: "Leatherworking",
         level: {
-/* No Residuum:
-			0:["Leatherworking_Tier0_Intro_1"],
-//      1:["Leatherworking_Tier1_Darkleather_Boots_1"],
-      1:["Leatherworking_Tier1_Hide_Boots_1"],
-//      1:["Leatherworking_Tier1_Leather_Boots_1"],
-//      1:["Leatherworking_Tier1_Leather_Shirt_1_Set2"],
-//      2:["Leatherworking_Tier1_Darkleather_Armor_1"],
-      2:["Leatherworking_Tier1_Hide_Armor_1"],
-//      2:["Leatherworking_Tier1_Leather_Armor_1"],
-//      2:["Leatherworking_Tier1_Leather_Pants_1"],
-//      2:["Leatherworking_Tier1_Leather_Pants_1_Set2"],
-//      3:["Leatherworking_Tier1_Darkleather_Gloves_1"],
-      3:["Leatherworking_Tier1_Hide_Gloves_1"],
-      4:["Leatherworking_Tier1_Hide_Gloves_1"],
-      5:["Leatherworking_Tier1_Hide_Gloves_1"],
-      6:["Leatherworking_Tier1_Hide_Gloves_1"],
-//      3:["Leatherworking_Tier1_Leather_Gloves_1"],
-      7:["Leatherworking_Tier2_Leather_Shirt"],
-//      7:["Leatherworking_Tier2_Leather_Shirt_Set2"],
-      8:["Leatherworking_Tier2_Leather_Pants_1"],
-      9:["Leatherworking_Tier2_Leather_Pants_1"],
-      10:["Leatherworking_Tier2_Leather_Pants_1"],
-      11:["Leatherworking_Tier2_Leather_Pants_1"],
-      12:["Leatherworking_Tier2_Leather_Pants_1"],
-      13:["Leatherworking_Tier2_Leather_Pants_1"],
-//      8:["Leatherworking_Tier2_Leather_Pants_1_Set2"],
-      14:["Leatherworking_Tier3_Leather_Shirt"],
-//      14:["Leatherworking_Tier3_Leather_Shirt_Set2"],
-      15:["Leatherworking_Tier3_Leather_Pants"],
-      16:["Leatherworking_Tier3_Leather_Pants"],
-      17:["Leatherworking_Tier3_Leather_Pants"],
-      18:["Leatherworking_Tier3_Leather_Pants"],
-      19:["Leatherworking_Tier3_Leather_Pants"],
-      20:["Leatherworking_Tier3_Leather_Pants"],
-//      15:["Leatherworking_Tier3_Leather_Pants_Set2"],
-*/
+            /* No Residuum:
+             0:["Leatherworking_Tier0_Intro_1"],
+             //      1:["Leatherworking_Tier1_Darkleather_Boots_1"],
+             1:["Leatherworking_Tier1_Hide_Boots_1"],
+             //      1:["Leatherworking_Tier1_Leather_Boots_1"],
+             //      1:["Leatherworking_Tier1_Leather_Shirt_1_Set2"],
+             //      2:["Leatherworking_Tier1_Darkleather_Armor_1"],
+             2:["Leatherworking_Tier1_Hide_Armor_1"],
+             //      2:["Leatherworking_Tier1_Leather_Armor_1"],
+             //      2:["Leatherworking_Tier1_Leather_Pants_1"],
+             //      2:["Leatherworking_Tier1_Leather_Pants_1_Set2"],
+             //      3:["Leatherworking_Tier1_Darkleather_Gloves_1"],
+             3:["Leatherworking_Tier1_Hide_Gloves_1"],
+             4:["Leatherworking_Tier1_Hide_Gloves_1"],
+             5:["Leatherworking_Tier1_Hide_Gloves_1"],
+             6:["Leatherworking_Tier1_Hide_Gloves_1"],
+             //      3:["Leatherworking_Tier1_Leather_Gloves_1"],
+             7:["Leatherworking_Tier2_Leather_Shirt"],
+             //      7:["Leatherworking_Tier2_Leather_Shirt_Set2"],
+             8:["Leatherworking_Tier2_Leather_Pants_1"],
+             9:["Leatherworking_Tier2_Leather_Pants_1"],
+             10:["Leatherworking_Tier2_Leather_Pants_1"],
+             11:["Leatherworking_Tier2_Leather_Pants_1"],
+             12:["Leatherworking_Tier2_Leather_Pants_1"],
+             13:["Leatherworking_Tier2_Leather_Pants_1"],
+             //      8:["Leatherworking_Tier2_Leather_Pants_1_Set2"],
+             14:["Leatherworking_Tier3_Leather_Shirt"],
+             //      14:["Leatherworking_Tier3_Leather_Shirt_Set2"],
+             15:["Leatherworking_Tier3_Leather_Pants"],
+             16:["Leatherworking_Tier3_Leather_Pants"],
+             17:["Leatherworking_Tier3_Leather_Pants"],
+             18:["Leatherworking_Tier3_Leather_Pants"],
+             19:["Leatherworking_Tier3_Leather_Pants"],
+             20:["Leatherworking_Tier3_Leather_Pants"],
+             //      15:["Leatherworking_Tier3_Leather_Pants_Set2"],
+             */
 
             0: ["Leatherworking_Tier0_Intro_1"],
             1: ["Leatherworking_Tier1_Leather_Boots_1", "Leatherworking_Tier1_Leather_Shirt_1","Leatherworking_Tier1_Gather_Basic"],
@@ -1183,9 +1187,9 @@ Jewelcrafting_Tier3_Gather_Basic_Mass  800/480 -> 1.66
         level: {
             0: ["Weaponsmithing_Tier0_Intro"],
 
-/* No use of Residuum:
-            1: ["Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass", "Weaponsmithing_Tier2_Refine_Basic_Mass", "Weaponsmithing_Tier2_Gather_Basic_Mass", "Weaponsmithing_Tier1_Gather_Basic"],
-*/
+            /* No use of Residuum:
+             1: ["Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass", "Weaponsmithing_Tier2_Refine_Basic_Mass", "Weaponsmithing_Tier2_Gather_Basic_Mass", "Weaponsmithing_Tier1_Gather_Basic"],
+             */
             // We don't have axes until level 2
             1: ["Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier1_Longbow_1", "Weaponsmithing_Tier1_Gather_Basic"],
             2: ["Weaponsmithing_Tier1_Greataxe_1", "Weaponsmithing_Tier1_Battleaxe_1", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier1_Longbow_1", "Weaponsmithing_Tier1_Gather_Basic"],
@@ -1196,26 +1200,26 @@ Jewelcrafting_Tier3_Gather_Basic_Mass  800/480 -> 1.66
             // Just make resources at the new resource level -- they'll be used at higher levels
             // (even though the swords at this level seem more efficient -- they require lower level swords, which we haven't made and don't have inventory space for)
             // (we'll make 24 sets (of 2 each) "refined" resources in 16 hours (with no speed bonuses), which will be used by levels 8 and 9 alone
-            7: ["Weaponsmithing_Tier2_Refine_Basic_Mass", "Weaponsmithing_Tier2_Gather_Basic_Mass"],
-            8: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic_Mass", "Weaponsmithing_Tier2_Gather_Basic_Mass"],
-            9: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic_Mass", "Weaponsmithing_Tier2_Gather_Basic_Mass"],
-            10: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic_Mass", "Weaponsmithing_Tier2_Gather_Basic_Mass"],
-            11: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic_Mass", "Weaponsmithing_Tier2_Gather_Basic_Mass"],
-            12: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic_Mass", "Weaponsmithing_Tier2_Gather_Basic_Mass"],
-            13: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic_Mass", "Weaponsmithing_Tier2_Gather_Basic_Mass"],
+            7: ["Weaponsmithing_Tier2_Refine_Basic", "Weaponsmithing_Tier2_Gather_Basic"],
+            8: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic", "Weaponsmithing_Tier2_Gather_Basic"],
+            9: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic", "Weaponsmithing_Tier2_Gather_Basic"],
+            10: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic", "Weaponsmithing_Tier2_Gather_Basic"],
+            11: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic", "Weaponsmithing_Tier2_Gather_Basic"],
+            12: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic", "Weaponsmithing_Tier2_Gather_Basic"],
+            13: ["Weaponsmithing_Tier2_Greataxe_3", "Weaponsmithing_Tier2_Battleaxe_3", "Weaponsmithing_Tier2_Refine_Basic", "Weaponsmithing_Tier2_Gather_Basic"],
             // (we'll make 160 sets (of 2 each) "refined" resources in 133.33 hours (5.55 days) (with no speed bonuses)
-            14: ["Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            15: ["Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            16: ["Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            17: ["Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            14: ["Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
+            15: ["Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
+            16: ["Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
+            17: ["Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
             // If we have Fundamental Fire or Ice, we get a bit more exp by using it (and both options are not dependancies of anything else, unlike lower levels)
-            18: ["Weaponsmithing_Tier3_Greataxe_Set_2", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_Set_2", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            19: ["Weaponsmithing_Tier3_Greataxe_Set_2", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_Set_2", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            20 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            21 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            22 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            23 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            24 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            18: ["Weaponsmithing_Tier3_Greataxe_Set_2", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_Set_2", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
+            19: ["Weaponsmithing_Tier3_Greataxe_Set_2", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_Set_2", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
+            20 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
+            21 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
+            22 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
+            23 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
+            24 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
             25 :["Weaponsmithing_Tier3_Gather_Basic_Mass"],
 // 20: ["Weaponsmithing_Tier3_Gather_Basic_Mass"],   // We want Gather here, because the raw materials can be used in other profs
 // If we actually want experience at level 20, these would be the tasks:
@@ -1317,12 +1321,12 @@ Jewelcrafting_Tier3_Gather_Basic_Mass  800/480 -> 1.66
             17: ["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
             18: ["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
             19: ["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            20 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],        
-            21 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],		
-            22 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],		
-            23 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],		
-            24 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],		
-            25 :["Weaponsmithing_Tier3_Gather_Basic_Mass"],		
+            20 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            21 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            22 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            23 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            24 :["Weaponsmithing_Tier3_Greatsword_Set_2", "Weaponsmithing_Tier3_Greatsword_4", "Weaponsmithing_Tier2_Greatsword_3", "Weaponsmithing_Tier1_Greatsword_2", "Weaponsmithing_Tier1_Greatsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            25 :["Weaponsmithing_Tier3_Gather_Basic_Mass"],
         },
     };
 
@@ -1351,53 +1355,53 @@ Jewelcrafting_Tier3_Gather_Basic_Mass  800/480 -> 1.66
             17: ["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
             18: ["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
             19: ["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
-            20 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],        
-            21 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],		
-            22 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],		
-            23 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],		
-            24 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],		
-            25 :["Weaponsmithing_Tier3_Gather_Basic_Mass"],		
+            20 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            21 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            22 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            23 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            24 :["Weaponsmithing_Tier3_Longsword_Set_2", "Weaponsmithing_Tier3_Longsword_4", "Weaponsmithing_Tier2_Longsword_3", "Weaponsmithing_Tier1_Longsword_2", "Weaponsmithing_Tier1_Longsword_1", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            25 :["Weaponsmithing_Tier3_Gather_Basic_Mass"],
         },
     };
 
-/*
-"Weaponsmithing_Tier1_Refine_Basic"      7/15        -> 0.4666
-Weaponsmithing_Tier1_Refine_Basic_Mass   50/360 (6h) -> 0.1388
-"Weaponsmithing_Tier1_Gather_Basic"      8/15        -> 0.5333
-Weaponsmithing_Tier1_Gather_Basic_Mass  50/360  (6h) -> 0.1388
+    /*
+     "Weaponsmithing_Tier1_Refine_Basic"      7/15        -> 0.4666
+     Weaponsmithing_Tier1_Refine_Basic_Mass   50/360 (6h) -> 0.1388
+     "Weaponsmithing_Tier1_Gather_Basic"      8/15        -> 0.5333
+     Weaponsmithing_Tier1_Gather_Basic_Mass  50/360  (6h) -> 0.1388
 
-"Weaponsmithing_Tier2_Refine_Basic"          12/20       -> 0.6
-Weaponsmithing_Tier2_Refine_Basic_Mass      200/420 (7h) -> 0.48
-"Weaponsmithing_Tier2_Gather_Basic"          13/20       -> 0.65
-Weaponsmithing_Tier2_Gather_Basic_Mass      200/420 (7h) -> 0.48
+     "Weaponsmithing_Tier2_Refine_Basic"          12/20       -> 0.6
+     Weaponsmithing_Tier2_Refine_Basic_Mass      200/420 (7h) -> 0.48
+     "Weaponsmithing_Tier2_Gather_Basic"          13/20       -> 0.65
+     Weaponsmithing_Tier2_Gather_Basic_Mass      200/420 (7h) -> 0.48
 
-"Weaponsmithing_Tier3_Refine_Basic"                 30/25 ->  1.2
-Weaponsmithing_Tier3_Refine_Basic_Mass      800/480 (8h)  -> 1.66
-"Weaponsmithing_Tier3_Gather_Basic"                 30/25 ->  1.2
-Weaponsmithing_Tier3_Gather_Basic_Mass      800/480 (8h)  -> 1.66
+     "Weaponsmithing_Tier3_Refine_Basic"                 30/25 ->  1.2
+     Weaponsmithing_Tier3_Refine_Basic_Mass      800/480 (8h)  -> 1.66
+     "Weaponsmithing_Tier3_Gather_Basic"                 30/25 ->  1.2
+     Weaponsmithing_Tier3_Gather_Basic_Mass      800/480 (8h)  -> 1.66
 
-time / (1 + speedBonus)
+     time / (1 + speedBonus)
 
-360 / (1 + speedBonus) == 93.75
--> 265% bonus
+     360 / (1 + speedBonus) == 93.75
+     -> 265% bonus
 
-420 / (1 + speedBonus) == 333.3
--> 26% bonus
+     420 / (1 + speedBonus) == 333.3
+     -> 26% bonus
 
-25%:
-480 / 1.25 == 384 => 800/384 == 2.0833
+     25%:
+     480 / 1.25 == 384 => 800/384 == 2.0833
 
-40%:
-480 / (1.4) == 342.86 => 800/342.84 == 2.33
+     40%:
+     480 / (1.4) == 342.86 => 800/342.84 == 2.33
 
-50%:
-480 / 1.5 == 320 => 2.5
+     50%:
+     480 / 1.5 == 320 => 2.5
 
-100%:
-480 / 2 == 240 => 800/240 == 3.33
+     100%:
+     480 / 2 == 240 => 800/240 == 3.33
 
 
-*/
+     */
 
 
 
@@ -1425,7 +1429,8 @@ time / (1 + speedBonus)
             17: ["Alchemy_Tier3_Experiment_Rank18", "Alchemy_Tier3_Experimentation_Rank17"],
             18: ["Alchemy_Tier3_Experiment_Rank19", "Alchemy_Tier3_Experimentation_Rank18"],
             19: ["Alchemy_Tier3_Experiment_Rank20", "Alchemy_Tier3_Experimentation_Rank19"],
-            20 : ["Alchemy_Tier3_Experiment_Rank21", "Alchemy_Tier3_Experimentation_Rank20"],
+            20: ["Alchemy_Tier3_Protection_Potion_Major", "Alchemy_Tier2_Aquaregia", "Alchemy_Tier3_Refine_Basic", "Alchemy_Tier3_Gather_Components"], //disable for mod6
+            //20 : ["Alchemy_Tier3_Experiment_Rank21", "Alchemy_Tier3_Experimentation_Rank20"], // Enable for mod6
             21 : ["Alchemy_Tier4_Experiment_Rank22", "Alchemy_Tier4_Experimentation_Rank21"],
             22 : ["Alchemy_Tier4_Experiment_Rank23", "Alchemy_Tier4_Experimentation_Rank22"], //,"Alchemy_Tier4_Aquaregia_2"],
             23 : ["Alchemy_Tier4_Experiment_Rank24", "Alchemy_Tier4_Experimentation_Rank23"],
@@ -1500,10 +1505,10 @@ time / (1 + speedBonus)
         definedTask["Black Ice Shaping"],
         definedTask["Alchemy"],
         definedTask["Weaponsmithing_Axe"],
-        definedTask["Weaponsmithing_Bow"],
+        /*definedTask["Weaponsmithing_Bow"],
         definedTask["Weaponsmithing_Dagger"],
         definedTask["Weaponsmithing_Greatsword"],
-        definedTask["Weaponsmithing_Longsword"],
+        definedTask["Weaponsmithing_Longsword"],*/
         definedTask["Artificing"],
         definedTask["Jewelcrafting"],
         definedTask["Mailsmithing"],
@@ -1523,11 +1528,11 @@ time / (1 + speedBonus)
         charSettings.push({name: 'Event_Siege' + i, title: 'Siege Event', def: '0', type: 'text', tooltip: 'Number of slots to assign to Siege Event'});
         charSettings.push({name: 'BlackIce' + i, title: 'Black Ice Shaping', def: '0', type: 'text', tooltip: 'Number of slots to assign to BIS'});
         charSettings.push({name: 'Alchemy' + i, title: 'Alchemy', def: '0', type: 'text', tooltip: 'Number of slots to assign to Alchemy'});
-        charSettings.push({name: 'Weaponsmithing_Axe' + i, title: 'Weaponsmithing/Axes', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Axes -- for every two of these, choose one Dagger/Greatsword/Longsword/Blade (or choose bows)'});
-        charSettings.push({name: 'Weaponsmithing_Dagger' + i, title: 'Weaponsmithing/Daggers', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Daggers'});
+        charSettings.push({name: 'Weaponsmithing_Axe' + i, title: 'Weaponsmithing/Axes', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Axes'});
+        /*charSettings.push({name: 'Weaponsmithing_Dagger' + i, title: 'Weaponsmithing/Daggers', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Daggers'});
         charSettings.push({name: 'Weaponsmithing_Bow' + i, title: 'Weaponsmithing/Bows', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Bows -- choose one of these for every two Daggers/Greatswords/Longswords/Blades (or choose axes)'});
         charSettings.push({name: 'Weaponsmithing_Greatsword' + i, title: 'Weaponsmithing/Greatswords', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Greatswords'});
-        charSettings.push({name: 'Weaponsmithing_Longsword' + i, title: 'Weaponsmithing/Longswords', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Longswords'});
+        charSettings.push({name: 'Weaponsmithing_Longsword' + i, title: 'Weaponsmithing/Longswords', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Longswords'});*/
         charSettings.push({name: 'Artificing' + i, title: 'Artificing', def: '0', type: 'text', tooltip: 'Number of slots to assign to Artificing'});
         charSettings.push({name: 'Jewelcrafting' + i, title: 'Jewelcrafting', def: '0', type: 'text', tooltip: 'Number of slots to assign to Jewelcrafting'});
         charSettings.push({name: 'Mailsmithing' + i, title: 'Mailsmithing', def: '0', type: 'text', tooltip: 'Number of slots to assign to Mailsmithing'});
@@ -1568,8 +1573,8 @@ time / (1 + speedBonus)
      */
     function GetCurrentPage() {
         for(var __kk in PAGES) {
-    if (!PAGES.hasOwnProperty(__kk)) continue; 
-    var page = PAGES[__kk];
+            if (!PAGES.hasOwnProperty(__kk)) continue;
+            var page = PAGES[__kk];
             if ($(page["path"]).filter(":visible").length) {
                 return page;
             }
@@ -1630,59 +1635,59 @@ time / (1 + speedBonus)
                 var prof = tasklist[i]
                 if (settings[prof.taskListName] > 0) { //MAC-NW
 
-/*
-entry.slotindex
+                    /*
+                     entry.slotindex
 
-entry: Object
-category: "Leadership"
-categoryicon: "Crafting_Profession_Leadership"
-displayname: "Hire a Mercenary"
-hascompletedetails: 0
-hdef: "@ItemAssignmentDef[Leadership_Tier1_2_Recruit]"
-icon: "Crafting_Follower_Leader_Generic_T1_01"
-isabortable: 1
-islockedslot: 0
-rewards: null
-sfinishearlycost: 32976
-slotindex: 1
-uassignmentid: 1617
-ufinishdate: "Mon, 23 Feb 2015 22:00:48 GMT"
-utimestarted: "Mon, 23 Feb 2015 04:00:48 GMT"
+                     entry: Object
+                     category: "Leadership"
+                     categoryicon: "Crafting_Profession_Leadership"
+                     displayname: "Hire a Mercenary"
+                     hascompletedetails: 0
+                     hdef: "@ItemAssignmentDef[Leadership_Tier1_2_Recruit]"
+                     icon: "Crafting_Follower_Leader_Generic_T1_01"
+                     isabortable: 1
+                     islockedslot: 0
+                     rewards: null
+                     sfinishearlycost: 32976
+                     slotindex: 1
+                     uassignmentid: 1617
+                     ufinishdate: "Mon, 23 Feb 2015 22:00:48 GMT"
+                     utimestarted: "Mon, 23 Feb 2015 04:00:48 GMT"
 
-unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments: Array[9]
-0: Object
-category: "None"
-categoryicon: ""
-displayname: ""
-hascompletedetails: 0
-hdef: ""
-icon: ""
-isabortable: 0
-islockedslot: 0
-sfinishearlycost: -1
-slotindex: 0
-uassignmentid: 0
-ufinishdate: "Sat, 01 Jan 2000 00:00:00 GMT"
-utimestarted: "Sat, 01 Jan 2000 00:00:00 GMT"
-__proto__: Object
-1: Object
-category: "Leadership"
-categoryicon: "Crafting_Profession_Leadership"
-displayname: "Battle Undead"
-hascompletedetails: 0
-hdef: "@ItemAssignmentDef[Leadership_Tier2_10_Battle]"
-icon: "Icons_Pets_Manatarms_01"
-isabortable: 1
-islockedslot: 0
-rewards: null
-sfinishearlycost: 21504
-slotindex: 1
-uassignmentid: 7908
-ufinishdate: "Thu, 05 Mar 2015 06:45:20 GMT"
-utimestarted: "Thu, 05 Mar 2015 01:02:29 GMT"
-__proto__: Object
+                     unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments: Array[9]
+                     0: Object
+                     category: "None"
+                     categoryicon: ""
+                     displayname: ""
+                     hascompletedetails: 0
+                     hdef: ""
+                     icon: ""
+                     isabortable: 0
+                     islockedslot: 0
+                     sfinishearlycost: -1
+                     slotindex: 0
+                     uassignmentid: 0
+                     ufinishdate: "Sat, 01 Jan 2000 00:00:00 GMT"
+                     utimestarted: "Sat, 01 Jan 2000 00:00:00 GMT"
+                     __proto__: Object
+                     1: Object
+                     category: "Leadership"
+                     categoryicon: "Crafting_Profession_Leadership"
+                     displayname: "Battle Undead"
+                     hascompletedetails: 0
+                     hdef: "@ItemAssignmentDef[Leadership_Tier2_10_Battle]"
+                     icon: "Icons_Pets_Manatarms_01"
+                     isabortable: 1
+                     islockedslot: 0
+                     rewards: null
+                     sfinishearlycost: 21504
+                     slotindex: 1
+                     uassignmentid: 7908
+                     ufinishdate: "Thu, 05 Mar 2015 06:45:20 GMT"
+                     utimestarted: "Thu, 05 Mar 2015 01:02:29 GMT"
+                     __proto__: Object
 
-*/
+                     */
 
 
                     if (failedProf.length > 0 && failedProf.indexOf(prof.taskListName) > -1) {
@@ -1713,8 +1718,8 @@ __proto__: Object
                         return entry.category === "None";
                     });
                     if (taskSlots[currentOpenSlots[0].slotindex] === prof.taskListName ||
-                            (currentTasksByTaskList.length < settings[prof.taskListName] &&
-                             currentTasksByProf.length < slotsByProf[prof.taskName])) {
+                        (currentTasksByTaskList.length < settings[prof.taskListName] &&
+                        currentTasksByProf.length < slotsByProf[prof.taskName])) {
                         unsafeWindow.client.professionFetchTaskList('craft_' + tasklist[i].taskName);
                         window.setTimeout(function () {
                             // todo: How do we propegate the return value of this up the stack?
@@ -1842,13 +1847,13 @@ __proto__: Object
             return false;
         }
         /*// Check level
-        var level = unsafeWindow.client.dataModel.model.ent.main.itemassignmentcategories.categories.filter(function (entry) {
-            return entry.name == prof.taskName;
-        })[0].currentrank;
-        var list = prof.level[level];
-        if (list.length <= i) {
-            console.log("Nothing Found");
-            switchChar();*/
+         var level = unsafeWindow.client.dataModel.model.ent.main.itemassignmentcategories.categories.filter(function (entry) {
+         return entry.name == prof.taskName;
+         })[0].currentrank;
+         var list = prof.level[level];
+         if (list.length <= i) {
+         console.log("Nothing Found");
+         switchChar();*/
         if (list.length <= i) {
             console.log("No more possible tasks at this level to try to start", i);
             console.log("task list: ", list);
@@ -1957,8 +1962,11 @@ __proto__: Object
      */
     function searchForTask(taskname, profname) {
         // Return first object that matches exact craft name
-        // edited by WloBeb - start Patrol the Mines task only if char has less than 7 Mining Claims
-        if (taskname == "Leadership_Tier3_13_Patrol" && countResource("Crafting_Resource_Mining_Claim") >= 7) {
+        // edited by WloBeb - start Patrol the Mines task only if char has less than 7 Mining Claims if XP prifile limit 100 claims
+        var resource_limit = 7;
+        if (settings['Leadership_XP'] > 0) {
+            var resource_limit = 1000;}
+        if (taskname == "Leadership_Tier3_13_Patrol" && countResource("Crafting_Resource_Mining_Claim") >= resource_limit ) {
             console.log("Too many Mining Claims: skiping");
             return false;
         }
@@ -1973,10 +1981,14 @@ __proto__: Object
         }
 
         // start task if requirements are met
-        if (!thisTask.failedrequirementsreasons.length) {
+        try {
+            if (!thisTask.failedrequirementsreasons.length) {
             return thisTask;
+            }
+        } catch (e) {
+            unsafeWindow.location.href = current_Gateway;
         }
-
+            
         // Too high level
         if (thisTask.failslevelrequirements) {
             console.log("Task level is too high:", taskname);
@@ -2142,8 +2154,8 @@ __proto__: Object
             taskList.shift();
         }
         if (searchItem == "Crafting_Resource_Aquaregia" && taskList.length > 1) {
-         taskList.shift();
-         }
+            taskList.shift();
+        }
         // Should really only be one result now but lets iterate through anyway.
         for (var i = 0; i < taskList.length; i++) {
             console.log("Attempting search for ingredient task:", taskList[i].def.name);
@@ -2439,7 +2451,7 @@ __proto__: Object
         var _tmpBag = [];
         var _profitems = [];
         // Pattern for items to leave out of auto vendoring (safeguard)
-      	var _excludeItems = /(Charcoal|Rocksalt|Spool_Thread|Porridge|Solvent|Brimstone|Coal|Moonseasalt|Quicksilver|Spool_Threadsilk|Clues_Bandit_Hq|Clothscraps_T4|Clothbolt_T4|Potion_Potency|Potion_Protection|Taffeta|Crafting_Asset|Craftsman|Aqua|Vitriol|Residuum|Shard|Crystal|District_Map|Local_Map|Bill_Of_Sale|Refugee|Asset_Tool|Tool|Gemfood|Gem_Upgrade_Resource|Crafting_Resource_Elemental|Elemental|Artifact|Hoard|Coffer|Fuse|Ward|Preservation|Armor_Enhancement|Weapon_Enhancement|T[5-9]_Enchantment|T[5-9]_Runestones|T10_Enchantment|T10_Runestones|4c_Personal|Item_Potion_Companion_Xp|Gateway_Rewardpack|Consumable_Id_Scroll|Dungeon_Delve_Key)/; // edited by RottenMind 08.03.2015
+        var _excludeItems = /(Charcoal|Rocksalt|Spool_Thread|Porridge|Solvent|Brimstone|Coal|Moonseasalt|Quicksilver|Spool_Threadsilk|Clues_Bandit_Hq|Clothscraps_T4|Clothbolt_T4|Potion_Potency|Potion_Protection|Taffeta|Crafting_Asset|Craftsman|Aqua|Vitriol|Residuum|Shard|Crystal|District_Map|Local_Map|Bill_Of_Sale|Refugee|Asset_Tool|Tool|Gemfood|Gem_Upgrade_Resource|Crafting_Resource_Elemental|Elemental|Artifact|Hoard|Coffer|Fuse|Ward|Preservation|Armor_Enhancement|Weapon_Enhancement|T[5-9]_Enchantment|T[5-9]_Runestones|T10_Enchantment|T10_Runestones|4c_Personal|Item_Potion_Companion_Xp|Gateway_Rewardpack|Consumable_Id_Scroll|Dungeon_Delve_Key)/; // edited by RottenMind 08.03.2015
 
         if (settings["autovendor_profresults"]) {
             /** Profession leveling result item cleanup logic for T1-4 crafted results
@@ -2455,25 +2467,25 @@ __proto__: Object
              };*/ // moved to selljunk filter, RottenMind
             /*#2, Tier2 - tier3 mixed, upgrade, sell if inventory full, "TierX" is here "TX" */
             _profitems[_profitems.length] = {
-                pattern : /^Crafted_(Jewelcrafting_Neck_Misc_2|Jewelcrafting_Waist_Misc_2|Med_Armorsmithing_T3_Chain_Pants|Hvy_Armorsmithing_Pants_3|Med_Armorsmithing_Chain_Shirt_3|Leatherworking_Shirt_3|Hvy_Armorsmithing_Shirt_3|Leatherworking_Pants_3|Med_Armorsmithing_Chain_Pants_3||Med_Armorsmithing_T3_Chain_Shirt|Hvy_Armorsmithing_T3_Plate_Pants|Hvy_Armorsmithing_T3_Plate_Shirt|Leatherworking_T3_Leather_Pants|Leatherworking_T3_Leather_Shirt|Tailoring_Shirt_3|Tailoring_T3_Cloth_Shirt|Tailoring_T3_Cloth_Shirt_Set2|Tailoring_T3_Cloth_Pants|Tailoring_Shirt_3_Set2|Tailoring_Pants_3_Set2|Tailoring_Pants_3|Artificing_T3_Pactblade_Temptation_4|Artificing_T3_Icon_Virtuous_4|Weaponsmithing_T2_Dagger_3|Weaponsmithing_T2_Dagger_3)$/,
+                pattern : /^Crafted_(Jewelcrafting_Neck_Misc_2|Jewelcrafting_Waist_Misc_2|Med_Armorsmithing_T3_Chain_Pants|Hvy_Armorsmithing_Pants_3|Med_Armorsmithing_Chain_Shirt_3|Leatherworking_Shirt_3|Hvy_Armorsmithing_Shirt_3|Leatherworking_Pants_3|Med_Armorsmithing_Chain_Pants_3||Med_Armorsmithing_T3_Chain_Shirt|Hvy_Armorsmithing_T3_Plate_Pants|Hvy_Armorsmithing_T3_Plate_Shirt|Leatherworking_T3_Leather_Pants|Leatherworking_T3_Leather_Shirt|Tailoring_Shirt_3|Tailoring_T3_Cloth_Shirt|Tailoring_T3_Cloth_Shirt_Set2|Tailoring_T3_Cloth_Pants|Tailoring_Shirt_3_Set2|Tailoring_Pants_3_Set2|Tailoring_Pants_3|Artificing_T3_Pactblade_Temptation_4|Artificing_T3_Icon_Virtuous_4|Weaponsmithing_T2_Dagger_3|Weaponsmithing_T2_Dagger_3|Weaponsmithing_T3_Greataxe_4|Weaponsmithing_T3_Battleaxe_4|Weaponsmithing_T3_Greataxe_Set_2|Weaponsmithing_T3_Battleaxe_Set_2)$/,
                 limit: 0,
                 count: 0
             };
             /*#3, Tier2, upgrade, sell if inventory full, "TierX" is here "TX" */
             _profitems[_profitems.length] = {
-                pattern: /^Crafted_(Jewelcrafting_Neck_Offense_2|Jewelcrafting_Waist_Offense_2|Tailoring_T2_Cloth_Shirt|T2_Cloth_Armor_Set_2|Med_Armorsmithing_T2_Chain_Armor_Set_1|Med_Armorsmithing_T2_Chain_Pants_2|Med_Armorsmithing_T2_Chain_Boots_Set_1|Med_Armorsmithing_T2_Chain_Shirt_2|Med_Armorsmithing_T2_Chain_Pants_1|Med_Armorsmithing_T2_Chain_Shirt|Hvy_Armorsmithing_T2_Plate_Armor_Set_1|Hvy_Armorsmithing_T2_Plate_Pants_2|Crafted_Tailoring_Pants_2|Tailoring_T2_Cloth_Armor_Set_1|Crafted_Tailoring_Shirt_2 |Hvy_Armorsmithing_T2_Plate_Boots_Set_1|Hvy_Armorsmithing_T2_Plate_Shirt_2|Med_Armorsmithing_Chain_Pants_2|Hvy_Armorsmithing_T2_Plate_Pants_1|Hvy_Armorsmithing_T2_Shield_Set_1|Hvy_Armorsmithing_T2_Plate_Shirt|Leatherworking_T2_Leather_Shirt|Leatherworking_T2_Leather_Boots_Set_1|Leatherworking_T2_Leather_Shirt_2|Leatherworking_T2_Leather_Pants_1|Leatherworking_T2_Leather_Armor_Set_1|Leatherworking_T2_Leather_Pants_2|Leatherworking_Shirt_3_Set2|Tailoring_T2_Cloth_Armor_Set_1|Tailoring_Pants_2|Tailoring_T2_Cloth_Pants|Tailoring_T2_Cloth_Pants_2|Tailoring_T2_Cloth_Boots_Set_1|Tailoring_T2_Cloth_Shirt_2|Tailoring_T2_Cloth_Pants_1|Artificing_T2_Pactblade_Temptation_3|Artificing_T1_Icon_Virtuous_2|Weaponsmithing_T2_Dagger_2)$/,
+                pattern: /^Crafted_(Jewelcrafting_Neck_Offense_2|Jewelcrafting_Waist_Offense_2|Tailoring_T2_Cloth_Shirt|T2_Cloth_Armor_Set_2|Med_Armorsmithing_T2_Chain_Armor_Set_1|Med_Armorsmithing_T2_Chain_Pants_2|Med_Armorsmithing_T2_Chain_Boots_Set_1|Med_Armorsmithing_T2_Chain_Shirt_2|Med_Armorsmithing_T2_Chain_Pants_1|Med_Armorsmithing_T2_Chain_Shirt|Hvy_Armorsmithing_T2_Plate_Armor_Set_1|Hvy_Armorsmithing_T2_Plate_Pants_2|Crafted_Tailoring_Pants_2|Tailoring_T2_Cloth_Armor_Set_1|Crafted_Tailoring_Shirt_2 |Hvy_Armorsmithing_T2_Plate_Boots_Set_1|Hvy_Armorsmithing_T2_Plate_Shirt_2|Med_Armorsmithing_Chain_Pants_2|Hvy_Armorsmithing_T2_Plate_Pants_1|Hvy_Armorsmithing_T2_Shield_Set_1|Hvy_Armorsmithing_T2_Plate_Shirt|Leatherworking_T2_Leather_Shirt|Leatherworking_T2_Leather_Boots_Set_1|Leatherworking_T2_Leather_Shirt_2|Leatherworking_T2_Leather_Pants_1|Leatherworking_T2_Leather_Armor_Set_1|Leatherworking_T2_Leather_Pants_2|Leatherworking_Shirt_3_Set2|Tailoring_T2_Cloth_Armor_Set_1|Tailoring_Pants_2|Tailoring_T2_Cloth_Pants|Tailoring_T2_Cloth_Pants_2|Tailoring_T2_Cloth_Boots_Set_1|Tailoring_T2_Cloth_Shirt_2|Tailoring_T2_Cloth_Pants_1|Artificing_T2_Pactblade_Temptation_3|Artificing_T1_Icon_Virtuous_2|Weaponsmithing_T2_Dagger_2|Weaponsmithing_T2_Greataxe_3|Weaponsmithing_T2_Battleaxe_3)$/,
                 limit: 0,
                 count: 0
             };
             /*#4, Tier1, upgrade, sell if inventory full, "TierX" is here "TX" */
             _profitems[_profitems.length] = {
-                pattern: /^Crafted_(Jewelcrafting_Neck_Misc_1|Jewelcrafting_Waist_Misc_1|Tailoring_Cloth_Shirt_1_Set2|Med_Armorsmithing_T1_Chain_Armor_Set_1|Med_Armorsmithing_T1_Chain_Boots_Set_1|Hvy_Armorsmithing_Plate_Armor_1|Hvy_Armorsmithing_T1_Plate_Armor_Set_1|Hvy_Armorsmithing_T1_Plate_Boots_Set_1|Leatherworking_T1_Leather_Boots_Set_1|Leatherworking_T1_Leather_Boots_Set_1|Leatherworking_T1_Leather_Armor_Set_1|Tailoring_T1_Cloth_Armor_1|Tailoring_Cloth_Armor_1|Tailoring_T1_Cloth_Pants_1|Tailoring_T1_Cloth_Boots_Set_1|Artificing_T1_Pactblade_Convergence_2|Artificing_T1_Icon_Virtuous_2|Weaponsmithing_T1_Dagger_1)$/,
+                pattern: /^Crafted_(Jewelcrafting_Neck_Misc_1|Jewelcrafting_Waist_Misc_1|Tailoring_Cloth_Shirt_1_Set2|Med_Armorsmithing_T1_Chain_Armor_Set_1|Med_Armorsmithing_T1_Chain_Boots_Set_1|Hvy_Armorsmithing_Plate_Armor_1|Hvy_Armorsmithing_T1_Plate_Armor_Set_1|Hvy_Armorsmithing_T1_Plate_Boots_Set_1|Leatherworking_T1_Leather_Boots_Set_1|Leatherworking_T1_Leather_Boots_Set_1|Leatherworking_T1_Leather_Armor_Set_1|Tailoring_T1_Cloth_Armor_1|Tailoring_Cloth_Armor_1|Tailoring_T1_Cloth_Pants_1|Tailoring_T1_Cloth_Boots_Set_1|Artificing_T1_Pactblade_Convergence_2|Artificing_T1_Icon_Virtuous_2|Weaponsmithing_T1_Dagger_1|Weaponsmithing_T2_Greataxe_2|Weaponsmithing_T2_Battleaxe_2)$/,
                 limit: 0,
                 count: 0
             };
             /*#5, Tier0, upgrade, sell if inventory full, taskilist "Tier1" is here "empty" or "_" must replace (_T1_|_)*/
             _profitems[_profitems.length] = {
-                pattern: /^Crafted_(Jewelcrafting_Waist_Offense_1|Jewelcrafting_Neck_Offense_1|Tailoring_Cloth_Pants_1|Med_Armorsmithing_Chain_Boots_1|Med_Armorsmithing_Chain_Shirt_1|Med_Armorsmithing_Chain_Armor_1|Med_Armorsmithing_Chain_Pants_1|Hvy_Armorsmithing_Plate_Boots_1|Hvy_Armorsmithing_Plate_Shirt_1|Hvy_Armorsmithing_Shield_1|Leatherworking_Tier0_Intro_1|Leatherworking_Leather_Boots_1|Leatherworking_Leather_Shirt_1|Tailoring_T1_Cloth_Shirt_Set2|Leatherworking_Leather_Armor_1|Leatherworking_Leather_Pants_1|Tailoring_Cloth_Boots_1|Tailoring_Cloth_Shirt_1|Artificing_T1_Pactblade_Convergence_1|Artificing_Icon_Virtuous_1|Artificing_Symbol_Virtuous_1|Weaponsmithing_Dagger_1)$/,
+                pattern: /^Crafted_(Jewelcrafting_Waist_Offense_1|Jewelcrafting_Neck_Offense_1|Tailoring_Cloth_Pants_1|Med_Armorsmithing_Chain_Boots_1|Med_Armorsmithing_Chain_Shirt_1|Med_Armorsmithing_Chain_Armor_1|Med_Armorsmithing_Chain_Pants_1|Hvy_Armorsmithing_Plate_Boots_1|Hvy_Armorsmithing_Plate_Shirt_1|Hvy_Armorsmithing_Shield_1|Leatherworking_Tier0_Intro_1|Leatherworking_Leather_Boots_1|Leatherworking_Leather_Shirt_1|Tailoring_T1_Cloth_Shirt_Set2|Leatherworking_Leather_Armor_1|Leatherworking_Leather_Pants_1|Tailoring_Cloth_Boots_1|Tailoring_Cloth_Shirt_1|Artificing_T1_Pactblade_Convergence_1|Artificing_Icon_Virtuous_1|Artificing_Symbol_Virtuous_1|Weaponsmithing_Dagger_1|Weaponsmithing_T1_Greatsword_1|Weaponsmithing_T1_Longbow_1|Weaponsmithing_T1_Greataxe_1|Weaponsmithing_T1_Battleaxe_1)$/,
                 limit: 0,
                 count: 0
             };
@@ -2597,7 +2609,7 @@ __proto__: Object
                     // Check that the rate is not less than the min & max
                     if (settings["banktransrate"] && parseInt(settings["banktransrate"]) >= 50 && parseInt(settings["banktransrate"]) <= 500) {
                         window.setTimeout(postZexOffer, delay.SHORT);
-                    } 
+                    }
                     // Crash ZEX Domino 
                     if (unsafeWindow.client.dataModel.model.exchangeaccountdata.openorders.length >= 4) {
                         window.setTimeout(withdrawZexOffer, delay.MEDIUM);
@@ -3296,7 +3308,7 @@ document.getElementById("charContainer"+val).style.display="block";\
         // edited by RottenMind
         if (settings["autovendor_profresults"]) {
             _vendorItems[_vendorItems.length] = {
-                pattern: /^Crafted_(Jewelcrafting_Waist_Offense_3|Jewelcrafting_Neck_Defense_3|Jewelcrafting_Waist_Defense_3|Tailoring_T3_Helm_Set_1|Med_Armorsmithing_T3_Chain_Armor_Set_1|Med_Armorsmithing_T3_Chain_Pants2|Med_Armorsmithing_T3_Chain_Shirt2|Med_Armorsmithing_T3_Chain_Helm_Set_1|Med_Armorsmithing_T3_Chain_Pants|Med_Armorsmithing_T3_Chain_Boots_Set_1|Hvy_Armorsmithing_T3_Plate_Armor_Set_1|Hvy_Armorsmithing_T3_Plate_Pants2|Hvy_Armorsmithing_T3_Plate_Shirt2|Hvy_Armorsmithing_T3_Plate_Helm_Set_1|Hvy_Armorsmithing_T3_Plate_Boots_Set_1|Leatherworking_T3_Leather_Armor_Set_1|Leatherworking_T3_Leather_Pants2|Leatherworking_T3_Leather_Shirt2|Leatherworking_T3_Leather_Helm_Set_1|Leatherworking_T3_Leather_Boots_Set_1|Tailoring_T3_Cloth_Boots_Set_1|Tailoring_T3_Cloth_Armor_Set_3|Tailoring_T3_Cloth_Armor_Set_2|Tailoring_T3_Cloth_Armor_Set_1|Tailoring_T3_Cloth_Pants2_Set2|Tailoring_T3_Cloth_Shirt2|Tailoring_T3_Cloth_Helm_Set_1|Artificing_T3_Pactblade_Temptation_5|Artificing_T3_Icon_Virtuous_5|Weaponsmithing_T3_Dagger_4)$/, limit: 0};
+                pattern: /^Crafted_(Jewelcrafting_Waist_Offense_3|Jewelcrafting_Neck_Defense_3|Jewelcrafting_Waist_Defense_3|Tailoring_T3_Helm_Set_1|Med_Armorsmithing_T3_Chain_Armor_Set_1|Med_Armorsmithing_T3_Chain_Pants2|Med_Armorsmithing_T3_Chain_Shirt2|Med_Armorsmithing_T3_Chain_Helm_Set_1|Med_Armorsmithing_T3_Chain_Pants|Med_Armorsmithing_T3_Chain_Boots_Set_1|Hvy_Armorsmithing_T3_Plate_Armor_Set_1|Hvy_Armorsmithing_T3_Plate_Pants2|Hvy_Armorsmithing_T3_Plate_Shirt2|Hvy_Armorsmithing_T3_Plate_Helm_Set_1|Hvy_Armorsmithing_T3_Plate_Boots_Set_1|Leatherworking_T3_Leather_Armor_Set_1|Leatherworking_T3_Leather_Pants2|Leatherworking_T3_Leather_Shirt2|Leatherworking_T3_Leather_Helm_Set_1|Leatherworking_T3_Leather_Boots_Set_1|Tailoring_T3_Cloth_Boots_Set_1|Tailoring_T3_Cloth_Armor_Set_3|Tailoring_T3_Cloth_Armor_Set_2|Tailoring_T3_Cloth_Armor_Set_1|Tailoring_T3_Cloth_Pants2_Set2|Tailoring_T3_Cloth_Shirt2|Tailoring_T3_Cloth_Helm_Set_1|Artificing_T3_Pactblade_Temptation_5|Artificing_T3_Icon_Virtuous_5|Weaponsmithing_T3_Dagger_4|Weaponsmithing_T3_Longsword_Set_3|Weaponsmithing_T3_Mace_Set_3|Weaponsmithing_T3_Greatsword_Set_3|Weaponsmithing_T3_Dagger_Set_3|Weaponsmithing_T3_Blades_Set_3|Weaponsmithing_T3_Longbow_Set_3)$/, limit: 0};
         }
         // edited by RottenMind
         if (_vendorItems.length > 0) {
@@ -3330,9 +3342,9 @@ document.getElementById("charContainer"+val).style.display="block";\
         });
         return _bagUnused;
     }
-    
-     /** Count resouce in bags
-     * edited by WloBeb 
+
+    /** Count resouce in bags
+     * edited by WloBeb
      * @param {string} name The name of resource
      */
     function countResource(name) {
@@ -3342,14 +3354,14 @@ document.getElementById("charContainer"+val).style.display="block";\
         $.each(_bags, function (bi, bag) {
             bag.slots.forEach(function (slot) {
                 if (slot && slot.name === name) {
-                     count = count + slot.count;
+                    count = count + slot.count;
                 }
             });
         });
         return count;
     }
-    
-     /** End, Helpers added by users.*/
+
+    /** End, Helpers added by users.*/
 
         // Add the settings button and start a process timer
     addSettings();
