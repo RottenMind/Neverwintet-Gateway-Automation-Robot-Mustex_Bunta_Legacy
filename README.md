@@ -3,9 +3,11 @@ Neverwinter Gateway Automation Robot, Mustex_Bunta_Legacy
 
 Neverwinter gateway - Professions Robot 
 
-+ work with RU gateway
++ Autofill character names & character count
++ work with RU gateway & multiple languages on GAteway
 + fills professions slots
 + level professions
++ Vendor Gathered for gold (no stuck if low gold)
 + refines AD
 + Transfers AD to one chracter (account)
 + Open rewardchest(99) per session
