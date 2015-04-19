@@ -19,7 +19,7 @@
  - breadguy
  */
 
-// @version 1.10.06.02
+// @version 1.10.06.03
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -28,7 +28,12 @@
 // ==/UserScript==
 
 /* RELEASE NOTES
- 1.10.06.02
+ Ninja Release
+ - Black ice & Leadership update
+ - added counter for "undefine" & "Epic button" -error (temporal solution to see count) also button to console.log
+ - added "Epic button enabled" -bug recovery (test)
+ - added Black Ice refining lvl 4 - 5
+ - FIX non-EN task filter
  - added "Vendor Gathered" + Tradebag, Gold treshold is 2
  - added "Unstable potions" Vendor list
  - added "Noonereallys" way fetch character names
@@ -679,23 +684,51 @@ function _select_Gateway() { // Check for Gateway used to
             11: ["Leadership_Tier1_Feedtheneedy", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4r_Gatherdiamonds", "Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore"],
             12: ["Leadership_Tier1_Feedtheneedy", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4r_Gatherdiamonds", "Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore"],
             // Add "protect diamonds rare" and the patrol quest as a backup
-            13: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4r_Gatherdiamonds", "Leadership_Tier3_13_Patrol", "Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore"],
-            14: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier1_4r_Gatherdiamonds", "Leadership_Tier3_13_Patrol", "Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore"],
-            15: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier1_4r_Gatherdiamonds", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier1_4_Protect", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
+            13: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier1_4r_Gatherdiamonds", "Leadership_Tier3_13_Patrol", "Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore"],
+            14: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier1_4r_Gatherdiamonds", "Leadership_Tier3_13_Patrol", "Leadership_Tier1_4_Protect", "Leadership_Tier1_5_Explore"],
+            15: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier1_4r_Gatherdiamonds", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier1_4_Protect", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
             // Production mode: Spellplague + Battle Undead
-            16: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
-            17: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol",  "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
-            18: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
-            19: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
-            20: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            21: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            22: ["Leadership_Tier3_13_Patrol","Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            23: ["Leadership_Tier3_13_Patrol","Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            24: ["Leadership_Tier3_13_Patrol","Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            25: ["Leadership_Tier3_13_Patrol","Leadership_Tier4_25r_Huntexperiment","Leadership_Tier4_22r_Capturebandithq","Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_20_Destroy","Leadership_Tier4_25_Battleelementalcultists", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+            16: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol","Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
+            17: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol","Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol",  "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
+            18: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol","Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
+            19: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol","Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
+           	
+           	20: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_20r_Master2",
+           	"Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3","Leadership_Tier3_20_Destroy",
+           	"Leadership_Tier2_12_Taxes", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_16_Fight",
+           	"Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+           	
+           	21: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_20r_Master2",
+           	"Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3","Leadership_Tier3_20_Destroy",
+           	"Leadership_Tier2_12_Taxes", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_16_Fight",
+           	"Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart",	"Leadership_Tier1_5_Explore"],
+           	
+           	22: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_22r_Capturebandithq",
+           	"Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3",
+           	"Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes","Tier3_13_Patrol",
+           	"Leadership_Tier3_16_Fight","Leadership_Tier2_10_Battle",	"Leadership_Tier2_9_Chart",
+           	"Leadership_Tier1_5_Explore"],
+           	
+           	23: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_22r_Capturebandithq",
+           	"Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3",
+           	"Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_13_Patrol",
+           	"Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart",
+           	"Leadership_Tier1_5_Explore"],
+           	
+           	24: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_22r_Capturebandithq",
+           	"Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2","Leadership_Tier3_20r_Master1",
+           	"Leadership_Tier3_20r_Master3",	"Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes",
+           	"Leadership_Tier3_13_Patrol","Leadership_Tier3_16_Fight",	"Leadership_Tier2_10_Battle",
+           	"Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+           	
+           	25: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_25r_Huntexperiment",
+           	"Leadership_Tier4_22r_Capturebandithq","Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2",
+           	"Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3","Leadership_Tier3_20_Destroy",
+           	"Leadership_Tier4_25_Battleelementalcultists","Leadership_Tier2_12_Taxes",
+           	"Leadership_Tier3_13_Patrol","Leadership_Tier3_16_Fight","Leadership_Tier2_10_Battle",
+           	"Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
 
             /*
-
              "Leadership_Tier1_2_Guardduty"                                 0/2   ->  0
              "Leadership_Tier1_4_Protect"                                 100/2   -> 50
              "Leadership_Tier2_8_Protect"                                 200/6   -> 33.33
@@ -854,11 +887,11 @@ function _select_Gateway() { // Check for Gateway used to
             19: ["Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier3_13_Training", "Leadership_Tier1_5_Explore", "Leadership_Tier1_4_Protect", "Leadership_Tier2_7_Training"],
             20: ["Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart","Leadership_Tier1_5_Explore", "Leadership_Tier3_13_Training", "Leadership_Tier1_4_Protect", "Leadership_Tier2_7_Training"],
             // 20: ["Leadership_Tier3_13_Patrol","Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol"],
-            21: [ "Leadership_Tier3_13_Patrol","Leadership_Tier4_21_Protectmagic","Leadership_Tier4_21_Training","Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            22: [ "Leadership_Tier3_13_Patrol","Leadership_Tier4_22_Guardclerics","Leadership_Tier4_21_Training","Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            23: [ "Leadership_Tier3_13_Patrol","Leadership_Tier4_21_Protectmagic","Leadership_Tier4_22_Guardclerics","Leadership_Tier4_21_Protectmagic","Leadership_Tier4_21_Training","Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            24: [ "Leadership_Tier3_13_Patrol","Leadership_Tier4_24_Wizardsseneschal","Leadership_Tier4_22_Guardclerics","Leadership_Tier4_21_Protectmagic","Leadership_Tier4_21_Training","Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-            25: [ "Leadership_Tier3_13_Patrol","Leadership_Tier4_25r_Huntexperiment", "Leadership_Tier4_21_Protectmagic", "Leadership_Tier4_24_Wizardsseneschal","Leadership_Tier4_22_Guardclerics","Leadership_Tier4_22_Guardclerics","Leadership_Tier4_25_Battleelementalcultists", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+            21: ["Leadership_Tier4_21_Protectmagic","Leadership_Tier4_21_Training","Leadership_Tier2_9_Chart","Leadership_Tier1_5_Explore","Leadership_Tier3_13_Patrol"],
+            22: ["Leadership_Tier4_22_Guardclerics","Leadership_Tier4_21_Training","Leadership_Tier2_9_Chart","Leadership_Tier1_5_Explore","Leadership_Tier3_13_Patrol"],
+            23: ["Leadership_Tier4_21_Protectmagic","Leadership_Tier4_22_Guardclerics","Leadership_Tier4_21_Protectmagic","Leadership_Tier4_21_Training","Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+            24: ["Leadership_Tier4_24_Wizardsseneschal","Leadership_Tier4_22_Guardclerics","Leadership_Tier4_21_Protectmagic","Leadership_Tier4_21_Training","Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+            25: ["Leadership_Tier4_25r_Huntexperiment", "Leadership_Tier4_21_Protectmagic", "Leadership_Tier4_24_Wizardsseneschal","Leadership_Tier4_22_Guardclerics","Leadership_Tier4_22_Guardclerics","Leadership_Tier4_25_Battleelementalcultists", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
         },
     };
 
@@ -907,6 +940,9 @@ function _select_Gateway() { // Check for Gateway used to
             1: ["Blackice_Tier1_Process_Blackice"],
             2: ["Blackice_Tier1_Process_Blackice"],
             3: ["Blackice_Tier1_Process_Blackice"],
+            4: ["Blackice_Tier1_Process_Blackice"],
+            5: ["Blackice_Tier1_Process_Blackice"],
+
             /*
              1:["Forge Hammerstone Pick","Gather Raw Black Ice","Truesilver Pick Grip","Process Raw Black Ice","Upgrade Chillwright","Hire an additional Chillwright"],
              2:["Forge Hammerstone Pick","Gather Raw Black Ice","Truesilver Pick Grip","Process Raw Black Ice","Upgrade Chillwright","Hire an additional Chillwright"],
@@ -1947,8 +1983,13 @@ function _select_Gateway() { // Check for Gateway used to
                             startedTask["lastTaskName"] = startedTask["currTaskName"];
                             startedTask["lastTaskCount"] = 1;
                         }
-                        if (startedTask["lastTaskCount"] >= 20) {
-                            console.log("Restart needed");
+                        if (startedTask["lastTaskCount"] >= 15) {
+                            console.log("LOOP FAILURE x [", Epic_button_error()  , "] times, skip to next task!!!");
+                        $(".footer-professions-taskdetails .button button.resetWindow").trigger('click');
+                            WaitForState("").done(function () {
+                            createNextTask(prof, level, list, i + 1); // try create forced next task to resolve gateway bug
+                                
+                            });
                         }
                         return true;
                     }
@@ -2009,6 +2050,7 @@ function _select_Gateway() { // Check for Gateway used to
                 return thisTask;
             }
         } catch (e) {
+            Array_undefine_error();
             unsafeWindow.location.href = current_Gateway;
         }
 
@@ -2153,18 +2195,8 @@ function _select_Gateway() { // Check for Gateway used to
                 }
             }
 
-            // Skip mass production tasks
-            if (entry.def.displayname.match(/^(Batch|Mass|Deep|Intensive) /)) {
-                return false;
-            }
-
-            // Skip trading tasks
-            if (entry.def.displayname.match(/rading$/)) {
-                return false;
-            }
-
-            // Skip looping Transmute tasks
-            if (entry.def.displayname.match(/^(Transmute|Create) /)) {
+            // Skip Mass/Trading/looping Transmute -tasks
+            if (entry.def.name.match(/(_Mass|_Transmute_|_Create_|(_Gather|_Refine)_Special)/)) {
                 return false;
             }
 
@@ -3203,6 +3235,7 @@ document.getElementById("charContainer"+val).style.display="block";\
 <input id="settings_save" class="button-blue pure-button" type="button" value="Save and Apply">\
 <input id="settings_close" class="button-yellow pure-button" type="button" value="Close">\
 <input id="settings_sca" class="button-red pure-button" type="button" value="Cycle SCA">\
+<input id="log_error" class="button-green pure-button" type="button" value="Log Error">\
 </div>');
 
         // Add open settings button to page
@@ -3239,6 +3272,14 @@ document.getElementById("charContainer"+val).style.display="block";\
             unsafeWindow.location.hash = unsafeWindow.location.hash.replace(/\)\/.+/, ')' + "/adventures");
             processSwordCoastDailies();
         });
+        $("#log_error").click(function () {
+            setTimeout(function () {
+                var epic = GM_getValue("Epic_error", 0);
+                var un_def_err = GM_getValue("Undefine_error", 0)
+                console.log("Button Epic fails[" + epic +"] & undefine [" + un_def_err + "].");
+            }, 0)
+        });
+
         customRadio("radio_position");
 
         $('#update-content-inventory-bags-0 .bag-header').waitUntilExists(function () {
@@ -3463,6 +3504,22 @@ document.getElementById("charContainer"+val).style.display="block";\
         });
         return count;
     }
+    /** Report error in GM for later  use
+     * edited by RM
+     * 
+     */
+    function Epic_button_error() {
+        var counter = GM_getValue('Epic_error', 0);
+        // console.log('This script has been run ' + counter + ' times.');
+        GM_setValue('Epic_error', ++counter);
+        return counter;
+    }
+    function Array_undefine_error() {
+        var counter = GM_getValue('Undefine_error', 0);
+        // console.log('This script has been run ' + counter + ' times.');
+        GM_setValue('Undefine_error', ++counter);
+        return counter;
+    }    
 
     /** End, Helpers added by users.*/
 
