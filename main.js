@@ -19,7 +19,7 @@
  - breadguy
  */
 
-// @version 1.12.06.01 test
+// @version 1.12.06.01
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -28,7 +28,6 @@
 // ==/UserScript==
 
 /* RELEASE NOTES
- Really evil broken
  Ninja Release
  + reset for settins excluding user/passw.
  + added exception for bandit clues
@@ -329,15 +328,8 @@ var current_Gateway = _select_Gateway(); // edited by RottenMind
 
 
 var accounts = GM_getValue('nw_accounts', 2);
-var acc_nro = {};
-    for (var i_counter = 1; i_counter <= accounts; i_counter++) {
-        acc_nro = i_counter;
-        main(acc_nro);
-
-        if (i_counter == accounts) {
-            i_counter = 1;
-        }
-    }
+var acc_nro = 2;
+main(acc_nro);
 
 function main(acc_nro) {
 // Set global console variables
@@ -441,6 +433,7 @@ var s_paused = false;	   // extend the paused setting to the Page Reloading func
             // check for errors
             if ($("title").text().match(/Error/) || $("div.modal-content h3").text().match(/Disconnected/)) {
                 console.log("Error detected - relogging");
+                location.reload(true);
                 unsafeWindow.location.href = current_Gateway; // edited by RottenMind
                 return;
             }
@@ -451,7 +444,7 @@ var s_paused = false;	   // extend the paused setting to the Page Reloading func
                 if (state_loading >= state_loading_time) {
                     console.log("Page Loading too long");
                     state_loading = 0;
-                    location.reload();
+                    location.reload(true);
                 }
                 else {
                     state_loading++;
