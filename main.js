@@ -11,7 +11,7 @@
 
 /*
  === NW Gateway Professions Bot Developers
- - Bluep, Numberb, mac-nw, Phr33d0m, BigRedBrent, 
+ - Bluep, Numberb, mac-nw, Phr33d0m, BigRedBrent,
  - Noonereally, Glowing Crystalline Entity, WloBeb
 
  === NW Gateway Professions Bot Contributors
@@ -19,7 +19,7 @@
  - breadguy
  */
 
-// @version 1.10.06.03
+// @version 1.12.06.01 test
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -28,8 +28,11 @@
 // ==/UserScript==
 
 /* RELEASE NOTES
+ Really evil broken
  Ninja Release
- - Black ice & Leadership update
+ + reset for settins excluding user/passw.
+ + added exception for bandit clues
+ + leadership is good now
  - added counter for "undefine" & "Epic button" -error (temporal solution to see count) also button to console.log
  - added "Epic button enabled" -bug recovery (test)
  - added Black Ice refining lvl 4 - 5
@@ -296,8 +299,7 @@
  - Uses saved values to determine which profession type to level (Defaults to Leadership, currently no way to change it)
  0.1.5
  - Is now able to recover from missing assets
- - Uses a configurable grid to determine what the next task is to complete
- 0.1.0
+ - Uses a configurable grid to determine what the next task is to complete1 0.1.0
  - Is now able to select some hard coded leadership tasks
  - Can now collect from any completed slot
  */
@@ -306,25 +308,6 @@
 if (window.self !== window.top) {
     throw "";
 }
-var current_Gateway = _select_Gateway(); // edited by RottenMind
-// Set global console variables
-var fouxConsole = {log: function () {
-}, info: function () {
-}, error: function () {
-}, warn: function () {
-}};
-var console = unsafeWindow.console || fouxConsole;
-var chardiamonds = {};
-var definedTask = {};
-var startedTask = {};  // stores information about previous (character, taskname, and counter) and currently started task 
-startedTask["lastTaskChar"] = "";
-startedTask["lastTaskName"] = "";
-startedTask["lastTaskCount"] = 0;
-// Page Reloading function
-// Every second the page is idle or loading is tracked
-var loading_reset = false; // Enables a periodic reload if this is toggled on by the Auto Reload check box on the settings panel
-var s_paused = false;	   // extend the paused setting to the Page Reloading function
-
 // RottenMind (start), multi Url support
 function _select_Gateway() { // Check for Gateway used to
     if (window.location.href.indexOf("gatewaytest") > -1) { // detect gatewaytest Url
@@ -341,6 +324,40 @@ function _select_Gateway() { // Check for Gateway used to
     }
 }
 // RottenMind (END)
+
+var current_Gateway = _select_Gateway(); // edited by RottenMind
+
+
+var accounts = GM_getValue('nw_accounts', 2);
+var acc_nro = {};
+    for (var i_counter = 1; i_counter <= accounts; i_counter++) {
+        acc_nro = i_counter;
+        main(acc_nro);
+
+        if (i_counter == accounts) {
+            i_counter = 1;
+        }
+    }
+
+function main(acc_nro) {
+// Set global console variables
+var fouxConsole = {log: function () {
+}, info: function () {
+}, error: function () {
+}, warn: function () {
+}};
+var console = unsafeWindow.console || fouxConsole;
+var chardiamonds = {};
+var definedTask = {};
+var startedTask = {};  // stores information about previous (character, taskname, and counter) and currently started task
+startedTask["lastTaskChar"] = "";
+startedTask["lastTaskName"] = "";
+startedTask["lastTaskCount"] = 0;
+// Page Reloading function
+// Every second the page is idle or loading is tracked
+var loading_reset = false; // Enables a periodic reload if this is toggled on by the Auto Reload check box on the settings panel
+var s_paused = false;	   // extend the paused setting to the Page Reloading function
+
 
 (function () {
     var $ = unsafeWindow.$;
@@ -657,7 +674,7 @@ function _select_Gateway() { // Check for Gateway used to
      * Each craft slot will pick the first task that meets requirements.
      * See http://pastebin.com/VaGntEha for Task Name Map.
      * Updated list, see http://pastebin.com/inR0Hwv0
-     * Tools, 
+     * Tools,
      * Tasknames extraction, https://greasyfork.org/en/scripts/7977-nw-profession-names
      * Inventory listing, https://greasyfork.org/en/scripts/8506-nw-inventory-names
      * Some names above do not match, use below code to check:
@@ -692,43 +709,44 @@ function _select_Gateway() { // Check for Gateway used to
             17: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol","Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol",  "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
             18: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol","Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
             19: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_13_Patrol","Leadership_Tier2_12_Taxes", "Leadership_Tier2_10r_Seekmaps", "Leadership_Tier2_9_Chart", "Leadership_Tier3_16_Fight", "Leadership_Tier2_8r_Givehome", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_15r_Raidtreasury", "Leadership_Tier1_5_Explore"],
-           	
-           	20: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_20r_Master2",
-           	"Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3","Leadership_Tier3_20_Destroy",
-           	"Leadership_Tier2_12_Taxes", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_16_Fight",
-           	"Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-           	
-           	21: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_20r_Master2",
-           	"Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3","Leadership_Tier3_20_Destroy",
-           	"Leadership_Tier2_12_Taxes", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_16_Fight",
-           	"Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart",	"Leadership_Tier1_5_Explore"],
-           	
-           	22: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_22r_Capturebandithq",
-           	"Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3",
-           	"Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes","Tier3_13_Patrol",
-           	"Leadership_Tier3_16_Fight","Leadership_Tier2_10_Battle",	"Leadership_Tier2_9_Chart",
-           	"Leadership_Tier1_5_Explore"],
-           	
-           	23: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_22r_Capturebandithq",
-           	"Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3",
-           	"Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_13_Patrol",
-           	"Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart",
-           	"Leadership_Tier1_5_Explore"],
-           	
-           	24: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_22r_Capturebandithq",
-           	"Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2","Leadership_Tier3_20r_Master1",
-           	"Leadership_Tier3_20r_Master3",	"Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes",
-           	"Leadership_Tier3_13_Patrol","Leadership_Tier3_16_Fight",	"Leadership_Tier2_10_Battle",
-           	"Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-           	
-           	25: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_25r_Huntexperiment",
-           	"Leadership_Tier4_22r_Capturebandithq","Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2",
-           	"Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3","Leadership_Tier3_20_Destroy",
-           	"Leadership_Tier4_25_Battleelementalcultists","Leadership_Tier2_12_Taxes",
-           	"Leadership_Tier3_13_Patrol","Leadership_Tier3_16_Fight","Leadership_Tier2_10_Battle",
-           	"Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+
+            20: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_20r_Master2",
+                "Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3","Leadership_Tier3_20_Destroy",
+                "Leadership_Tier2_12_Taxes", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_16_Fight",
+                "Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+
+            21: ["Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier3_20r_Master2",
+                "Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3","Leadership_Tier3_20_Destroy", "Leadership_Tier4_21_Protectmagic",
+                "Leadership_Tier2_12_Taxes", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_16_Fight",
+                "Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart","Leadership_Tier1_5_Explore"],
+
+            22: ["Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier3_13r_Protectdiamonds",
+                "Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1",
+                "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier4_21_Protectmagic",
+                "Leadership_Tier2_12_Taxes", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_16_Fight",
+                "Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+
+            23: ["Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier3_13r_Protectdiamonds",
+                "Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3",
+                "Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_12_Taxes",
+                "Leadership_Tier4_21_Protectmagic","Leadership_Tier3_13_Patrol","Leadership_Tier3_16_Fight",
+                "Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart","Leadership_Tier1_5_Explore"],
+
+            24: ["Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier3_13r_Protectdiamonds",
+                "Leadership_Tier4_24r_Killdragon","Leadership_Tier3_20r_Master2","Leadership_Tier3_20r_Master1",
+                "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier2_12_Taxes",
+                "Leadership_Tier4_21_Protectmagic","Leadership_Tier3_13_Patrol","Leadership_Tier3_16_Fight",
+                "Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+
+            25: ["Leadership_Tier4_25r_Huntexperiment","Leadership_Tier4_22r_Capturebandithq",
+                "Leadership_Tier3_13r_Protectdiamonds","Leadership_Tier4_24r_Killdragon",
+                "Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1","Leadership_Tier3_20r_Master3",
+                "Leadership_Tier3_20_Destroy","Leadership_Tier2_12_Taxes", "Leadership_Tier4_25_Battleelementalcultists",
+                "Leadership_Tier4_21_Protectmagic", "Leadership_Tier3_13_Patrol","Leadership_Tier3_16_Fight",
+                "Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
 
             /*
+
              "Leadership_Tier1_2_Guardduty"                                 0/2   ->  0
              "Leadership_Tier1_4_Protect"                                 100/2   -> 50
              "Leadership_Tier2_8_Protect"                                 200/6   -> 33.33
@@ -957,10 +975,10 @@ function _select_Gateway() { // Check for Gateway used to
         level: {
             // Gather Mithral Ore and Exotic Pelts (14): Jewelcrafting_Tier3_Gather_Basic,
             // Semi-Precious Gem and Tough Leather Strip Crafting (7): Jewelcrafting_Tier2_Refine_Basic,
-            // Gather High Quality Iron Ore and Tough Pelts (7): Jewelcrafting_Tier2_Gather_Basic, 
+            // Gather High Quality Iron Ore and Tough Pelts (7): Jewelcrafting_Tier2_Gather_Basic,
             // Craft Raw Gems and Simple Leather Strips (1): Jewelcrafting_Tier1_Refine_Basic,
             // Gather Iron Ore and Simple Pelts (1):  Jewelcrafting_Tier1_Gather_Basic
-//			0:["Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Refine_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Refine_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
+            //			0:["Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Refine_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Refine_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
 
             0: ["Jewelcrafting_Tier0_Intro"],
             1: ["Jewelcrafting_Tier1_Waist_Offense_1", "Jewelcrafting_Tier1_Refine_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
@@ -1013,9 +1031,9 @@ function _select_Gateway() { // Check for Gateway used to
         taskListName: "Mailsmithing",
         taskName: "Armorsmithing_Med",
         level: {
-//            Med_Armorsmithing_Tier3_Scale_Pants (15)
-//            Med_Armorsmithing_Tier3_Scale_Shirt (14)
-//			      0:["Med_Armorsmithing_Tier3_Scale_Pants", "Med_Armorsmithing_Tier3_Scale_Shirt", "Med_Armorsmithing_Tier2_Scale_Pants_1_Set2", "Med_Armorsmithing_Tier2_Scale_Shirt", "Med_Armorsmithing_Tier1_Scale_Gloves_1", "Med_Armorsmithing_Tier1_Scale_Armor_1", "Med_Armorsmithing_Tier1_Scale_Shirt_1"],
+            //            Med_Armorsmithing_Tier3_Scale_Pants (15)
+            //            Med_Armorsmithing_Tier3_Scale_Shirt (14)
+            //			      0:["Med_Armorsmithing_Tier3_Scale_Pants", "Med_Armorsmithing_Tier3_Scale_Shirt", "Med_Armorsmithing_Tier2_Scale_Pants_1_Set2", "Med_Armorsmithing_Tier2_Scale_Shirt", "Med_Armorsmithing_Tier1_Scale_Gloves_1", "Med_Armorsmithing_Tier1_Scale_Armor_1", "Med_Armorsmithing_Tier1_Scale_Shirt_1"],
 
             0: ["Med_Armorsmithing_Tier0_Intro"],
             1: ["Med_Armorsmithing_Tier1_Gather_Basic"],
@@ -1164,9 +1182,9 @@ function _select_Gateway() { // Check for Gateway used to
         taskName: "Tailoring",
         level: {
             // power
-//			      0:["Tailoring_Tier3_Cloth_Pants", "Tailoring_Tier3_Cloth_Shirt", "Tailoring_Tier2_Cloth_Pants_1", "Tailoring_Tier2_Cloth_Shirt", "Tailoring_Tier1_Cloth_Gloves_1", "Tailoring_Tier1_Cloth_Armor_1", "Tailoring_Tier1_Cloth_Boots_1"],
+            //			      0:["Tailoring_Tier3_Cloth_Pants", "Tailoring_Tier3_Cloth_Shirt", "Tailoring_Tier2_Cloth_Pants_1", "Tailoring_Tier2_Cloth_Shirt", "Tailoring_Tier1_Cloth_Gloves_1", "Tailoring_Tier1_Cloth_Armor_1", "Tailoring_Tier1_Cloth_Boots_1"],
             // critical strike
-//			0:["Tailoring_Tier3_Cloth_Pants_Set2", "Tailoring_Tier3_Cloth_Shirt_Set2", "Tailoring_Tier2_Cloth_Pants_1_Set2", "Tailoring_Tier2_Cloth_Shirt_Set2", "Tailoring_Tier1_Cloth_Gloves_1", "Tailoring_Tier1_Cloth_Gloves_1", "Tailoring_Tier1_Cloth_Shirt_1_Set2"],
+            //			0:["Tailoring_Tier3_Cloth_Pants_Set2", "Tailoring_Tier3_Cloth_Shirt_Set2", "Tailoring_Tier2_Cloth_Pants_1_Set2", "Tailoring_Tier2_Cloth_Shirt_Set2", "Tailoring_Tier1_Cloth_Gloves_1", "Tailoring_Tier1_Cloth_Gloves_1", "Tailoring_Tier1_Cloth_Shirt_1_Set2"],
 
             0: ["Tailoring_Tier0_Intro"],
             1: [ "Tailoring_Tier1_Cloth_Shirt_1","Tailoring_Tier1_Cloth_Boots_1","Tailoring_Tier1_Gather_Basic"],
@@ -1274,9 +1292,9 @@ function _select_Gateway() { // Check for Gateway used to
             23 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
             24 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic", "Weaponsmithing_Tier3_Gather_Basic"],
             25 :["Weaponsmithing_Tier3_Gather_Basic_Mass"],
-// 20: ["Weaponsmithing_Tier3_Gather_Basic_Mass"],   // We want Gather here, because the raw materials can be used in other profs
-// If we actually want experience at level 20, these would be the tasks:
-//20: ["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            // 20: ["Weaponsmithing_Tier3_Gather_Basic_Mass"],   // We want Gather here, because the raw materials can be used in other profs
+            // If we actually want experience at level 20, these would be the tasks:
+            //20: ["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
         },
     };
 
@@ -1309,9 +1327,9 @@ function _select_Gateway() { // Check for Gateway used to
             23 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
             24 :["Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greataxe_4", "Weaponsmithing_Tier3_Battleaxe_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
             25 :["Weaponsmithing_Tier3_Gather_Basic_Mass"],
-// 20: ["Weaponsmithing_Tier3_Gather_Basic_Mass"],  // We want Gather here, because the raw materials can be used in other profs
-// If we actually want experience at level 20, these would be the tasks:
-//20: ["Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
+            // 20: ["Weaponsmithing_Tier3_Gather_Basic_Mass"],  // We want Gather here, because the raw materials can be used in other profs
+            // If we actually want experience at level 20, these would be the tasks:
+            //20: ["Weaponsmithing_Tier3_Longbow_Set_3", "Weaponsmithing_Tier3_Greatsword_Set_3", "Weaponsmithing_Tier3_Longsword_Set_3", "Weaponsmithing_Tier3_Dagger_Set_3", "Weaponsmithing_Tier3_Blades_Set_3", "Weaponsmithing_Tier3_Longbow_4", "Weaponsmithing_Tier3_Refine_Basic_Mass", "Weaponsmithing_Tier3_Gather_Basic_Mass"],
         },
     };
 
@@ -1501,32 +1519,33 @@ function _select_Gateway() { // Check for Gateway used to
         {name: 'optionals', title: 'Fill Optional Assets', def: true, type: 'checkbox', tooltip: 'Enable to include selecting the optional assets of tasks'},
         {name: 'autopurchase', title: 'Auto Purchase Resources', def: true, type: 'checkbox', tooltip: 'Automatically purchase required resources from gateway shop (100 at a time)'},
         {name: 'trainassets', title: 'Train Assets', def: true, type: 'checkbox', tooltip: 'Enable training/upgrading of asset worker resources'},
-        {name: 'refinead', title: 'Refine AD', def: true, type: 'checkbox', tooltip: 'Enable refining of AD on character switch'},
+        //{name: 'refinead', title: 'Refine AD', def: true, type: 'checkbox', tooltip: 'Enable refining of AD on character switch'},
         {name: 'openrewards', title: 'Open Reward Chests', def: false, type: 'checkbox', tooltip: 'Enable opeing of leadership chests on character switch'}, //MAC-NW
         {name: 'autoreload', title: 'Auto Reload', def: true, type: 'checkbox', tooltip: 'Enabling this will reload the gateway periodically. (Ensure Auto Login is enabled)'},
-        {name: 'autovendor_junk', title: 'Auto Vendor junk..', def: false, type: 'checkbox', tooltip: 'Vendor all (currently) winterfest fireworks+lanterns'}, //MAC-NW
-        {name: 'autovendor_kits_altars_limit', title: 'Vendor/Maintain Altar Node Kit Stacks', def: false, type: 'checkbox', tooltip: 'Limit skill kits stacks to 50/Altars80, vendor kits unusable by class, remove all if player has one bag or full bags'}, // edited by RottenMind
+        {name: 'autovendor_junk', title: 'Vendor junk..', def: false, type: 'checkbox', tooltip: 'Vendor all (currently) winterfest fireworks+lanterns'}, //MAC-NW
+        {name: 'autovendor_kits_altars_limit', title: 'Maintain Altar Node Kit Stacks', def: false, type: 'checkbox', tooltip: 'Limit skill kits stacks to 50/Altars80, vendor kits unusable by class, remove all if player has one bag or full bags'}, // edited by RottenMind
         {name: 'autovendor_kits_altars_all', title: 'Vendor All Altar Node Kit Stacks', def: false, type: 'checkbox', tooltip: 'Sell ALL skill kits  Altars.'}, // RottenMind
-        {name: 'autovendor_profresults', title: 'Vendor/Maintain Prof Crafted Levelup & Gathered Items', def: true, type: 'checkbox', tooltip: 'Vendor off Tier 1 to 5 items produced and reused for leveling crafting & Gathered professions items.'},
-        {name: 'autovendor_pots1', title: 'Auto Vendor minor potions (lvl 1)', def: false, type: 'checkbox', tooltip: 'Vendor all minor potions (lvl 1) found in player bags'}, //MAC-NW
-        {name: 'autovendor_pots2', title: 'Auto Vendor lesser potions (lvl 15)', def: false, type: 'checkbox', tooltip: 'Vendor all lesser potions (lvl 15) found in player bags'}, //MAC-NW
-        {name: 'autovendor_pots3', title: 'Auto Vendor potions (lvl 30)', def: false, type: 'checkbox', tooltip: 'Vendor all potions (lvl 30) found in player bags'}, //MAC-NW
-        {name: 'autovendor_pots4', title: 'Auto Vendor greater potions (lvl 45)', def: false, type: 'checkbox', tooltip: 'Vendor all greater potions (lvl 45) found in player bags'}, //MAC-NW
-        {name: 'autovendor_rank1', title: 'Auto Vendor enchants & runes Rank 1', def: false, type: 'checkbox', tooltip: 'Vendor all Rank 1 enchantments & runestones found in player bags'}, //MAC-NW
-        {name: 'autovendor_rank2', title: 'Auto Vendor enchants & runes Rank 2', def: false, type: 'checkbox', tooltip: 'Vendor all Rank 2 enchantments & runestones found in player bags'}, //MAC-NW
-        {name: 'autovendor_rank3', title: 'Auto Vendor enchants & runes Rank 3', def: false, type: 'checkbox', tooltip: 'Vendor all Rank 3 enchantments & runestones found in player bags'}, // edited by RottenMind
+        {name: 'autovendor_profresults', title: 'Vendor Prof Crafted & Gathered Items', def: true, type: 'checkbox', tooltip: 'Vendor off Tier 1 to 5 items produced and reused for leveling crafting & Gathered professions items.'},
+        {name: 'autovendor_pots1', title: 'Vendor minor potions (lvl 1)', def: false, type: 'checkbox', tooltip: 'Vendor all minor potions (lvl 1) found in player bags'}, //MAC-NW
+        {name: 'autovendor_pots2', title: 'Vendor lesser potions (lvl 15)', def: false, type: 'checkbox', tooltip: 'Vendor all lesser potions (lvl 15) found in player bags'}, //MAC-NW
+        {name: 'autovendor_pots3', title: 'Vendor potions (lvl 30)', def: false, type: 'checkbox', tooltip: 'Vendor all potions (lvl 30) found in player bags'}, //MAC-NW
+        {name: 'autovendor_pots4', title: 'Vendor greater potions (lvl 45)', def: false, type: 'checkbox', tooltip: 'Vendor all greater potions (lvl 45) found in player bags'}, //MAC-NW
+        //{name: 'autovendor_rank1', title: 'Auto Vendor enchants & runes Rank 1', def: false, type: 'checkbox', tooltip: 'Vendor all Rank 1 enchantments & runestones found in player bags'}, //MAC-NW
+        {name: 'autovendor_rank2', title: 'Vendor enchants & runes Rank 2', def: false, type: 'checkbox', tooltip: 'Vendor all Rank 2 enchantments & runestones found in player bags'}, //MAC-NW
+        {name: 'autovendor_rank3', title: 'Vendor enchants & runes Rank 3', def: false, type: 'checkbox', tooltip: 'Vendor all Rank 3 enchantments & runestones found in player bags'}, // edited by RottenMind
         {name: 'level_20_skip', title: 'Auto level 20', def: true, type: 'checkbox', tooltip: 'All level 20 profession slots are skipped NOT Leadership'},
-        {name: 'purchasePorridge', title: 'Purchase Porridge', def: false, type: 'checkbox', tooltip: 'Purchase Porridge to Advance Leadership Rank'},
-        {name: 'autologin', title: 'Attempt to login automatically', def: true, type: 'checkbox', tooltip: 'Automatically attempt to login to the neverwinter gateway site', border: true},
-        {name: 'nw_username', title: 'Neverwinter Username', def: '', type: 'text', tooltip: ''},
-        {name: 'nw_password', title: 'Neverwinter Password', def: '', type: 'password', tooltip: ''},
+        {name: 'purchasePorridge', title: 'Purchase Porridge', def: true, type: 'checkbox', tooltip: 'Purchase Porridge to Advance Leadership Rank'},
+        {name: 'nw_accounts', title: 'Accounts', def: '1', type: 'text', tooltip: 'Set number of accounts(EXPERIMENTAL)'},
+        {name: 'easy_start', title: 'Automatic BAnker', def: true, type: 'checkbox', tooltip: 'Get Banker first character etc. works best after reset, turn off if need other character.', border: true},
+        {name: acc_nro + 'nw_username', title: 'NW UserN Acc.' + acc_nro, def: '', type: 'text', tooltip: ''},
+        {name: acc_nro + 'nw_password', title: 'NW Pass Acc.' + acc_nro, def: '', type: 'password', tooltip: ''},
         // MAC-NW AD Consolidation
-        {name: 'autoexchange', title: 'Consolidate AD via ZEX', def: false, type: 'checkbox', tooltip: 'Automatically attempt to post, cancel and withdraw AD via ZEX and consolidate to designated character', border: true},
-        {name: 'bankchar', title: 'Character Name of Banker', def: '', type: 'text', tooltip: 'Enter name of the character to hold account AD'},
+        {name: 'autoexchange', title: 'Consolidate AD via ZEX', def: true, type: 'checkbox', tooltip: 'Automatically attempt to post, cancel and withdraw AD via ZEX and consolidate to designated character', border: true},
+        {name: acc_nro + 'bankchar', title: 'NW Banker Acc.' + acc_nro, def: '', type: 'text', tooltip: 'Enter name of the character to hold account AD'},
         {name: 'banktransmin', title: 'Min AD for Transfer', def: '5000', type: 'text', tooltip: 'Enter minimum AD limit for it to be cosidered for transfer off a character'},
         {name: 'bankcharmin', title: 'Min Character balance', def: '600', type: 'text', tooltip: 'Enter the amount of AD to always keep available on characters'},
         {name: 'banktransrate', title: 'AD per Zen Rate (in zen)', def: '300', type: 'text', tooltip: 'Enter default rate to use for transfering through ZEX'},
-        {name: 'charcount', title: 'Enter number of characters to use (Save and Apply to update settings form)', def: '1', type: 'text', tooltip: 'Enter number of characters to use (Save and Apply to update settings form)', border: true},
+        {name: acc_nro + 'charcount', title: 'NW char. count Acc.' + acc_nro, def: '1', type: 'text', tooltip: 'Multi Acc. char. count is better keep same eg. name extra characters (Save and Apply)', border: true},
         // MAC-NW
     ];
 
@@ -1545,14 +1564,14 @@ function _select_Gateway() { // Check for Gateway used to
         }
     }
 
-    if (settings["charcount"] < 1) {
-        settings["charcount"] = 1;
+    if (settings[acc_nro + "charcount"] < 1) {
+        settings[acc_nro + "charcount"] = 1;
     }
-    if (settings["charcount"] > 99) {
-        settings["charcount"] = 99;
+    if (settings[acc_nro + "charcount"] > 99) {
+        settings[acc_nro + "charcount"] = 99;
     }
 
-    // Profession priority list by order
+// Profession priority list by order
     var tasklist = [
         definedTask["Winter Event"],
         definedTask["Siege Event"],
@@ -1575,20 +1594,20 @@ function _select_Gateway() { // Check for Gateway used to
 
     var charSettings = [];
 
-    for (var i = 0; i < settings["charcount"]; i++) {
-        charSettings.push({name: 'nw_charname' + i, title: 'Character', def: 'Character ' + (i + 1), type: 'text', tooltip: 'Characters Name,(set first character name to Character 1 for Automatic char.name fill.'});
+    for (var i = 0; i < settings[acc_nro + "charcount"]; i++) {
+        charSettings.push({name: acc_nro + 'nw_charname' + i, title: 'Character', def: 'Character ' + (i + 1), type: 'text', tooltip: 'Characters Name,(set first character name to Character 1 for Automatic char.name fill.'});
         charSettings.push({name: 'WinterEvent' + i, title: 'WinterEvent', def: '0', type: 'text', tooltip: 'Number of slots to assign to WinterEvent'});
         charSettings.push({name: 'Leadership' + i, title: 'Leadership', def: '9', type: 'text', tooltip: 'Number of slots to assign to Leadership'});
         charSettings.push({name: 'Event_Siege' + i, title: 'Siege Event', def: '0', type: 'text', tooltip: 'Number of slots to assign to Siege Event'});
         charSettings.push({name: 'BlackIce' + i, title: 'Black Ice Shaping', def: '0', type: 'text', tooltip: 'Number of slots to assign to BIS'});
-        charSettings.push({name: 'Alchemy' + i, title: 'Alchemy', def: '1', type: 'text', tooltip: 'Number of slots to assign to Alchemy'});
+        charSettings.push({name: 'Alchemy' + i, title: 'Alchemy', def: '0', type: 'text', tooltip: 'Number of slots to assign to Alchemy'});
         charSettings.push({name: 'Weaponsmithing_Axe' + i, title: 'Weaponsmithing/Axes', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Axes'});
         /*charSettings.push({name: 'Weaponsmithing_Dagger' + i, title: 'Weaponsmithing/Daggers', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Daggers'});
          charSettings.push({name: 'Weaponsmithing_Bow' + i, title: 'Weaponsmithing/Bows', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Bows -- choose one of these for every two Daggers/Greatswords/Longswords/Blades (or choose axes)'});
          charSettings.push({name: 'Weaponsmithing_Greatsword' + i, title: 'Weaponsmithing/Greatswords', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Greatswords'});
          charSettings.push({name: 'Weaponsmithing_Longsword' + i, title: 'Weaponsmithing/Longswords', def: '0', type: 'text', tooltip: 'Number of slots to assign to Weaponsmithing/Longswords'});*/
-        charSettings.push({name: 'Artificing' + i, title: 'Artificing', def: '1', type: 'text', tooltip: 'Number of slots to assign to Artificing'});
-        charSettings.push({name: 'Jewelcrafting' + i, title: 'Jewelcrafting', def: '1', type: 'text', tooltip: 'Number of slots to assign to Jewelcrafting'});
+        charSettings.push({name: 'Artificing' + i, title: 'Artificing', def: '0', type: 'text', tooltip: 'Number of slots to assign to Artificing'});
+        charSettings.push({name: 'Jewelcrafting' + i, title: 'Jewelcrafting', def: '0', type: 'text', tooltip: 'Number of slots to assign to Jewelcrafting'});
         charSettings.push({name: 'Mailsmithing' + i, title: 'Mailsmithing', def: '0', type: 'text', tooltip: 'Number of slots to assign to Mailsmithing'});
         charSettings.push({name: 'Platesmithing' + i, title: 'Platesmithing', def: '0', type: 'text', tooltip: 'Number of slots to assign to Platesmithing'});
         charSettings.push({name: 'Leatherworking' + i, title: 'Leatherworking', def: '0', type: 'text', tooltip: 'Number of slots to assign to Leatherworking'});
@@ -1616,7 +1635,7 @@ function _select_Gateway() { // Check for Gateway used to
 
     }
 
-    // Page Settings
+// Page Settings
     var PAGES = Object.freeze({
         LOGIN: {name: "Login", path: "div#login"},
         GUARD: {name: "Account Guard", path: "div#page-accountguard"},
@@ -1643,9 +1662,9 @@ function _select_Gateway() { // Check for Gateway used to
         //if (!$("form > p.error:visible").length && settings["autologin"]) {
         // No previous log in error - attempt to log in
         console.log("Setting username");
-        $("input#user").val(settings["nw_username"]);
+        $("input#user").val(settings[acc_nro + "nw_username"]);
         console.log("Setting password");
-        $("input#pass").val(settings["nw_password"]);
+        $("input#pass").val(settings[acc_nro + "nw_password"]);
         console.log("Clicking Login Button");
         $("div#login > input").click();
         //}
@@ -1750,7 +1769,7 @@ function _select_Gateway() { // Check for Gateway used to
 
                     // Check level
                     var level = unsafeWindow.client.dataModel.model.ent.main.itemassignmentcategories.categories.filter(function (entry) {
-                        return entry.name == prof.taskName; // 
+                        return entry.name == prof.taskName; //
                     })[0].currentrank;
                     var list = prof.level[level];
                     var tmpLevel = level;
@@ -1762,7 +1781,7 @@ function _select_Gateway() { // Check for Gateway used to
                     }
 
                     var currentTasksByTaskList = unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.filter(function (entry) {
-//                        return entry.category == tasklist[i].taskName && list.indexOf(entry.hdef.match(/^@ItemAssignmentDef\[([^\]]*)\]$/)[1]) > -1;
+                        //                        return entry.category == tasklist[i].taskName && list.indexOf(entry.hdef.match(/^@ItemAssignmentDef\[([^\]]*)\]$/)[1]) > -1;
                         return entry.category === prof.taskName && taskSlots[entry.slotindex] === prof.taskListName;
                     });
                     var currentTasksByProf = unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.filter(function (entry) {
@@ -1794,7 +1813,7 @@ function _select_Gateway() { // Check for Gateway used to
 
         // Add diamond count
         chardiamonds[charcurrent] = unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds;
-        console.log(settings["nw_charname" + charcurrent] + "'s", "Astral Diamonds:", chardiamonds[charcurrent]);
+        console.log(settings[acc_nro + "nw_charname" + charcurrent] + "'s", "Astral Diamonds:", chardiamonds[charcurrent]);
         return false;
     }
 
@@ -1805,7 +1824,7 @@ function _select_Gateway() { // Check for Gateway used to
         var _accountName = unsafeWindow.client.dataModel.model.loginInfo.publicaccountname;
         var _charIndex = (!_charStartIndex || parseInt(_charStartIndex) > (charSettings.length + 1) || parseInt(_charStartIndex) < 0)
             ? 0 : parseInt(_charStartIndex);
-        var _fullCharName = settings["nw_charname" + _charIndex] + '@' + _accountName;
+        var _fullCharName = settings[acc_nro + "nw_charname" + _charIndex] + '@' + _accountName;
         var _hasLoginDaily = 0;
         var _isLastChar = false;
         var _scaHashMatch = /\/adventures$/;
@@ -1819,7 +1838,7 @@ function _select_Gateway() { // Check for Gateway used to
             unsafeWindow.location.hash = "#char(" + encodeURI(_fullCharName) + ")/adventures";
         }
 
-        if (settings["nw_charname" + (_charIndex + 1)] === undefined)
+        if (settings[acc_nro + "nw_charname" + (_charIndex + 1)] === undefined)
             _isLastChar = true;
 
         WaitForState("").done(function () {
@@ -1985,10 +2004,10 @@ function _select_Gateway() { // Check for Gateway used to
                         }
                         if (startedTask["lastTaskCount"] >= 15) {
                             console.log("LOOP FAILURE x [", Epic_button_error()  , "] times, skip to next task!!!");
-                        $(".footer-professions-taskdetails .button button.resetWindow").trigger('click');
+                            $(".footer-professions-taskdetails .button button.resetWindow").trigger('click');
                             WaitForState("").done(function () {
-                            createNextTask(prof, level, list, i + 1); // try create forced next task to resolve gateway bug
-                                
+                                createNextTask(prof, level, list, i + 1); // try create forced next task to resolve gateway bug
+
                             });
                         }
                         return true;
@@ -2034,6 +2053,11 @@ function _select_Gateway() { // Check for Gateway used to
             console.log("Too many Mining Claims: skiping");
             return false;
         }
+        if (taskname == "Leadership_Tier4_21_Protectmagic" && countResource("Crafting_Resource_Clues_Bandit_Hq") >= resource_limit ) {
+            console.log("Too many Clues: skiping");
+            return false;
+        }
+
         var thisTask = unsafeWindow.client.dataModel.model.craftinglist['craft_' + profname].entries.filter(function (entry) {
             return entry.def && entry.def.name == taskname;
         })[0];
@@ -2232,7 +2256,7 @@ function _select_Gateway() { // Check for Gateway used to
      * @param {string} taskDetail The craftindetail object for the task to be started
      function startTask(taskDetail) {
      return;
-     
+
      unsafeWindow.client.professionFetchTaskDetail(taskDetail.def.name);
      //client.dataModel.addDefaultResources();
      client.professionStartAssignment(taskDetail.def.name);
@@ -2447,7 +2471,7 @@ function _select_Gateway() { // Check for Gateway used to
     }
 
 
-    // Function used to check exchange data model and post calculated AD/Zen for transfer if all requirements are met
+// Function used to check exchange data model and post calculated AD/Zen for transfer if all requirements are met
     function postZexOffer() {
         // Make sure the exchange data is loaded to model
         if (unsafeWindow.client.dataModel.model.exchangeaccountdata) {
@@ -2470,7 +2494,7 @@ function _select_Gateway() { // Check for Gateway used to
         }
     }
 
-    // Function used to check exchange data model and withdraw listed orders that use the settings zen transfer rate
+// Function used to check exchange data model and withdraw listed orders that use the settings zen transfer rate
     function withdrawZexOffer() {
         // Make sure the exchange data is loaded to model
         if (unsafeWindow.client.dataModel.model.exchangeaccountdata) {
@@ -2497,7 +2521,7 @@ function _select_Gateway() { // Check for Gateway used to
         }
     }
 
-    // MAC-NW
+// MAC-NW
 
     function vendorItemsLimited(_items) {
         var _charGold = unsafeWindow.client.dataModel.model.ent.main.currencies.gold;
@@ -2605,7 +2629,7 @@ function _select_Gateway() { // Check for Gateway used to
         }
         var _tmpBag = _tmpBag1.concat(_tmpBag2);
 
-         if (settings["autovendor_profresults"]) {
+        if (settings["autovendor_profresults"]) {
             _tmpBag.forEach(function (slot) {
                 for (i = 0; i < _profitems.length; i++) { // edited by RottenMind
                     if (slot && _profitems[i].pattern.test(slot.name) && Inventory_bagspace() <= 9) { // !slot.bound && _profitems[i].count > 3 &&, edited by RottenMind
@@ -2669,25 +2693,27 @@ function _select_Gateway() { // Check for Gateway used to
 
         setTaskSlots();
 
-        if (settings["refinead"]) {
-            var _currencies = unsafeWindow.client.dataModel.model.ent.main.currencies;
-            if (_currencies.diamondsconvertleft && _currencies.roughdiamonds) {
-                var refined_diamonds;
-                if (_currencies.diamondsconvertleft < _currencies.roughdiamonds) {
-                    refined_diamonds = _currencies.diamondsconvertleft
-                } else {
-                    refined_diamonds = _currencies.roughdiamonds
-                }
-                chardiamonds[charcurrent] += refined_diamonds
-                console.log("Refining AD for", settings["nw_charname" + charcurrent] + ":", refined_diamonds);
-                console.log(settings["nw_charname" + charcurrent] + "'s", "Astral Diamonds:", chardiamonds[charcurrent]);
-                unsafeWindow.client.sendCommand('Gateway_ConvertNumeric', 'Astral_Diamonds');
-                WaitForState("button.closeNotification").done(function () {
-                    $("button.closeNotification").click();
-                });
+        //if (settings["refinead"]) {
+        var _currencies = unsafeWindow.client.dataModel.model.ent.main.currencies;
+        if (_currencies.diamondsconvertleft && _currencies.roughdiamonds) {
+            var refined_diamonds;
+            if (_currencies.diamondsconvertleft < _currencies.roughdiamonds) {
+                refined_diamonds = _currencies.diamondsconvertleft
+            } else {
+                refined_diamonds = _currencies.roughdiamonds
             }
+            chardiamonds[charcurrent] += refined_diamonds
+            console.log("Refining AD for", settings[acc_nro + "nw_charname" + charcurrent] + ":", refined_diamonds);
+            console.log(settings[acc_nro + "nw_charname" + charcurrent] + "'s", "Astral Diamonds:", chardiamonds[charcurrent]);
+            unsafeWindow.client.sendCommand('Gateway_ConvertNumeric', 'Astral_Diamonds');
+            WaitForState("button.closeNotification").done(function () {
+                $("button.closeNotification").click();
+            });
         }
-
+        //}
+        if (settings["easy_start"]) {
+            get_banker();
+        }
         // MAC-NW -- AD Consolidation
         if (settings["autoexchange"]) {
 
@@ -2699,7 +2725,7 @@ function _select_Gateway() { // Check for Gateway used to
                     if (settings["banktransrate"] && parseInt(settings["banktransrate"]) >= 50 && parseInt(settings["banktransrate"]) <= 500) {
                         window.setTimeout(postZexOffer, delay.SHORT);
                     }
-                    // Crash ZEX Domino 
+                    // Crash ZEX Domino
                     if (unsafeWindow.client.dataModel.model.exchangeaccountdata.openorders.length >= 4) {
                         window.setTimeout(withdrawZexOffer, delay.MEDIUM);
                     }
@@ -2743,9 +2769,9 @@ function _select_Gateway() { // Check for Gateway used to
 
         var chardelay, chardate = null, nowdate = new Date();
         nowdate = nowdate.getTime();
-        for (var cc = 0; cc < settings["charcount"]; cc++) {
+        for (var cc = 0; cc < settings[acc_nro + "charcount"]; cc++) {
             if (chartimers[cc] != null) {
-                console.log("Date found for " + settings["nw_charname" + cc]);
+                console.log("Date found for " + settings[acc_nro + "nw_charname" + cc]);
                 if (!chardate || chartimers[cc] < chardate) {
                     chardate = chartimers[cc];
                     charcurrent = cc;
@@ -2758,22 +2784,22 @@ function _select_Gateway() { // Check for Gateway used to
                 charcurrent = cc;
                 chardelay = delay.SHORT;
                 chardate = null;
-                console.log("No date found for " + settings["nw_charname" + cc] + ", switching now.");
+                console.log("No date found for " + settings[acc_nro + "nw_charname" + cc] + ", switching now.");
                 break;
             }
         }
 
         // Count AD
         var curdiamonds = 0;
-        for (var cc = 0; cc < settings["charcount"]; cc++) {
+        for (var cc = 0; cc < settings[acc_nro + "charcount"]; cc++) {
             if (chardiamonds[cc] != null) {
                 curdiamonds += Math.floor(chardiamonds[cc] / 50) * 50;
             }
         }
 
-        console.log("Next run for " + settings["nw_charname" + charcurrent] + " in " + parseInt(chardelay / 1000) + " seconds.");
-        $("#prinfopane").empty().append("<h3 class='promo-image copy-top prh3'>Professions Robot<br />Next task for " + settings["nw_charname" + charcurrent] + "<br /><span data-timer='" + chardate + "' data-timer-length='2'></span><br />Diamonds: " + curdiamonds.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</h3>");
-        GM_setValue("charcurrent", charcurrent);
+        console.log("Next run for " + settings[acc_nro + "nw_charname" + charcurrent] + " in " + parseInt(chardelay / 1000) + " seconds.");
+        $("#prinfopane").empty().append("<h3 class='promo-image copy-top prh3'>Professions Robot<br />Next task for " + settings[acc_nro + "nw_charname" + charcurrent] + "<br /><span data-timer='" + chardate + "' data-timer-length='2'></span><br />Diamonds: " + curdiamonds.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</h3>");
+        GM_setValue(acc_nro + "charcurrent", charcurrent);
         dfdNextRun.resolve(chardelay);
     }
 
@@ -2917,16 +2943,16 @@ function _select_Gateway() { // Check for Gateway used to
 
         if (accountName) {
             // load current character position and values
-            charcurrent = GM_getValue("charcurrent", 0);
-            for (var i = 0; i < (charSettings.length / settings["charcount"]); i++) {
-                j = i + (charcurrent * charSettings.length / settings["charcount"]);
+            charcurrent = GM_getValue(acc_nro + "charcurrent", 0);
+            for (var i = 0; i < (charSettings.length / settings[acc_nro + "charcount"]); i++) {
+                j = i + (charcurrent * charSettings.length / settings[acc_nro + "charcount"]);
                 settings[charSettings[j].name.replace(new RegExp(charcurrent + "$"), '')] = settings[charSettings[j].name];
             }
 
-            var charName = settings["nw_charname"];
+            var charName = settings[acc_nro + "nw_charname"];
             var fullCharName = charName + '@' + accountName;
 
-            if (charName == "Character 1") {
+            if (charName.match(/Character/)) {
                 if (!settings["paused"])
                     PauseSettings("pause");
                 console.log("Loading character list", charName);
@@ -2937,9 +2963,9 @@ function _select_Gateway() { // Check for Gateway used to
                 });
                 console.log("Found names: " + charNameList);
 
-                GM_setValue("charcount", charNameList.length);
+                GM_setValue(acc_nro + "charcount", charNameList.length);
                 charNameList.forEach(function (name, i) {
-                    GM_setValue("nw_charname" + i, name);
+                    GM_setValue(acc_nro + "nw_charname" + i, name);
                 })
                 if (settings["paused"]) {
                     window.setTimeout(function () {
@@ -3006,7 +3032,7 @@ function _select_Gateway() { // Check for Gateway used to
             }
 
             // Check to see if this is the designated banker character
-            if (settings["bankchar"] == unsafeWindow.client.dataModel.model.ent.main.name) {
+            if (settings[acc_nro + "bankchar"] == unsafeWindow.client.dataModel.model.ent.main.name) {
                 // This is the banker -- withdraw any buy listings that match the transfer rate set in panel
                 window.setTimeout(withdrawZexOffer, delay.MEDIUM);
                 // withdraw the balance from exchange
@@ -3070,7 +3096,7 @@ function _select_Gateway() { // Check for Gateway used to
 #charPanel {width:98%;max-height:400px;overflow:auto;display:block;padding:3px;}\
 #charPanel div div ul li { display: inline-block; width: 48%; }\
 .inventory-container {float: left; clear: none; width: 270px; margin-right: 20px;}\
-#prinfopane {position: fixed; top: 5px; left: 200px; display: block; z-index: 1000;}\
+#prinfopane {position: fixed; top: 5px; left: 200px; display: block; z-index: 500;}\
 .prh3 {padding: 5px; height: auto!important; width: auto!important; background-color: rgba(0, 0, 0, 0.7);}\
 .custom-radio{width:16px;height:16px;display:inline-block;position:relative;z-index:1;top:3px;background-color:#fff;margin:0 4px 0 2px;}\
 .custom-radio:hover{background-color:black;} .custom-radio.selected{background-color:red;} .custom-radio-selected-text{color:darkred;font-weight:500;}\
@@ -3086,8 +3112,8 @@ function _select_Gateway() { // Check for Gateway used to
         // Add settings panel to page body
         $("body").append(
             '<div id="settingsPanel">\
-<div id="settings_title">\
-<img src=' + image_prefs + ' style="float: left; vertical-align: text-bottom;"\>\
+    <div id="settings_title">\
+    <img src=' + image_prefs + ' style="float: left; vertical-align: text-bottom;"\>\
 <img id="settings_close" src=' + image_close + ' title="Click to hide preferences" style="float: right; vertical-align: text-bottom; cursor: pointer; display: block;"\>\
 <span style="margin:3px">Settings</span>\
 </div>\
@@ -3178,7 +3204,7 @@ $(this).parent().parent().removeClass("custom-radio-selected-text");\
 }\
 function change_position(val)\
 {\
-for (var i = 0; i < ' + settings["charcount"] + '; i++)\
+for (var i = 0; i < ' + settings[acc_nro + "charcount"] + '; i++)\
 {\
 document.getElementById("charContainer"+i).style.display="none";\
 }\
@@ -3189,25 +3215,25 @@ document.getElementById("charContainer"+val).style.display="block";\
 <div id="charPanel">\
 <div style="width:30%;float:left;max-height:400px;overflow:auto;">\
 ';
-        for (var i = 0; i < settings["charcount"]; i++) {
+        for (var i = 0; i < settings[acc_nro + "charcount"]; i++) {
             addText += '\
-<div><label for="value_' + i + '" style="display:block;padding-top:2px;"><input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_' + i + '" value="' + i + '" />' + settings["nw_charname" + i] + '</label></div>\
+<div><label for="value_' + i + '" style="display:block;padding-top:2px;"><input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_' + i + '" value="' + i + '" />' + settings[acc_nro + "nw_charname" + i] + '</label></div>\
 ';
         }
         addText += '\
 </div>\
 <div style="width:69%;float:right;">\
 ';
-        for (var i = 0; i < settings["charcount"]; i++) {
+        for (var i = 0; i < settings[acc_nro + "charcount"]; i++) {
             addText += '\
 <div id="charContainer' + i + '" style="display:none">\
 <ul style="list-style: none outside none; max-height: 500px; overflow: auto;">\
 ';
-            var k = 0 + (i * charSettings.length / settings["charcount"]);
+            var k = 0 + (i * charSettings.length / settings[acc_nro+ "charcount"]);
             var id = 'settings_' + charSettings[k].name;
             addText += '<li title="' + charSettings[k].tooltip + '"><input style="margin:4px; padding: 2px;" name="' + id + '" id="' + id + '" type="text" /></li>';
-            for (var j = 1; j < (charSettings.length / settings["charcount"]); j++) {
-                k = j + (i * charSettings.length / settings["charcount"]);
+            for (var j = 1; j < (charSettings.length / settings[acc_nro + "charcount"]); j++) {
+                k = j + (i * charSettings.length / settings[acc_nro + "charcount"]);
                 if (charSettings[k].type == 'void') {
                     continue;
                 }
@@ -3236,6 +3262,7 @@ document.getElementById("charContainer"+val).style.display="block";\
 <input id="settings_close" class="button-yellow pure-button" type="button" value="Close">\
 <input id="settings_sca" class="button-red pure-button" type="button" value="Cycle SCA">\
 <input id="log_error" class="button-green pure-button" type="button" value="Log Error">\
+<input id="settings_wipe" class="button-white pure-button" type="button" value="RESET all">\
 </div>');
 
         // Add open settings button to page
@@ -3279,6 +3306,20 @@ document.getElementById("charContainer"+val).style.display="block";\
                 console.log("Button Epic fails[" + epic +"] & undefine [" + un_def_err + "].");
             }, 0)
         });
+        $("#settings_wipe").click(function() {
+            setTimeout(function () {
+                // Delete all saved settings, EXCEPT password/username
+                var keys = GM_listValues();
+                for (i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    if (!key.match(/(username|password)/)) {
+                        //console.log("do delete these", key);
+                        GM_deleteValue(key);}
+                }
+            }, 0)
+            unsafeWindow.location.href = current_Gateway;
+            return;
+        });
 
         customRadio("radio_position");
 
@@ -3308,7 +3349,7 @@ document.getElementById("charContainer"+val).style.display="block";\
     }
 
     function SaveSettings() {
-        var charcount = settings["charcount"];
+        var charcount = settings[acc_nro + "charcount"];
 
         // Get each value from the UI
         for (var i = 0; i < settingnames.length; i++) {
@@ -3360,7 +3401,7 @@ document.getElementById("charContainer"+val).style.display="block";\
         }
 
         // If character numbers have changed reload page
-        if (charcount != settings["charcount"]) {
+        if (charcount != settings[acc_nro + "charcount"]) {
             console.log("Reloading gateway to update character count");
             unsafeWindow.location.href = current_Gateway; // edited by RottenMind
             return;
@@ -3386,7 +3427,7 @@ document.getElementById("charContainer"+val).style.display="block";\
             _vendorItems[_vendorItems.length] = {pattern: /^Item_Portable_Altar$/, limit: 0};
             _vendorItems[_vendorItems.length] = {pattern: /^Item_Consumable_Skill/, limit: 0};
         }
-        if (settings["autovendor_rank1"]) {
+        if (settings["autovendor_rank2"]) {
             _vendorItems[_vendorItems.length] = {pattern: /^T1_Enchantment/, limit: 0};
             _vendorItems[_vendorItems.length] = {pattern: /^T1_Runestone/, limit: 0};
         }
@@ -3428,7 +3469,7 @@ document.getElementById("charContainer"+val).style.display="block";\
             _vendorItems[_vendorItems.length] = {pattern: /^Item_Fireworks/, limit: 0}; // Fireworks
             _vendorItems[_vendorItems.length] = {pattern: /^Object_Plate_/, limit: 0};
             _vendorItems[_vendorItems.length] = {pattern: /^Object_Decoration_/, limit: 0};
-            _vendorItems[_vendorItems.length] = {pattern: /_Green_T[1-5]_Unid$/, limit: 0}; // Unidentified Green Gear
+            _vendorItems[_vendorItems.length] = {pattern: /_Green_T[1-7]_Unid$/, limit: 0}; // Unidentified Green Gear
         }
         if (settings["autovendor_profresults"] && _charGold < 2) { //this "gold" threshold must be global var and adjustable by users
             _vendorItems[_vendorItems.length] = {
@@ -3506,7 +3547,7 @@ document.getElementById("charContainer"+val).style.display="block";\
     }
     /** Report error in GM for later  use
      * edited by RM
-     * 
+     *
      */
     function Epic_button_error() {
         var counter = GM_getValue('Epic_error', 0);
@@ -3519,13 +3560,24 @@ document.getElementById("charContainer"+val).style.display="block";\
         // console.log('This script has been run ' + counter + ' times.');
         GM_setValue('Undefine_error', ++counter);
         return counter;
-    }    
-
+    }
+// This just set Banker to character 1 if its not him all-ready
+    function get_banker(){
+        var me = GM_getValue(acc_nro + "nw_charname0",0);
+        var banker = GM_getValue(acc_nro + "bankchar",0);
+        //console.log(me, banker);
+        if (me !== banker) {
+            GM_setValue(acc_nro + 'bankchar', me);
+            unsafeWindow.location.href = current_Gateway;
+            return;
+        }
+    }
     /** End, Helpers added by users.*/
 
-        // Add the settings button and start a process timer
+// Add the settings button and start a process timer
     addSettings();
     timerHandle = window.setTimeout(function () {
         process();
     }, delay.SHORT);
 })();
+}
