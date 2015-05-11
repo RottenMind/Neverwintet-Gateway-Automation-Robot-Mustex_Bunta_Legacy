@@ -121,10 +121,10 @@ function _select_Gateway() { // Check for Gateway used to
             $("div.notification div.messages li").eq(0).remove();
     });
 
-    // Always disable SCA tutorial if its active
-    $('#help-dimmer.help-cont.whenTutorialActive').waitUntilExists(function () {
+    // Always disable SCA tutorial if its active, this cause flickering on SCA
+    /*$('#help-dimmer.help-cont.whenTutorialActive').waitUntilExists(function () {
         client.toggleHelp();
-    });
+    });*/
 
     //MAC-NW
 
@@ -1292,6 +1292,7 @@ function processSwordCoastDailies(_charStartIndex) {
     var _charIndex = (!_charStartIndex || parseInt(_charStartIndex) > (charSettings.length + 1) || parseInt(_charStartIndex) < 0)
     ? 0 : parseInt(_charStartIndex);
     var _fullCharName = settings["nw_charname" + _charIndex] + '@' + _accountName;
+    var _hasTutorial_active = "undefined";
     var _hasLoginDaily = 0;
     var _isLastChar = false;
     var _scaHashMatch = /\/adventures$/;
@@ -1318,6 +1319,13 @@ function processSwordCoastDailies(_charStartIndex) {
             }, delay.SHORT);
             return;
         }
+       // check datamodel and disable Tutorial, active = "undefined", disabled = 1
+       try {
+           _hasTutorial_active = unsafeWindow.client.dataModel.model.gatewaygamedata.tutorial.all;
+           if (typeof _hasTutorial_active == "undefined") {
+              client.toggleHelp();
+              }
+           }catch(e) {}
 
         console.log("Checking SCA Dialy for", _fullCharName, "...");
 
