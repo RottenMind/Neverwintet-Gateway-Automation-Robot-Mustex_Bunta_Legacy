@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name Neverwinter gateway - Professions Robot
+// @name Neverwinter gateway - Profession Automation
 // @description Automatically selects professions for empty slots
 // @namespace https://greasyfork.org/scripts/7061-neverwinter-gateway-professions-robot/
 // @include http://gateway*.playneverwinter.com/*
@@ -18,6 +18,7 @@
 
 /* RELEASE NOTES
  1.10.06.06
+ + SCA tutotrial check from datamodel info, stops flickering in SCA
  + added, junk filter several definitions
  + added, _Alchemy_exclusion list, is active if Alchemy is active, works only if script do rotations
  + rearranged, SCA roll check to avoid unnecessary GM -swaps
@@ -1938,7 +1939,7 @@ function vendorItemsLimited(_items) {
     if (_Alchemy_state !== 0) {
         _excludeItems = new RegExp(_exclude_Alchemy.source + "|" + _excludeItems.source); // make sure that we DONT sell potions if Alchemy is active    
     }
-    console.log(_excludeItems);
+    //console.log(_excludeItems);
     if (settings["autovendor_profresults"]) {
         /** Profession leveling result item cleanup logic for T1-4 crafted results
              * Created by RM on 14.1.2015.
@@ -2813,7 +2814,7 @@ function vendorJunk(evnt) {
     var _vendorItems = [];
     var _sellCount = 0;
     var _Alchemy_state = parseInt(settings["Alchemy"]);
-   console.log(_Alchemy_state === 0, _Alchemy_state, "values out, Alchemy state, True allows Vendoring if selected, is allways False if Alchemy is on work");
+    //console.log(_Alchemy_state === 0, _Alchemy_state, "values out, Alchemy state, True allows Vendoring if selected, is allways False if Alchemy is on work");
     if (settings["autovendor_kits_altars_limit"]) {
         _vendorItems[_vendorItems.length] = {pattern: /^Item_Consumable_Skill/, limit: 50};
         _vendorItems[_vendorItems.length] = {pattern: /^Item_Portable_Altar$/, limit: 80};
